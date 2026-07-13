@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WMS - Dashboard de Ocupação de Endereços</title>
+    <!-- Tailwind CSS para Design Moderno e Responsivo -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Chart.js para Gráficos Interativos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .metric-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .metric-card:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.5); border-color: #3b82f6; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 font-sans antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="bg-[#111827] border-b border-slate-800 text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-600 rounded-lg text-white font-black text-xl tracking-wider shadow-lg shadow-blue-500/20">WMS</div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-slate-100">Torre de Controle Logística</h1>
+                    <p class="text-xs text-slate-400">Whirlpool • Monitoramento Avançado de Capacidade</p>
+                </div>
+            </div>
+            <div class="text-xs bg-[#1e293b] px-3 py-2 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2 shadow-inner">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-medium">Métricas Oficiais Consolidadas • Premium Dark</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+        <!-- Régua de Indicadores Principais (Conforme o topo do print) -->
+        <h2 class="text-xs font-bold uppercase text-slate-400 tracking-widest pl-1">Métricas Globais de Capacidade</h2>
+        <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Área Total m²</p>
+                <h4 class="text-lg font-black text-white mt-1">2.207</h4>
+            </div>
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+                <p class="text-[10px] font-bold text-amber-500 uppercase tracking-tight truncate">Área Ocupada m²</p>
+                <h4 class="text-lg font-black text-amber-400 mt-1">1.500</h4>
+            </div>
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+                <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">Área Livre m²</p>
+                <h4 class="text-lg font-black text-emerald-400 mt-1">707</h4>
+            </div>
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+                <p class="text-[10px] font-bold text-red-500 uppercase tracking-tight truncate">Ocup. Área %</p>
+                <h4 class="text-lg font-black text-red-400 mt-1">68%</h4>
+            </div>
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Total de End.</p>
+                <h4 class="text-lg font-black text-white mt-1">113</h4>
+            </div>
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+                <p class="text-[10px] font-bold text-blue-400 uppercase tracking-tight truncate">End. Ocupados</p>
+                <h4 class="text-lg font-black text-blue-400 mt-1">80</h4>
+            </div>
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+                <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">End. Livres</p>
+                <h4 class="text-lg font-black text-emerald-400 mt-1">33</h4>
+            </div>
+            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card bg-gradient-to-b from-[#111827] to-amber-950/20">
+                <p class="text-[10px] font-bold text-amber-400 uppercase tracking-tight truncate">Média Ocup. End.</p>
+                <h4 class="text-lg font-black text-amber-400 mt-1">58%</h4>
+            </div>
+        </section>
+
+        <!-- Blocos Secundários de Estoque -->
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-[#111827] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md">
+                <div>
+                    <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Est. Disponível</p>
+                    <h3 class="text-2xl font-black text-blue-400 mt-1">6.274</h3>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-[#1e293b] px-2 py-1 rounded">Volumes</span>
+            </div>
+            <div class="bg-[#111827] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md">
+                <div>
+                    <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Total SKU</p>
+                    <h3 class="text-2xl font-black text-purple-400 mt-1">100</h3>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-[#1e293b] px-2 py-1 rounded">Itens</span>
+            </div>
+            <div class="bg-[#111827] p-4 rounded-xl border border-slate-800 shadow-md flex justify-between items-center bg-gradient-to-r from-[#111827] to-blue-950/20">
+                <div>
+                    <p class="text-xs font-bold uppercase text-blue-400 tracking-wider">Cooktop P.P</p>
+                    <h3 class="text-2xl font-black text-white mt-1">2.000 <span class="text-xs font-normal text-slate-400">peças</span></h3>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] font-bold text-slate-500 uppercase">Qtd. SKU</p>
+                    <span class="text-sm font-bold text-slate-300">30</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Principal: Tabelas e Gráficos -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Tabela Ocupação Família M² (Lado Esquerdo) -->
+            <div class="lg:col-span-2 bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md">
+                <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> Ocupação Família M²
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-[#0f172a] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+                            <tr>
+                                <th class="px-4 py-3">Família</th>
+                                <th class="px-4 py-3 text-right">Qtd. End</th>
+                                <th class="px-4 py-3 text-right">Área M²</th>
+                                <th class="px-4 py-3 text-center">Percent. Família</th>
+                            </tr>
+                        </thead>
+                        <tbody id="familyTableBody" class="divide-y divide-slate-800/60 font-medium">
+                            <!-- Injetado via Javascript baseado rigidamente no seu print -->
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-blue-950/40 border-t-2 border-blue-900 font-bold text-white text-xs">
+                                <td class="px-4 py-3.5">Total Geral</td>
+                                <td class="px-4 py-3.5 text-right font-mono" id="totalPecas">6.074</td>
+                                <td class="px-4 py-3.5 text-right font-mono" id="totalArea">1.437,00</td>
+                                <td class="px-4 py-3.5 text-center font-mono text-blue-400">100%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Coluna Direita: Resumo Mini Bin e Gráfico de Rosca -->
+            <div class="flex flex-col gap-6">
+                <!-- Painel Ocupação Mini Bin M² -->
+                <div class="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md">
+                    <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-3.5 bg-indigo-500 rounded-full inline-block"></span> Ocupação Mini Bin M²
+                    </h3>
+                    <div class="divide-y divide-slate-800/60 text-xs text-slate-300 font-medium">
+                        <div class="flex justify-between py-2.5"><span class="text-slate-400">End. Mini Bin</span><span class="font-bold text-white">5</span></div>
+                        <div class="flex justify-between py-2.5"><span class="text-slate-400">Área Ocup M²</span><span class="font-bold text-emerald-400">95,93 m²</span></div>
+                        <div class="flex justify-between py-2.5"><span class="text-slate-400">Qtd. Peças</span><span class="font-bold text-white">200</span></div>
+                        <div class="flex justify-between py-2.5"><span class="text-slate-400">Qtd. SKU</span><span class="font-bold text-purple-400">40</span></div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Distribuição Espacial de Família -->
+                <div class="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md flex-1 flex flex-col">
+                    <h3 class="font-bold text-xs tracking-wider uppercase text-slate-400 mb-2">Share de Ocupação (%)</h3>
+                    <div class="relative flex-1 min-h-[180px] flex items-center justify-center">
+                        <canvas id="chartShare"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gráfico de Volumetria Comparativo Ocupado por Categoria -->
+        <section class="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md">
+            <h3 class="font-bold text-sm text-slate-300 mb-4">Análise Visual de Densidade de Peças por Categoria</h3>
+            <div class="relative h-[250px]"><canvas id="chartVolumetria"></canvas></div>
+        </section>
+    </main>
+
+    <footer class="bg-[#111827] border-t border-slate-800 text-slate-500 text-center py-5 text-xs tracking-wide">
+        <p>© 2026 Alhandra Whirlpool Enterprise • Malha Logística Consolidada</p>
+    </footer>
+
+    <script>
+        // Array de dados consolidados extraídos rigidamente do seu novo print
+        const datasetOficial = [
+            { familia: "cervejeira", pecas: 167, area: 100.80, percent: 5 },
+            { familia: "fogão", pecas: 655, area: 217.25, percent: 10 },
+            { familia: "forno", pecas: 631, area: 109.89, percent: 5 },
+            { familia: "freezer", pecas: 577, area: 130.35, percent: 6 },
+            { familia: "lavadora", pecas: 1000, area: 127.01, percent: 6 },
+            { familia: "refrigerador", pecas: 2809, area: 776.79, percent: 35 },
+            { familia: "secadora", pecas: 235, area: 734.00, percent: 33 }
+        ];
+
+        // Geração dinâmica das linhas da tabela principal
+        function carregarTabela() {
+            const tbody = document.getElementById('familyTableBody');
+            tbody.innerHTML = '';
+
+            datasetOficial.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/30 transition-colors";
+                tr.innerHTML = `
+                    <td class="px-4 py-3.5 capitalize font-bold text-slate-200">${item.familia}</td>
+                    <td class="px-4 py-3.5 text-right font-mono font-semibold text-white">${item.pecas.toLocaleString('pt-BR')}</td>
+                    <td class="px-4 py-3.5 text-right font-mono text-slate-300">${item.area.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                    <td class="px-4 py-3.5 text-center">
+                        <span class="inline-block px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-blue-400 font-mono text-[11px]">
+                            ${item.percent}%
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Renderização dos Gráficos Interativos (Chart.js)
+        function renderizarGraficos() {
+            // Gráfico 1: Barras Verticais (Volumetria)
+            new Chart(document.getElementById('chartVolumetria').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: datasetOficial.map(item => item.familia.toUpperCase()),
+                    datasets: [{
+                        label: 'Quantidade de Peças',
+                        data: datasetOficial.map(item => item.pecas),
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 4,
+                        barThickness: 28
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
+                    }
+                }
+            });
+
+            // Gráfico 2: Rosca (Share de Distribuição de M²)
+            new Chart(document.getElementById('chartShare').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: datasetOficial.map(item => item.familia.toUpperCase()),
+                    datasets: [{
+                        data: datasetOficial.map(item => item.percent),
+                        backgroundColor: ['#3b82f6', '#10b981', '#6366f1', '#f59e0b', '#ec4899', '#06b6d4', '#64748b'],
+                        borderWidth: 2,
+                        borderColor: '#111827'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false } // Desativado para economizar espaço e focar no visual clean
+                    }
+                }
+            });
+        }
+
+        // Execução ao inicializar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            carregarTabela();
+            renderizarGraficos();
+        });
+    </script>
+</body>
+</html>
