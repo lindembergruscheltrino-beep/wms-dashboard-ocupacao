@@ -15,6 +15,37 @@
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Estilização da Barra de Letreiro Rolável (Ticker Marquee) */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: #111827;
+            border-bottom: 1px solid #1e293b;
+            padding: 10px 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+        }
+        .ticker:hover {
+            animation-play-state: paused; /* Pausa a animação quando o usuário passa o mouse por cima */
+            cursor: pointer;
+        }
+        .ticker__item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
     </style>
 </head>
 <body class="bg-[#0b0f19] text-slate-100 font-sans antialiased">
@@ -35,6 +66,13 @@
             </div>
         </div>
     </header>
+
+    <!-- BARRA ROLÁVEL (Estilo Bolsa de Valores - Ocupação Família) -->
+    <div class="ticker-wrap">
+        <div class="ticker" id="tickerMarquee">
+            <!-- Os itens serão gerados automaticamente via JavaScript com os dados oficiais -->
+        </div>
+    </div>
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
@@ -183,10 +221,32 @@
             { familia: "secadora", pecas: 235, area: 734.00, percent: 33 }
         ];
 
-        function carregarTabela() {
+        function carregarTabela E Marquee() {
             const tbody = document.getElementById('familyTableBody');
+            const marquee = document.getElementById('tickerMarquee');
             tbody.innerHTML = '';
+            marquee.innerHTML = '';
 
+            // Criar uma cópia duplicada dos itens no letreiro para criar o efeito infinito contínuo sem cortes
+            const itensDuplicados = [...datasetOficial, ...datasetOficial, ...datasetOficial];
+
+            // 1. Alimentação do Letreiro Rolável (Estilo Imagem Bolsa)
+            itensDuplicados.forEach(item => {
+                const span = document.createElement('div');
+                span.className = "ticker__item";
+                
+                // Colore de vermelho se o share for alto (refrigerador/secadora) ou verde se for mais baixo
+                const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
+                
+                span.innerHTML = `
+                    <span class="text-white font-black">${item.familia.toUpperCase()}</span> 
+                    <span class="text-slate-400 ml-1 font-medium">End M²:</span> <span class="text-blue-400 font-mono">${item.area.toFixed(1)}</span> 
+                    <span class="ml-1 ${colorClass} font-mono">${item.percent > 0 ? '-' : '+'}${item.percent}%</span>
+                `;
+                marquee.appendChild(span);
+            });
+
+            // 2. Alimentação da Tabela
             datasetOficial.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/30 transition-colors";
@@ -248,7 +308,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            carregarTabela();
+            carregarTabela E Marquee();
             renderizarGraficos();
         });
     </script>
