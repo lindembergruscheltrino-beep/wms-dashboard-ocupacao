@@ -38,7 +38,7 @@
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Régua de Indicadores Principais (Conforme o topo do print) -->
+        <!-- Régua de Indicadores Principais -->
         <h2 class="text-xs font-bold uppercase text-slate-400 tracking-widest pl-1">Métricas Globais de Capacidade</h2>
         <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
             <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
@@ -106,7 +106,7 @@
         <!-- Seção Principal: Tabelas e Gráficos -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Ocupação Família M² (Lado Esquerdo) -->
+            <!-- Tabela Ocupação Família M² -->
             <div class="lg:col-span-2 bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> Ocupação Família M²
@@ -122,7 +122,7 @@
                             </tr>
                         </thead>
                         <tbody id="familyTableBody" class="divide-y divide-slate-800/60 font-medium">
-                            <!-- Injetado via Javascript baseado rigidamente no seu print -->
+                            <!-- Injetado via Javascript -->
                         </tbody>
                         <tfoot>
                             <tr class="bg-blue-950/40 border-t-2 border-blue-900 font-bold text-white text-xs">
@@ -173,7 +173,6 @@
     </footer>
 
     <script>
-        // Array de dados consolidados extraídos rigidamente do seu novo print
         const datasetOficial = [
             { familia: "cervejeira", pecas: 167, area: 100.80, percent: 5 },
             { familia: "fogão", pecas: 655, area: 217.25, percent: 10 },
@@ -184,7 +183,6 @@
             { familia: "secadora", pecas: 235, area: 734.00, percent: 33 }
         ];
 
-        // Geração dinâmica das linhas da tabela principal
         function carregarTabela() {
             const tbody = document.getElementById('familyTableBody');
             tbody.innerHTML = '';
@@ -206,9 +204,7 @@
             });
         }
 
-        // Renderização dos Gráficos Interativos (Chart.js)
         function renderizarGraficos() {
-            // Gráfico 1: Barras Verticais (Volumetria)
             new Chart(document.getElementById('chartVolumetria').getContext('2d'), {
                 type: 'bar',
                 data: {
@@ -232,7 +228,6 @@
                 }
             });
 
-            // Gráfico 2: Rosca (Share de Distribuição de M²)
             new Chart(document.getElementById('chartShare').getContext('2d'), {
                 type: 'doughnut',
                 data: {
@@ -247,14 +242,11 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false } // Desativado para economizar espaço e focar no visual clean
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
         }
 
-        // Execução ao inicializar a página
         window.addEventListener('DOMContentLoaded', () => {
             carregarTabela();
             renderizarGraficos();
