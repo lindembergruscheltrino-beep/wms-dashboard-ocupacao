@@ -65,14 +65,15 @@
                     <p class="text-xs text-slate-400">Whirlpool • Monitoramento Avançado de Ocupação</p>
                 </div>
             </div>
+            <!-- Badge de Data Atualizada Automaticamente via JS -->
             <div class="text-xs bg-[#1e293b] px-4 py-2 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2 shadow-inner">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="font-medium font-mono">INTERFACE ATUALIZADA UI/UX</span>
+                <span class="font-medium font-mono" id="currentDateBadge">INTERFACE ATUALIZADA --/--/----</span>
             </div>
         </div>
     </header>
 
-    <!-- BARRA ROLÁVEL (Loop contínuo com todas as famílias visíveis) -->
+    <!-- BARRA ROLÁVEL -->
     <div class="ticker-wrap">
         <div class="ticker" id="tickerMarquee">
             <!-- Gerado via JS -->
@@ -81,7 +82,7 @@
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Régua de Indicadores Principais com Efeitos Glow -->
+        <!-- Régua de Indicadores Principais -->
         <h2 class="text-xs font-bold uppercase text-slate-500 tracking-widest pl-1">Métricas Globais de Capacidade</h2>
         <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
@@ -149,7 +150,7 @@
         <!-- Seção Principal: Tabelas e Gráficos -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Ocupação Família M² com Barras de Progresso -->
+            <!-- Tabela Ocupação Família M² -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block animate-pulse"></span> Ocupação Família M²
@@ -227,6 +228,16 @@
             { familia: "secadora", pecas: 235, area: 734.00, percent: 33 }
         ];
 
+        // Função de captura e injeção automática da data do dia atualizada
+        function atualizarDataAutomaticamente() {
+            const hoje = new Date();
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0'); // Meses começam do zero
+            const ano = hoje.getFullYear();
+            
+            document.getElementById('currentDateBadge').textContent = `INTERFACE ATUALIZADA ${dia}/${mes}/${ano}`;
+        }
+
         function renderizarPainel() {
             const tbody = document.getElementById('familyTableBody');
             const marquee = document.getElementById('tickerMarquee');
@@ -234,7 +245,6 @@
             tbody.innerHTML = '';
             marquee.innerHTML = '';
 
-            // Duplicamos a malha de dados no letreiro para garantir o loop infinito fluido e completo
             const tickerData = [...datasetOficial, ...datasetOficial];
 
             tickerData.forEach(item => {
@@ -250,12 +260,9 @@
                 marquee.appendChild(div);
             });
 
-            // Preenchimento da Tabela com Injeção de Progress Bars de UX
             datasetOficial.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/20 transition-colors border-b border-slate-800/50";
-                
-                // Determina a cor da barra de progresso interna da tabela com base no volume
                 const barColor = item.percent >= 30 ? "bg-gradient-to-r from-red-500 to-amber-500" : "bg-gradient-to-r from-blue-500 to-indigo-500";
 
                 tr.innerHTML = `
@@ -278,11 +285,10 @@
         }
 
         function renderizarGraficos() {
-            // Efeito de Gradiente Linear nas Barras Verticais
             const ctxVol = document.getElementById('chartVolumetria').getContext('2d');
             const gradientBlue = ctxVol.createLinearGradient(0, 0, 0, 250);
-            gradientBlue.addColorStop(0, 'rgba(59, 130, 246, 1)');   // Azul brilhante no topo
-            gradientBlue.addColorStop(1, 'rgba(59, 130, 246, 0.15)'); // Transparência elegante na base
+            gradientBlue.addColorStop(0, 'rgba(59, 130, 246, 1)');   
+            gradientBlue.addColorStop(1, 'rgba(59, 130, 246, 0.15)'); 
 
             new Chart(ctxVol, {
                 type: 'bar',
@@ -309,7 +315,6 @@
                 }
             });
 
-            // Gráfico Rosca (Doughnut)
             new Chart(document.getElementById('chartShare').getContext('2d'), {
                 type: 'doughnut',
                 data: {
@@ -330,6 +335,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            atualizarDataAutomaticamente(); // Roda na inicialização para setar a data correta do dia
             renderizarPainel();
             renderizarGraficos();
         });
