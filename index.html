@@ -188,7 +188,7 @@
                 </div>
             </div>
 
-            <!-- Coluna Direita: Estoque Bloqueado (Corrigida e Padronizada com Números em Vermelho) -->
+            <!-- Coluna Direita: Estoque Bloqueado (Com a nova linha do totalizador de 285) -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
                 <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
@@ -208,6 +208,12 @@
                             <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">127v</td><td class="px-4 py-2.5 text-right text-red-500 font-mono font-bold text-sm">21</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Reoperação</td><td class="px-4 py-2.5 text-right text-red-500 font-mono font-bold text-sm">10</td></tr>
                         </tbody>
+                        <tfoot>
+                            <tr class="bg-red-950/20 border-t-2 border-red-900 font-bold text-white text-xs">
+                                <td class="px-4 py-3.5">Total</td>
+                                <td class="px-4 py-3.5 text-right text-red-500 font-mono font-bold text-sm">285</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -221,7 +227,7 @@
                 <div class="relative h-[220px]"><canvas id="chartVolumetria"></canvas></div>
             </div>
 
-            <!-- Tabela Dinâmica: Dados Referência / Layout de Engenharia -->
+            <!-- Tabela Dinâmica: Dados Referência -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-purple">
                 <h3 class="font-bold text-sm tracking-wide text-purple-400 mb-4 flex items-center gap-2">
                     📐 Dados de Referência (Infraestrutura)
