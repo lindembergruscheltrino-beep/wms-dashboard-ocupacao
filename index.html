@@ -82,8 +82,8 @@
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Régua de Indicadores Principais -->
-        <h2 class="text-xs font-bold uppercase text-slate-500 tracking-widest pl-1">Métricas Globais de Capacidade</h2>
+        <!-- Régua de Indicadores Principais com Título Ajustado -->
+        <h2 class="text-xs font-bold uppercase text-slate-500 tracking-widest pl-1">Métricas de Capacidade</h2>
         <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Área Total m²</p>
@@ -232,7 +232,7 @@
         function atualizarDataAutomaticamente() {
             const hoje = new Date();
             const dia = String(hoje.getDate()).padStart(2, '0');
-            const mes = String(hoje.getMonth() + 1).padStart(2, '0'); // Meses começam do zero
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0'); 
             const ano = hoje.getFullYear();
             
             document.getElementById('currentDateBadge').textContent = `INTERFACE ATUALIZADA ${dia}/${mes}/${ano}`;
@@ -335,7 +335,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            atualizarDataAutomaticamente(); // Roda na inicialização para setar a data correta do dia
+            atualizarDataAutomaticamente(); 
             renderizarPainel();
             renderizarGraficos();
         });
