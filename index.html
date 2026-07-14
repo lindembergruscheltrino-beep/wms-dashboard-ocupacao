@@ -9,135 +9,139 @@
     <!-- Chart.js para Gráficos Interativos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .metric-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .metric-card:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.5); border-color: #3b82f6; }
+        /* Customização Avançada de Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
-        /* Estilização Avançada do Letreiro Rolável (Efeito Loop Infinito sem Cortes) */
+        /* Efeitos Neon Glow Dinâmicos nos Cards */
+        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(59, 130, 246, 0.05); transition: all 0.3s ease; }
+        .glow-blue:hover { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 0 15px 1px rgba(59, 130, 246, 0.15); transform: translateY(-2px); }
+
+        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.2); box-shadow: 0 4px 20px -2px rgba(245, 158, 11, 0.05); transition: all 0.3s ease; }
+        .glow-amber:hover { border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 0 15px 1px rgba(245, 158, 11, 0.15); transform: translateY(-2px); }
+
+        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.05); transition: all 0.3s ease; }
+        .glow-emerald:hover { border-color: rgba(16, 185, 129, 0.6); box-shadow: 0 0 15px 1px rgba(16, 185, 129, 0.15); transform: translateY(-2px); }
+
+        .glow-red { border: 1px solid rgba(239, 68, 68, 0.2); box-shadow: 0 4px 20px -2px rgba(239, 68, 68, 0.05); transition: all 0.3s ease; }
+        .glow-red:hover { border-color: rgba(239, 68, 68, 0.6); box-shadow: 0 0 15px 1px rgba(239, 68, 68, 0.15); transform: translateY(-2px); }
+
+        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(139, 92, 246, 0.05); transition: all 0.3s ease; }
+        .glow-purple:hover { border-color: rgba(139, 92, 246, 0.6); box-shadow: 0 0 15px 1px rgba(139, 92, 246, 0.15); transform: translateY(-2px); }
+
+        /* Letreiro Rolável Fluido (Ticker Marquee) */
         .ticker-wrap {
             width: 100%;
             overflow: hidden;
-            background-color: #111827;
+            background-color: #0f172a;
             border-bottom: 1px solid #1e293b;
             padding: 12px 0;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
             display: flex;
         }
         .ticker {
             display: flex;
             white-space: nowrap;
-            animation: marquee 25s linear infinite;
+            animation: marquee 28s linear infinite;
         }
-        .ticker:hover {
-            animation-play-state: paused; /* Pausa o movimento ao passar o mouse */
-            cursor: pointer;
-        }
-        .ticker__item {
-            display: flex;
-            align-items: center;
-            padding: 0 3rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
+        .ticker:hover { animation-play-state: paused; cursor: pointer; }
+        .ticker__item { display: flex; align-items: center; padding: 0 3rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); } /* Retorna exatamente na metade para manter o loop infinito fluido */
+            100% { transform: translate3d(-50%, 0, 0); }
         }
     </style>
 </head>
-<body class="bg-[#0b0f19] text-slate-100 font-sans antialiased">
+<body class="bg-[#070a13] text-slate-100 font-sans antialiased">
 
     <!-- Header / Navbar -->
-    <header class="bg-[#111827] border-b border-slate-800 text-white shadow-xl sticky top-0 z-50">
+    <header class="bg-[#0f172a] border-b border-slate-800 text-white shadow-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
-                <div class="p-2 bg-blue-600 rounded-lg text-white font-black text-xl tracking-wider shadow-lg shadow-blue-500/20">WMS</div>
+                <div class="p-2 bg-blue-600 rounded-lg text-white font-black text-xl tracking-wider shadow-lg shadow-blue-500/30">WMS</div>
                 <div>
                     <h1 class="text-xl font-bold tracking-tight text-slate-100">Torre de Controle Logística</h1>
-                    <p class="text-xs text-slate-400">Whirlpool • Monitoramento Avançado de Capacidade</p>
+                    <p class="text-xs text-slate-400">Whirlpool • Monitoramento Avançado de Ocupação</p>
                 </div>
             </div>
-            <div class="text-xs bg-[#1e293b] px-3 py-2 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2 shadow-inner">
+            <div class="text-xs bg-[#1e293b] px-4 py-2 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2 shadow-inner">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="font-medium">Métricas Oficiais Consolidadas • Premium Dark</span>
+                <span class="font-medium font-mono">INTERFACE ATUALIZADA UI/UX</span>
             </div>
         </div>
     </header>
 
-    <!-- BARRA ROLÁVEL CORRIGIDA (Loop contínuo com todas as famílias visíveis) -->
+    <!-- BARRA ROLÁVEL (Loop contínuo com todas as famílias visíveis) -->
     <div class="ticker-wrap">
         <div class="ticker" id="tickerMarquee">
-            <!-- Gerado via JS de forma duplicada e sequencial -->
+            <!-- Gerado via JS -->
         </div>
     </div>
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Régua de Indicadores Principais -->
-        <h2 class="text-xs font-bold uppercase text-slate-400 tracking-widest pl-1">Métricas Globais de Capacidade</h2>
+        <!-- Régua de Indicadores Principais com Efeitos Glow -->
+        <h2 class="text-xs font-bold uppercase text-slate-500 tracking-widest pl-1">Métricas Globais de Capacidade</h2>
         <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Área Total m²</p>
-                <h4 class="text-lg font-black text-white mt-1">2.207</h4>
+                <h4 class="text-xl font-black text-white mt-1">2.207</h4>
             </div>
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber">
                 <p class="text-[10px] font-bold text-amber-500 uppercase tracking-tight truncate">Área Ocupada m²</p>
-                <h4 class="text-lg font-black text-amber-400 mt-1">1.500</h4>
+                <h4 class="text-xl font-black text-amber-400 mt-1">1.500</h4>
             </div>
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
                 <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">Área Livre m²</p>
-                <h4 class="text-lg font-black text-emerald-400 mt-1">707</h4>
+                <h4 class="text-xl font-black text-emerald-400 mt-1">707</h4>
             </div>
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-red">
                 <p class="text-[10px] font-bold text-red-500 uppercase tracking-tight truncate">Ocup. Área %</p>
-                <h4 class="text-lg font-black text-red-400 mt-1">68%</h4>
+                <h4 class="text-xl font-black text-red-400 mt-1">68%</h4>
             </div>
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Total de End.</p>
-                <h4 class="text-lg font-black text-white mt-1">113</h4>
+                <h4 class="text-xl font-black text-white mt-1">113</h4>
             </div>
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-blue-400 uppercase tracking-tight truncate">End. Ocupados</p>
-                <h4 class="text-lg font-black text-blue-400 mt-1">80</h4>
+                <h4 class="text-xl font-black text-blue-400 mt-1">80</h4>
             </div>
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
                 <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">End. Livres</p>
-                <h4 class="text-lg font-black text-emerald-400 mt-1">33</h4>
+                <h4 class="text-xl font-black text-emerald-400 mt-1">33</h4>
             </div>
-            <div class="bg-[#111827] p-3 rounded-lg border border-slate-800 text-center metric-card bg-gradient-to-b from-[#111827] to-amber-950/20">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber bg-gradient-to-b from-[#0f172a] to-amber-950/10">
                 <p class="text-[10px] font-bold text-amber-400 uppercase tracking-tight truncate">Média Ocup. End.</p>
-                <h4 class="text-lg font-black text-amber-400 mt-1">58%</h4>
+                <h4 class="text-xl font-black text-amber-400 mt-1">58%</h4>
             </div>
         </section>
 
         <!-- Blocos Secundários de Estoque -->
         <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="bg-[#111827] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md">
+            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800/80 flex justify-between items-center shadow-md glow-blue">
                 <div>
                     <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Est. Disponível</p>
-                    <h3 class="text-2xl font-black text-blue-400 mt-1">6.274</h3>
+                    <h3 class="text-3xl font-black text-blue-400 mt-1">6.274</h3>
                 </div>
-                <span class="text-xs font-bold text-slate-500 bg-[#1e293b] px-2 py-1 rounded">Volumes</span>
+                <span class="text-xs font-bold text-slate-400 bg-[#1e293b] px-2.5 py-1 rounded-md">Volumes</span>
             </div>
-            <div class="bg-[#111827] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md">
+            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800/80 flex justify-between items-center shadow-md glow-purple">
                 <div>
                     <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Total SKU</p>
-                    <h3 class="text-2xl font-black text-purple-400 mt-1">100</h3>
+                    <h3 class="text-3xl font-black text-purple-400 mt-1">100</h3>
                 </div>
-                <span class="text-xs font-bold text-slate-500 bg-[#1e293b] px-2 py-1 rounded">Itens</span>
+                <span class="text-xs font-bold text-slate-400 bg-[#1e293b] px-2.5 py-1 rounded-md">Itens</span>
             </div>
-            <div class="bg-[#111827] p-4 rounded-xl border border-slate-800 shadow-md flex justify-between items-center bg-gradient-to-r from-[#111827] to-blue-950/20">
+            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800/80 shadow-md flex justify-between items-center bg-gradient-to-r from-[#0f172a] to-blue-950/10 glow-blue">
                 <div>
                     <p class="text-xs font-bold uppercase text-blue-400 tracking-wider">Cooktop P.P</p>
-                    <h3 class="text-2xl font-black text-white mt-1">2.000 <span class="text-xs font-normal text-slate-400">peças</span></h3>
+                    <h3 class="text-3xl font-black text-white mt-1">2.000 <span class="text-xs font-normal text-slate-400">peças</span></h3>
                 </div>
                 <div class="text-right">
-                    <p class="text-[10px] font-bold text-slate-500 uppercase">Qtd. SKU</p>
-                    <span class="text-sm font-bold text-slate-300">30</span>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Qtd. SKU</p>
+                    <span class="text-base font-black text-slate-300 font-mono">30</span>
                 </div>
             </div>
         </section>
@@ -145,30 +149,30 @@
         <!-- Seção Principal: Tabelas e Gráficos -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Ocupação Família M² -->
-            <div class="lg:col-span-2 bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md">
+            <!-- Tabela Ocupação Família M² com Barras de Progresso -->
+            <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
-                    <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> Ocupação Família M²
+                    <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block animate-pulse"></span> Ocupação Família M²
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0f172a] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
                             <tr>
-                                <th class="px-4 py-3">Família</th>
-                                <th class="px-4 py-3 text-right">Qtd. End</th>
-                                <th class="px-4 py-3 text-right">Área M²</th>
-                                <th class="px-4 py-3 text-center">Percent. Família</th>
+                                <th class="px-4 py-3.5">Família</th>
+                                <th class="px-4 py-3.5 text-right">Qtd. End</th>
+                                <th class="px-4 py-3.5 text-right">Área M²</th>
+                                <th class="px-4 py-3.5 text-center w-1/3">Percent. Família</th>
                             </tr>
                         </thead>
-                        <tbody id="familyTableBody" class="divide-y divide-slate-800/60 font-medium">
+                        <tbody id="familyTableBody" class="divide-y divide-slate-800/50 font-medium">
                             <!-- Injetado via Javascript -->
                         </tbody>
                         <tfoot>
-                            <tr class="bg-blue-950/40 border-t-2 border-blue-900 font-bold text-white text-xs">
-                                <td class="px-4 py-3.5">Total Geral</td>
-                                <td class="px-4 py-3.5 text-right font-mono">6.074</td>
-                                <td class="px-4 py-3.5 text-right font-mono">1.437,00</td>
-                                <td class="px-4 py-3.5 text-center font-mono text-blue-400">100%</td>
+                            <tr class="bg-blue-950/20 border-t-2 border-blue-900 font-bold text-white text-xs">
+                                <td class="px-4 py-4">Total Geral</td>
+                                <td class="px-4 py-4 text-right font-mono text-base">6.074</td>
+                                <td class="px-4 py-4 text-right font-mono text-base">1.437,00</td>
+                                <td class="px-4 py-4 text-center font-mono text-blue-400 text-sm">100%</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -178,21 +182,21 @@
             <!-- Coluna Direita: Resumo Mini Bin e Gráfico de Rosca -->
             <div class="flex flex-col gap-6">
                 <!-- Painel Ocupação Mini Bin M² -->
-                <div class="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md">
+                <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-purple">
                     <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                         <span class="w-1.5 h-3.5 bg-indigo-500 rounded-full inline-block"></span> Ocupação Mini Bin M²
                     </h3>
                     <div class="divide-y divide-slate-800/60 text-xs text-slate-300 font-medium">
-                        <div class="flex justify-between py-2.5"><span class="text-slate-400">End. Mini Bin</span><span class="font-bold text-white">5</span></div>
-                        <div class="flex justify-between py-2.5"><span class="text-slate-400">Área Ocup M²</span><span class="font-bold text-emerald-400">95,93 m²</span></div>
-                        <div class="flex justify-between py-2.5"><span class="text-slate-400">Qtd. Peças</span><span class="font-bold text-white">200</span></div>
-                        <div class="flex justify-between py-2.5"><span class="text-slate-400">Qtd. SKU</span><span class="font-bold text-purple-400">40</span></div>
+                        <div class="flex justify-between py-3"><span class="text-slate-400">End. Mini Bin</span><span class="font-bold text-white font-mono">5</span></div>
+                        <div class="flex justify-between py-3"><span class="text-slate-400">Área Ocup M²</span><span class="font-bold text-emerald-400 font-mono">95,93 m²</span></div>
+                        <div class="flex justify-between py-3"><span class="text-slate-400">Qtd. Peças</span><span class="font-bold text-white font-mono">200</span></div>
+                        <div class="flex justify-between py-3"><span class="text-slate-400">Qtd. SKU</span><span class="font-bold text-purple-400 font-mono">40</span></div>
                     </div>
                 </div>
 
                 <!-- Gráfico de Distribuição Espacial de Família -->
-                <div class="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md flex-1 flex flex-col">
-                    <h3 class="font-bold text-xs tracking-wider uppercase text-slate-400 mb-2">Share de Ocupação (%)</h3>
+                <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex-1 flex flex-col glow-blue">
+                    <h3 class="font-bold text-xs tracking-wider uppercase text-slate-400 mb-3">Share de Ocupação (%)</h3>
                     <div class="relative flex-1 min-h-[180px] flex items-center justify-center">
                         <canvas id="chartShare"></canvas>
                     </div>
@@ -201,17 +205,18 @@
         </section>
 
         <!-- Gráfico de Volumetria Comparativo Ocupado por Categoria -->
-        <section class="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-md">
-            <h3 class="font-bold text-sm text-slate-300 mb-4">Análise Visual de Densidade de Peças por Categoria</h3>
+        <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-blue">
+            <h3 class="font-bold text-sm text-slate-300 mb-4">Análise Visual de Densidade de Peças por Categoria (Gradiente UI)</h3>
             <div class="relative h-[250px]"><canvas id="chartVolumetria"></canvas></div>
         </section>
     </main>
 
-    <footer class="bg-[#111827] border-t border-slate-800 text-slate-500 text-center py-5 text-xs tracking-wide">
-        <p>© 2026 Alhandra Whirlpool Enterprise • Malha Logística Consolidada</p>
+    <footer class="bg-[#0f172a] border-t border-slate-800 text-slate-500 text-center py-5 text-xs tracking-wide">
+        <p>© 2026 Alhandra Whirlpool Enterprise • Malha Logística Redesenhada</p>
     </footer>
 
     <script>
+        // Dados Oficiais do Print
         const datasetOficial = [
             { familia: "cervejeira", pecas: 167, area: 100.80, percent: 5 },
             { familia: "fogão", pecas: 655, area: 217.25, percent: 10 },
@@ -229,10 +234,9 @@
             tbody.innerHTML = '';
             marquee.innerHTML = '';
 
-            // Duplicamos a lista exatamente 2 vezes seguidas para preencher o letreiro e evitar buracos brancos na rolagem
+            // Duplicamos a malha de dados no letreiro para garantir o loop infinito fluido e completo
             const tickerData = [...datasetOficial, ...datasetOficial];
 
-            // 1. Criação limpa do Letreiro Marquee
             tickerData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
@@ -240,24 +244,33 @@
                 
                 div.innerHTML = `
                     <span class="text-white font-black">${item.familia.toUpperCase()}</span> 
-                    <span class="text-slate-400 ml-1 font-medium">Área M²:</span> <span class="text-blue-400 font-mono">${item.area.toFixed(2)}</span> 
-                    <span class="ml-1 ${colorClass} font-mono">[${item.percent}%]</span>
+                    <span class="text-slate-500 ml-1.5 font-medium">Área M²:</span> <span class="text-blue-400 font-mono font-bold">${item.area.toFixed(2)}</span> 
+                    <span class="ml-1.5 ${colorClass} font-mono font-bold">[${item.percent}%]</span>
                 `;
                 marquee.appendChild(div);
             });
 
-            // 2. Preenchimento da Tabela
+            // Preenchimento da Tabela com Injeção de Progress Bars de UX
             datasetOficial.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/30 transition-colors border-b border-slate-800/50";
+                tr.className = "hover:bg-slate-800/20 transition-colors border-b border-slate-800/50";
+                
+                // Determina a cor da barra de progresso interna da tabela com base no volume
+                const barColor = item.percent >= 30 ? "bg-gradient-to-r from-red-500 to-amber-500" : "bg-gradient-to-r from-blue-500 to-indigo-500";
+
                 tr.innerHTML = `
-                    <td class="px-4 py-3.5 capitalize font-bold text-slate-200">${item.familia}</td>
-                    <td class="px-4 py-3.5 text-right font-mono font-semibold text-white">${item.pecas.toLocaleString('pt-BR')}</td>
+                    <td class="px-4 py-3.5 capitalize font-black text-slate-200 text-sm">${item.familia}</td>
+                    <td class="px-4 py-3.5 text-right font-mono font-bold text-white text-sm">${item.pecas.toLocaleString('pt-BR')}</td>
                     <td class="px-4 py-3.5 text-right font-mono text-slate-300">${item.area.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
-                    <td class="px-4 py-3.5 text-center">
-                        <span class="inline-block px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-blue-400 font-mono text-[11px]">
-                            ${item.percent}%
-                        </span>
+                    <td class="px-4 py-3.5">
+                        <div class="flex items-center gap-3 justify-center">
+                            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden hidden sm:block">
+                                <div class="${barColor} h-2 rounded-full" style="width: ${item.percent}%"></div>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded bg-[#0b0f19] border border-slate-800 text-blue-400 font-mono text-[11px] font-bold min-w-[40px] text-center">
+                                ${item.percent}%
+                            </span>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -265,16 +278,24 @@
         }
 
         function renderizarGraficos() {
-            new Chart(document.getElementById('chartVolumetria').getContext('2d'), {
+            // Efeito de Gradiente Linear nas Barras Verticais
+            const ctxVol = document.getElementById('chartVolumetria').getContext('2d');
+            const gradientBlue = ctxVol.createLinearGradient(0, 0, 0, 250);
+            gradientBlue.addColorStop(0, 'rgba(59, 130, 246, 1)');   // Azul brilhante no topo
+            gradientBlue.addColorStop(1, 'rgba(59, 130, 246, 0.15)'); // Transparência elegante na base
+
+            new Chart(ctxVol, {
                 type: 'bar',
                 data: {
                     labels: datasetOficial.map(item => item.familia.toUpperCase()),
                     datasets: [{
                         label: 'Quantidade de Peças',
                         data: datasetOficial.map(item => item.pecas),
-                        backgroundColor: '#3b82f6',
-                        borderRadius: 4,
-                        barThickness: 28
+                        backgroundColor: gradientBlue,
+                        borderColor: '#3b82f6',
+                        borderWidth: 1,
+                        borderRadius: 6,
+                        barThickness: 32
                     }]
                 },
                 options: {
@@ -282,21 +303,22 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+                        x: { ticks: { color: '#94a3b8', font: { weight: 'bold' } }, grid: { display: false } },
                         y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
                     }
                 }
             });
 
+            // Gráfico Rosca (Doughnut)
             new Chart(document.getElementById('chartShare').getContext('2d'), {
                 type: 'doughnut',
                 data: {
                     labels: datasetOficial.map(item => item.familia.toUpperCase()),
                     datasets: [{
                         data: datasetOficial.map(item => item.percent),
-                        backgroundColor: ['#3b82f6', '#10b981', '#6366f1', '#f59e0b', '#ec4899', '#06b6d4', '#64748b'],
-                        borderWidth: 2,
-                        borderColor: '#111827'
+                        backgroundColor: ['#3b82f6', '#10b981', '#6366f1', '#f59e0b', '#ec4899', '#06b6d4', '#475569'],
+                        borderWidth: 3,
+                        borderColor: '#0f172a'
                     }]
                 },
                 options: {
