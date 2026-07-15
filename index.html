@@ -121,13 +121,14 @@
 
         <!-- Detalhes de Volumes, SKUs e Estruturas Avançadas -->
         <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Card Atualizado com "Global Geral" -->
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-blue">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Total: Disp / CQ</p>
                     <h3 class="text-xl font-black text-blue-400 mt-1">7.083</h3>
                     <p class="text-[10px] text-slate-500 mt-1">Total Sku: <span class="text-slate-300 font-mono font-bold">115</span></p>
                 </div>
-                <span class="text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">Global</span>
+                <span class="text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">Global Geral</span>
             </div>
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-emerald">
                 <div>
@@ -188,7 +189,7 @@
                 </div>
             </div>
 
-            <!-- Coluna Direita: Estoque Bloqueado (Com a nova linha do totalizador de 285) -->
+            <!-- Coluna Direita: Estoque Bloqueado -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
                 <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
@@ -350,7 +351,7 @@
                     plugins: { legend: { display: false } },
                     scales: {
                         x: { ticks: { color: '#94a3b8', font: { weight: 'bold' } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
+                        y: { ticks: { color: '#94a3b8', grid: { color: '#1e293b' } } }
                     }
                 }
             });
