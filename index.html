@@ -188,7 +188,7 @@
                 </div>
             </div>
 
-            <!-- Coluna Direita: Estoque Bloqueado (Corrigida com Vermelho Mais Leve / Coral) -->
+            <!-- Coluna Direita: Estoque Bloqueado -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
                 <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
@@ -257,7 +257,7 @@
 
     <footer class="bg-[#0f172a] border-t border-slate-800 text-slate-500 text-center py-4 text-xs tracking-wide">
         <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento Integrado Core</p>
-    </footer>
+    </footer
 
     <script>
         const datasetOficial = [
@@ -292,10 +292,11 @@
                 div.className = "ticker__item";
                 const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
                 
+                // Removido os colchetes daqui para deixar o visual limpo
                 div.innerHTML = `
                     <span class="text-white font-black">${item.familia.toUpperCase()}</span> 
                     <span class="text-slate-500 ml-1.5 font-medium">Área M²:</span> <span class="text-blue-400 font-mono font-bold">${item.area.toFixed(2)}</span> 
-                    <span class="ml-1.5 ${colorClass} font-mono font-bold">[${item.percent}%]</span>
+                    <span class="ml-1.5 ${colorClass} font-mono font-bold">${item.percent}%</span>
                 `;
                 marquee.appendChild(div);
             });
@@ -350,7 +351,7 @@
                     plugins: { legend: { display: false } },
                     scales: {
                         x: { ticks: { color: '#94a3b8', font: { weight: 'bold' } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
+                        y: { ticks: { color: '#94a3b8', grid: { color: '#1e293b' } } }
                     }
                 }
             });
