@@ -121,7 +121,6 @@
 
         <!-- Detalhes de Volumes, SKUs e Estruturas Avançadas -->
         <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <!-- Card Atualizado de "Global Geral" para apenas "Geral" -->
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-blue">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Total: Disp / CQ</p>
@@ -189,7 +188,7 @@
                 </div>
             </div>
 
-            <!-- Coluna Direita: Estoque Bloqueado -->
+            <!-- Coluna Direita: Estoque Bloqueado (Corrigida com Vermelho Mais Leve / Coral) -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
                 <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
@@ -203,16 +202,16 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-800/50 font-medium">
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Sucata</td><td class="px-4 py-2.5 text-right text-red-500 font-mono font-bold text-sm">133</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Rio Claro</td><td class="px-4 py-2.5 text-right text-red-500 font-mono font-bold text-sm">1</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Joinville</td><td class="px-4 py-2.5 text-right text-red-500 font-mono font-bold text-sm">120</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">127v</td><td class="px-4 py-2.5 text-right text-red-500 font-mono font-bold text-sm">21</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Reoperação</td><td class="px-4 py-2.5 text-right text-red-500 font-mono font-bold text-sm">10</td></tr>
+                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Sucata</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">133</td></tr>
+                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Rio Claro</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">1</td></tr>
+                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Joinville</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">120</td></tr>
+                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">127v</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">21</td></tr>
+                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Reoperação</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">10</td></tr>
                         </tbody>
                         <tfoot>
-                            <tr class="bg-red-950/20 border-t-2 border-red-900 font-bold text-white text-xs">
-                                <td class="px-4 py-3.5">Total</td>
-                                <td class="px-4 py-3.5 text-right text-red-500 font-mono font-bold text-sm">285</td>
+                            <tr class="bg-red-950/10 border-t border-red-900/50 font-bold text-white text-xs">
+                                <td class="px-4 py-3.5 text-slate-300">Total</td>
+                                <td class="px-4 py-3.5 text-right text-red-400 font-mono font-black text-sm">285</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -351,7 +350,7 @@
                     plugins: { legend: { display: false } },
                     scales: {
                         x: { ticks: { color: '#94a3b8', font: { weight: 'bold' } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8', grid: { color: '#1e293b' } } }
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
                     }
                 }
             });
