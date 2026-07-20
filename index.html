@@ -246,7 +246,7 @@
                 <div class="relative h-[220px]"><canvas id="chartVolumetria"></canvas></div>
             </div>
 
-            <!-- Tabela Dinâmica: Dados Referência (COM TEXTO "BLOCADO" E ÁREA ÚTIL DESTAQUE EM VERDE) -->
+            <!-- Tabela Dinâmica: Dados Referência -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-purple">
                 <h3 class="font-bold text-sm tracking-wide text-purple-400 mb-4 flex items-center gap-2">
                     📐 Dados de Referência (Infraestrutura)
@@ -267,7 +267,7 @@
                             <tr class="hover:bg-slate-800/20 bg-purple-950/10"><td class="px-3 py-2 text-center font-bold font-mono text-purple-400">121</td><td class="px-3 py-2 font-bold text-purple-300">Área total blocado</td><td class="px-3 py-2 text-right font-mono font-bold text-purple-200">2.470,01 m²</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">8</td><td class="px-3 py-2 text-slate-400">Endereços Ocupados por CQ Rua 01</td><td class="px-3 py-2 text-right font-mono">262,41 m²</td></tr>
                             
-                            <!-- LINHA DESTAQUE VERDE ESMERALDA (Área útil atual) -->
+                            <!-- LINHA DESTAQUE VERDE ESMERALDA -->
                             <tr class="hover:bg-emerald-900/30 bg-emerald-950/40 border-l-4 border-emerald-500">
                                 <td class="px-3 py-2.5 text-center font-black font-mono text-emerald-400 text-xs">113</td>
                                 <td class="px-3 py-2.5 font-black text-emerald-300 uppercase tracking-wide">Área util atual</td>
@@ -284,7 +284,7 @@
         <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento Integrado Core</p>
     </footer>
 
-    <!-- JAVASCRIPT TOTALMENTE PROTEGIDO -->
+    <!-- JAVASCRIPT COM O TICKER MARQUEE SIMPLIFICADO -->
     <script>
         const datasetOficial = [
             { familia: "cervejeira", pecas: 124, area: 19.60, percent: 1 },
@@ -318,14 +318,14 @@
 
             const tickerData = [...datasetOficial, ...datasetOficial];
 
+            // Ticker Marquee Simplificado (Apenas FAMÍLIA e PERCENTUAL)
             tickerData.forEach(function(item) {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
                 const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
                 
                 div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
-                                '<span class="text-slate-500 ml-1.5 font-medium">Área M²:</span> <span class="text-blue-400 font-mono font-bold">' + item.area.toFixed(2) + '</span>' +
-                                '<span class="ml-1.5 ' + colorClass + ' font-mono font-bold">' + item.percent + '%</span>';
+                                '<span class="ml-2 ' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
                 marquee.appendChild(div);
             });
 
