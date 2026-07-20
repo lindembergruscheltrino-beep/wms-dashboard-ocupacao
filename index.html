@@ -31,6 +31,9 @@
         .glow-purple { border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(139, 92, 246, 0.05); transition: all 0.3s ease; }
         .glow-purple:hover { border-color: rgba(139, 92, 246, 0.6); box-shadow: 0 0 15px 1px rgba(139, 92, 246, 0.15); transform: translateY(-2px); }
 
+        .glow-cyan { border: 1px solid rgba(6, 182, 212, 0.2); box-shadow: 0 4px 20px -2px rgba(6, 182, 212, 0.05); transition: all 0.3s ease; }
+        .glow-cyan:hover { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 0 15px 1px rgba(6, 182, 212, 0.15); transform: translateY(-2px); }
+
         /* Letreiro Rolável Fluido (Ticker Marquee) */
         .ticker-wrap {
             width: 100%;
@@ -85,7 +88,7 @@
         <!-- Régua de Indicadores Principais -->
         <div class="flex justify-between items-center">
             <h2 class="text-xs font-bold uppercase text-slate-500 tracking-widest pl-1">Métricas de Capacidade</h2>
-            <span class="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 font-mono">Média Geral Ocupação: 58%</span>
+            <span class="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 font-mono">Média Geral Ocupação End.: 60%</span>
         </div>
         
         <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
@@ -95,15 +98,15 @@
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber">
                 <p class="text-[10px] font-bold text-amber-500 uppercase tracking-tight truncate">Área Ocupada m²</p>
-                <h4 class="text-xl font-black text-amber-400 mt-1">1.502</h4>
+                <h4 class="text-xl font-black text-amber-400 mt-1">1.581</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
                 <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">Área Livre m²</p>
-                <h4 class="text-xl font-black text-emerald-400 mt-1">705</h4>
+                <h4 class="text-xl font-black text-emerald-400 mt-1">626</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-red">
                 <p class="text-[10px] font-bold text-red-500 uppercase tracking-tight truncate">Ocup. Área %</p>
-                <h4 class="text-xl font-black text-red-400 mt-1">68%</h4>
+                <h4 class="text-xl font-black text-red-400 mt-1">72%</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Total de End.</p>
@@ -111,11 +114,11 @@
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-blue-400 uppercase tracking-tight truncate">End. Ocupados</p>
-                <h4 class="text-xl font-black text-blue-400 mt-1">78</h4>
+                <h4 class="text-xl font-black text-blue-400 mt-1">75</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
                 <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">End. Livres</p>
-                <h4 class="text-xl font-black text-emerald-400 mt-1">35</h4>
+                <h4 class="text-xl font-black text-emerald-400 mt-1">38</h4>
             </div>
         </section>
 
@@ -124,24 +127,24 @@
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-blue">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Total: Disp / CQ</p>
-                    <h3 class="text-xl font-black text-blue-400 mt-1">7.083</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Total Sku: <span class="text-slate-300 font-mono font-bold">115</span></p>
+                    <h3 class="text-xl font-black text-blue-400 mt-1">7.782</h3>
+                    <p class="text-[10px] text-slate-500 mt-1">Total Sku: <span class="text-slate-300 font-mono font-bold">141</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">Geral</span>
             </div>
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-emerald">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Disponivel R</p>
-                    <h3 class="text-xl font-black text-emerald-400 mt-1">5.763</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold">83</span></p>
+                    <h3 class="text-xl font-black text-emerald-400 mt-1">6.321</h3>
+                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold">89</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded">Disponível</span>
             </div>
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-purple">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Cooktop P.P</p>
-                    <h3 class="text-xl font-black text-purple-400 mt-1">1.035</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold">10</span></p>
+                    <h3 class="text-xl font-black text-purple-400 mt-1">1.049</h3>
+                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold">9</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-1 rounded">Cooktop</span>
             </div>
@@ -149,13 +152,13 @@
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">End. Mini Bin</p>
                     <h3 class="text-xl font-black text-amber-400 mt-1">5 <span class="text-xs text-slate-500 font-normal">| 95,93 m²</span></h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Peças: <span class="text-white font-bold font-mono">124</span> | Sku: <span class="text-white font-bold font-mono">31</span></p>
+                    <p class="text-[10px] text-slate-500 mt-1">Peças: <span class="text-white font-bold font-mono">146</span> | Sku: <span class="text-white font-bold font-mono">34</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-1 rounded">Mini Bin</span>
             </div>
         </section>
 
-        <!-- Corpo Principal: Tabelas de Ocupação e Blocos -->
+        <!-- Corpo Principal: Tabelas de Ocupação e Bloco Bloqueado + B2B -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
             <!-- Tabela Central: Ocupação Família M² -->
@@ -179,42 +182,58 @@
                         <tfoot>
                             <tr class="bg-blue-950/20 border-t-2 border-blue-900 font-bold text-white text-xs">
                                 <td class="px-4 py-4">Total Geral</td>
-                                <td class="px-4 py-4 text-right font-mono text-base">5.569</td>
-                                <td class="px-4 py-4 text-right font-mono text-base">1.598,00</td>
-                                <td class="px-4 py-4 text-center font-mono text-blue-400 text-sm">68%</td>
+                                <td class="px-4 py-4 text-right font-mono text-base">6.151</td>
+                                <td class="px-4 py-4 text-right font-mono text-base">1.581,00</td>
+                                <td class="px-4 py-4 text-center font-mono text-blue-400 text-sm">67%</td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
 
-            <!-- Coluna Direita: Estoque Bloqueado -->
-            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
-                <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
-                    <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
-                </h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
-                            <tr>
-                                <th class="px-4 py-3">Categoria</th>
-                                <th class="px-4 py-3 text-right">Qtd (Vol)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-800/50 font-medium">
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Sucata</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">133</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Rio Claro</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">1</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Joinville</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">120</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">127v</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">21</td></tr>
-                            <tr class="hover:bg-slate-800/20"><td class="px-4 py-2.5">Reoperação</td><td class="px-4 py-2.5 text-right text-red-400 font-mono font-bold text-sm">10</td></tr>
-                        </tbody>
-                        <tfoot>
-                            <tr class="bg-red-950/10 border-t border-red-900/50 font-bold text-white text-xs">
-                                <td class="px-4 py-3.5 text-slate-300">Total</td>
-                                <td class="px-4 py-3.5 text-right text-red-400 font-mono font-black text-sm">285</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+            <!-- Coluna Direita: Estoque Bloqueado + NOVO BLOCO ESTOQUE B2B -->
+            <div class="space-y-6">
+                <!-- Estoque Bloqueado -->
+                <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
+                    <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+                                <tr>
+                                    <th class="px-4 py-3">Categoria</th>
+                                    <th class="px-4 py-3 text-right">Qtd (Vol)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800/50 font-medium">
+                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-2">Sucata</td><td class="px-4 py-2 text-right text-red-400 font-mono font-bold text-sm">157</td></tr>
+                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-2">Rio Claro</td><td class="px-4 py-2 text-right text-red-400 font-mono font-bold text-sm">37</td></tr>
+                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-2">Joinville</td><td class="px-4 py-2 text-right text-red-400 font-mono font-bold text-sm">138</td></tr>
+                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-2">127v</td><td class="px-4 py-2 text-right text-red-400 font-mono font-bold text-sm">21</td></tr>
+                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-2">Reoperação</td><td class="px-4 py-2 text-right text-red-400 font-mono font-bold text-sm">59</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="bg-red-950/10 border-t border-red-900/50 font-bold text-white text-xs">
+                                    <td class="px-4 py-2.5 text-slate-300">Total</td>
+                                    <td class="px-4 py-2.5 text-right text-red-400 font-mono font-black text-sm">412</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Novo Bloco: Estoque B2B -->
+                <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 shadow-md glow-cyan flex justify-between items-center bg-gradient-to-r from-[#0f172a] to-cyan-950/20">
+                    <div>
+                        <p class="text-xs font-bold uppercase text-cyan-400 tracking-wider">Est. B2B</p>
+                        <h3 class="text-2xl font-black text-white mt-1">532 <span class="text-xs font-normal text-slate-400">vol</span></h3>
+                        <p class="text-[11px] text-slate-400 mt-1">Área M²: <span class="text-cyan-300 font-mono font-bold">192,36</span></p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-1 rounded uppercase">Canal B2B</span>
+                        <p class="text-[11px] text-slate-400 mt-3">End. Ocup: <span class="text-white font-mono font-bold text-sm">11</span></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -259,15 +278,15 @@
         <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento Integrado Core</p>
     </footer>
 
-    <!-- INÍCIO DOS SCRIPTS - TOTALMENTE REVISADO -->
+    <!-- JAVASCRIPT TOTALMENTE REVISADO E BLINDADO -->
     <script>
         const datasetOficial = [
-            { familia: "cervejeira", pecas: 159, area: 39.35, percent: 2 },
-            { familia: "fogão", pecas: 629, area: 214.63, percent: 10 },
-            { familia: "forno", pecas: 622, area: 92.37, percent: 4 },
-            { familia: "freezer", pecas: 485, area: 112.50, percent: 5 },
-            { familia: "lavadora", pecas: 606, area: 180.05, percent: 8 },
-            { familia: "refrigerador", pecas: 2908, area: 826.82, percent: 37 },
+            { familia: "cervejeira", pecas: 124, area: 19.60, percent: 1 },
+            { familia: "fogão", pecas: 558, area: 231.53, percent: 10 },
+            { familia: "forno", pecas: 571, area: 92.37, percent: 4 },
+            { familia: "freezer", pecas: 498, area: 95.27, percent: 4 },
+            { familia: "lavadora", pecas: 964, area: 235.17, percent: 11 },
+            { familia: "refrigerador", pecas: 3206, area: 775.45, percent: 35 },
             { familia: "secadora", pecas: 230, area: 36.02, percent: 2 }
         ];
 
@@ -276,19 +295,24 @@
             const dia = String(hoje.getDate()).padStart(2, '0');
             const mes = String(hoje.getMonth() + 1).padStart(2, '0'); 
             const ano = hoje.getFullYear();
-            document.getElementById('currentDateBadge').textContent = 'INTERFACE ATUALIZADA ' + dia + '/' + mes + '/' + ano;
+            const badge = document.getElementById('currentDateBadge');
+            if (badge) {
+                badge.textContent = 'INTERFACE ATUALIZADA ' + dia + '/' + mes + '/' + ano;
+            }
         }
 
         function renderizarPainel() {
             const tbody = document.getElementById('familyTableBody');
             const marquee = document.getElementById('tickerMarquee');
             
+            if (!tbody || !marquee) return;
+
             tbody.innerHTML = '';
             marquee.innerHTML = '';
 
             const tickerData = [...datasetOficial, ...datasetOficial];
 
-            tickerData.forEach(item => {
+            tickerData.forEach(function(item) {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
                 const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
@@ -299,7 +323,7 @@
                 marquee.appendChild(div);
             });
 
-            datasetOficial.forEach(item => {
+            datasetOficial.forEach(function(item) {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/20 transition-colors border-b border-slate-800/50";
                 const barColor = item.percent >= 30 ? "bg-gradient-to-r from-red-500 to-amber-500" : "bg-gradient-to-r from-blue-500 to-indigo-500";
@@ -320,7 +344,10 @@
         }
 
         function renderizarGraficos() {
-            const ctxVol = document.getElementById('chartVolumetria').getContext('2d');
+            const canvasVol = document.getElementById('chartVolumetria');
+            if (!canvasVol) return;
+
+            const ctxVol = canvasVol.getContext('2d');
             const gradientBlue = ctxVol.createLinearGradient(0, 0, 0, 220);
             gradientBlue.addColorStop(0, 'rgba(59, 130, 246, 1)');   
             gradientBlue.addColorStop(1, 'rgba(59, 130, 246, 0.15)'); 
@@ -328,10 +355,10 @@
             new Chart(ctxVol, {
                 type: 'bar',
                 data: {
-                    labels: datasetOficial.map(item => item.familia.toUpperCase()),
+                    labels: datasetOficial.map(function(item) { return item.familia.toUpperCase(); }),
                     datasets: [{
                         label: 'Quantidade de Peças',
-                        data: datasetOficial.map(item => item.pecas),
+                        data: datasetOficial.map(function(item) { return item.pecas; }),
                         backgroundColor: gradientBlue,
                         borderColor: '#3b82f6',
                         borderWidth: 1,
@@ -349,36 +376,19 @@
                     }
                 }
             });
-
-            new Chart(document.getElementById('chartShare').getContext('2d'), {
-                type: 'doughnut',
-                data: {
-                    labels: datasetOficial.map(item => item.familia.toUpperCase()),
-                    datasets: [{
-                        data: datasetOficial.map(item => item.percent),
-                        backgroundColor: ['#3b82f6', '#10b981', '#6366f1', '#f59e0b', '#ec4899', '#06b6d4', '#475569'],
-                        borderWidth: 3,
-                        borderColor: '#0f172a'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } }
-                }
-            });
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            atualizarDataAutomatically(); 
+        function executarInicilazacao() {
+            atualizarDataAutomaticamente();
             renderizarPainel();
             renderizarGraficos();
-        });
+        }
 
-        // Alternativa segura para ativação das chamadas
-        atualizarDataAutomaticamente();
-        renderizarPainel();
-        renderizarGraficos();
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', executarInicilazacao);
+        } else {
+            executarInicilazacao();
+        }
     </script>
 </body>
 </html>
