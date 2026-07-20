@@ -191,7 +191,7 @@
                 </div>
             </div>
 
-            <!-- Coluna Direita: Estoque Bloqueado + NOVO BLOCO ESTOQUE B2B -->
+            <!-- Coluna Direita: Estoque Bloqueado + Estoque B2B -->
             <div class="space-y-6">
                 <!-- Estoque Bloqueado -->
                 <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
@@ -223,7 +223,7 @@
                     </div>
                 </div>
 
-                <!-- Novo Bloco: Estoque B2B -->
+                <!-- Estoque B2B -->
                 <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 shadow-md glow-cyan flex justify-between items-center bg-gradient-to-r from-[#0f172a] to-cyan-950/20">
                     <div>
                         <p class="text-xs font-bold uppercase text-cyan-400 tracking-wider">Est. B2B</p>
@@ -246,7 +246,7 @@
                 <div class="relative h-[220px]"><canvas id="chartVolumetria"></canvas></div>
             </div>
 
-            <!-- Tabela Dinâmica: Dados Referência -->
+            <!-- Tabela Dinâmica: Dados Referência (COM TEXTO "BLOCADO" E ÁREA ÚTIL DESTAQUE EM VERDE) -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-purple">
                 <h3 class="font-bold text-sm tracking-wide text-purple-400 mb-4 flex items-center gap-2">
                     📐 Dados de Referência (Infraestrutura)
@@ -264,9 +264,15 @@
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">115</td><td class="px-3 py-2 text-slate-400">Endereços sem ampliações</td><td class="px-3 py-2 text-right font-mono">2.349,2 m²</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">6</td><td class="px-3 py-2 text-slate-400">Ampliações (cabeceira de rua)</td><td class="px-3 py-2 text-right font-mono">120,81 m²</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">8</td><td class="px-3 py-2 text-slate-400">Endereços novos (pós desmob.)</td><td class="px-3 py-2 text-right font-mono">138,41 m²</td></tr>
-                            <tr class="hover:bg-slate-800/20 bg-purple-950/10"><td class="px-3 py-2 text-center font-bold font-mono text-purple-400">121</td><td class="px-3 py-2 font-bold text-purple-300">Área total bloqueado</td><td class="px-3 py-2 text-right font-mono font-bold">2.470,01 m²</td></tr>
+                            <tr class="hover:bg-slate-800/20 bg-purple-950/10"><td class="px-3 py-2 text-center font-bold font-mono text-purple-400">121</td><td class="px-3 py-2 font-bold text-purple-300">Área total blocado</td><td class="px-3 py-2 text-right font-mono font-bold text-purple-200">2.470,01 m²</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">8</td><td class="px-3 py-2 text-slate-400">Endereços Ocupados por CQ Rua 01</td><td class="px-3 py-2 text-right font-mono">262,41 m²</td></tr>
-                            <tr class="hover:bg-slate-800/20 bg-blue-950/20"><td class="px-3 py-2 text-center font-bold font-mono text-blue-400">113</td><td class="px-3 py-2 font-bold text-blue-300">Área util atual</td><td class="px-3 py-2 text-right font-mono font-bold">2.207,6 m²</td></tr>
+                            
+                            <!-- LINHA DESTAQUE VERDE ESMERALDA (Área útil atual) -->
+                            <tr class="hover:bg-emerald-900/30 bg-emerald-950/40 border-l-4 border-emerald-500">
+                                <td class="px-3 py-2.5 text-center font-black font-mono text-emerald-400 text-xs">113</td>
+                                <td class="px-3 py-2.5 font-black text-emerald-300 uppercase tracking-wide">Área util atual</td>
+                                <td class="px-3 py-2.5 text-right font-mono font-black text-emerald-400 text-xs">2.207,6 m²</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -278,7 +284,7 @@
         <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento Integrado Core</p>
     </footer>
 
-    <!-- JAVASCRIPT TOTALMENTE REVISADO E BLINDADO -->
+    <!-- JAVASCRIPT TOTALMENTE PROTEGIDO -->
     <script>
         const datasetOficial = [
             { familia: "cervejeira", pecas: 124, area: 19.60, percent: 1 },
