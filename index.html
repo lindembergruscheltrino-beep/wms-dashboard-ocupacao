@@ -239,9 +239,9 @@
             </div>
         </section>
 
-        <!-- Seção Inferior: Gráfico Otimizado de Volumetria e Dados de Referência -->
+        <!-- Seção Inferior: Gráfico com Fundo Limpo e Dados de Referência -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Gráfico Visão Geral de Peças (DESIGN PREMIUM REESTRUTURADO) -->
+            <!-- Gráfico Visão Geral de Peças (SEM LINHAS DE GRADE) -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold text-sm text-slate-300 flex items-center gap-2">
@@ -293,7 +293,7 @@
         <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento Integrado Core</p>
     </footer>
 
-    <!-- JAVASCRIPT COM GRÁFICO ALTAMENTE VISUAL -->
+    <!-- JAVASCRIPT -->
     <script>
         // Registrar o plugin de DataLabels do Chart.js
         Chart.register(ChartDataLabels);
@@ -369,19 +369,16 @@
             // Degradês customizados por destaque
             const bgGradients = datasetOficial.map(function(item) {
                 if (item.pecas >= 3000) {
-                    // Maior volume (Refrigerador) - Tom Cyan Neon de Destaque
                     const g = ctxVol.createLinearGradient(0, 0, 0, 250);
                     g.addColorStop(0, 'rgba(6, 182, 212, 0.9)');
                     g.addColorStop(1, 'rgba(59, 130, 246, 0.2)');
                     return g;
                 } else if (item.pecas >= 1000) {
-                    // Volume Intermediário Alto (Lavadora) - Tom Azul Elétrico
                     const g = ctxVol.createLinearGradient(0, 0, 0, 250);
                     g.addColorStop(0, 'rgba(59, 130, 246, 0.85)');
                     g.addColorStop(1, 'rgba(30, 58, 138, 0.2)');
                     return g;
                 } else {
-                    // Padrão
                     const g = ctxVol.createLinearGradient(0, 0, 0, 250);
                     g.addColorStop(0, 'rgba(99, 102, 241, 0.7)');
                     g.addColorStop(1, 'rgba(30, 41, 59, 0.2)');
@@ -415,7 +412,7 @@
                     maintainAspectRatio: false,
                     layout: {
                         padding: {
-                            top: 25 // Espaço extra para os números não cortarem no topo
+                            top: 25
                         }
                     },
                     plugins: { 
@@ -434,7 +431,6 @@
                                 }
                             }
                         },
-                        // RÓTULOS DE DADOS NO TOPO DE CADA BARRA
                         datalabels: {
                             anchor: 'end',
                             align: 'top',
@@ -455,7 +451,7 @@
                     scales: {
                         x: { 
                             ticks: { color: '#94a3b8', font: { weight: 'bold', size: 10 } }, 
-                            grid: { display: false } 
+                            grid: { display: false } // Sem linhas verticais
                         },
                         y: { 
                             ticks: { 
@@ -463,8 +459,8 @@
                                 font: { size: 10 },
                                 callback: function(value) { return value.toLocaleString('pt-BR'); }
                             }, 
-                            grid: { color: 'rgba(30, 41, 59, 0.6)' },
-                            border: { dash: [4, 4] },
+                            grid: { display: false }, // SEM LINHAS DE GRADE HORIZONTAIS
+                            border: { display: false },
                             grace: '15%'
                         }
                     }
