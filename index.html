@@ -331,14 +331,14 @@
 
             const tickerData = [...datasetOficial, ...datasetOficial];
 
-            // LETREIRO ATUALIZADO COM AS QUANTIDADES DE PEÇAS DE CADA FAMÍLIA
+            // LETREIRO COM QUANTIDADE DESTACADA EM AZUL NEON E SEM O TEXTO "PECS"
             tickerData.forEach(function(item) {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
                 const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
                 
                 div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
-                                '<span class="text-slate-400 font-mono ml-2.5 font-bold text-xs">' + item.pecas.toLocaleString('pt-BR') + ' pecs</span>' +
+                                '<span class="text-blue-400 font-mono ml-2 font-bold text-sm">' + item.pecas.toLocaleString('pt-BR') + '</span>' +
                                 '<span class="text-slate-600 mx-2">|</span>' +
                                 '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
                 marquee.appendChild(div);
