@@ -298,7 +298,7 @@
         // Registrar o plugin de DataLabels do Chart.js
         Chart.register(ChartDataLabels);
 
-        // DATASET OFICIAL ATUALIZADO (DADOS DE HOJE)
+        // DATASET OFICIAL ATUALIZADO
         const datasetOficial = [
             { familia: "cervejeira", pecas: 121, area: 19.60, percent: 1 },
             { familia: "fogão", pecas: 520, area: 210.95, percent: 10 },
@@ -331,13 +331,16 @@
 
             const tickerData = [...datasetOficial, ...datasetOficial];
 
+            // LETREIRO ATUALIZADO COM AS QUANTIDADES DE PEÇAS DE CADA FAMÍLIA
             tickerData.forEach(function(item) {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
                 const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
                 
                 div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
-                                '<span class="ml-2 ' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
+                                '<span class="text-slate-400 font-mono ml-2.5 font-bold text-xs">' + item.pecas.toLocaleString('pt-BR') + ' pecs</span>' +
+                                '<span class="text-slate-600 mx-2">|</span>' +
+                                '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
                 marquee.appendChild(div);
             });
 
