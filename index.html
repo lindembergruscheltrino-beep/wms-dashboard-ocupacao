@@ -70,7 +70,7 @@
                 </div>
             </div>
             
-            <!-- BOTÃO INTERATIVO DE ATUALIZAÇÃO MANUAL -->
+            <!-- BOTÃO INTERATIVO DE ATUALIZAÇÃO MANUAL (Com Horário Fixo às 09:00) -->
             <button onclick="executarAtualizacaoManual()" id="btnRefresh" class="text-xs bg-[#1e293b] hover:bg-slate-800 text-slate-300 hover:text-white px-4 py-2.5 rounded-lg border border-slate-700 hover:border-blue-500/50 flex items-center gap-2.5 transition-all shadow-inner active:scale-95 cursor-pointer group">
                 <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -321,18 +321,17 @@
         // ORDENANDO OS DADOS DO MAIOR PARA O MENOR PERCENTUAL AUTOMATICAMENTE
         const datasetOficial = rawDataset.sort((a, b) => b.percent - a.percent);
 
-        // FUNÇÃO DE ATUALIZAÇÃO DA DATA E HORA EXATAS AO CLICAR NO BOTÃO
+        // FUNÇÃO DE ATUALIZAÇÃO DA DATA ATUAL E HORA FIXADA EM 09:00
         function registrarDataEHoraAtualizacao() {
             const hoje = new Date();
             const dia = String(hoje.getDate()).padStart(2, '0');
             const mes = String(hoje.getMonth() + 1).padStart(2, '0'); 
             const ano = hoje.getFullYear();
-            const horas = String(hoje.getHours()).padStart(2, '0');
-            const minutos = String(hoje.getMinutes()).padStart(2, '0');
             
+            // Horário fixado sempre às 09:00 conforme solicitado
             const badge = document.getElementById('currentDateBadge');
             if (badge) {
-                badge.textContent = 'ATUALIZADO ' + dia + '/' + mes + '/' + ano + ' às ' + horas + ':' + minutos;
+                badge.textContent = 'ATUALIZADO ' + dia + '/' + mes + '/' + ano + ' às 09:00';
             }
         }
 
