@@ -69,11 +69,18 @@
                     <p class="text-xs text-slate-400">Whirlpool • Trino</p>
                 </div>
             </div>
-            <!-- Badge de Data Atualizada Automaticamente via JS -->
-            <div class="text-xs bg-[#1e293b] px-4 py-2 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2 shadow-inner">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="font-medium font-mono" id="currentDateBadge">INTERFACE ATUALIZADA --/--/----</span>
-            </div>
+            
+            <!-- BOTÃO INTERATIVO DE ATUALIZAÇÃO MANUAL -->
+            <button onclick="executarAtualizacaoManual()" id="btnRefresh" class="text-xs bg-[#1e293b] hover:bg-slate-800 text-slate-300 hover:text-white px-4 py-2.5 rounded-lg border border-slate-700 hover:border-blue-500/50 flex items-center gap-2.5 transition-all shadow-inner active:scale-95 cursor-pointer group">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="font-medium font-mono tracking-tight" id="currentDateBadge">ATUALIZAR DADOS</span>
+                <svg id="refreshIcon" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-400 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+            </button>
         </div>
     </header>
 
@@ -162,7 +169,7 @@
         <!-- Corpo Principal: Tabelas de Ocupação e Bloco Bloqueado + B2B -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Central: Ocupação Família M² (ORDENADA DO MAIOR PARA O MENOR PERCENTUAL) -->
+            <!-- Tabela Central: Ocupação Família M² -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block animate-pulse"></span> Ocupação Família M²
@@ -298,6 +305,8 @@
         // Registrar o plugin de DataLabels do Chart.js
         Chart.register(ChartDataLabels);
 
+        let chartInstance = null;
+
         // DATASET OFICIAL (DADOS DE HOJE)
         const rawDataset = [
             { familia: "cervejeira", pecas: 216, area: 39.35, percent: 2 },
@@ -312,15 +321,32 @@
         // ORDENANDO OS DADOS DO MAIOR PARA O MENOR PERCENTUAL AUTOMATICAMENTE
         const datasetOficial = rawDataset.sort((a, b) => b.percent - a.percent);
 
-        function atualizarDataAutomaticamente() {
+        // FUNÇÃO DE ATUALIZAÇÃO DA DATA E HORA EXATAS AO CLICAR NO BOTÃO
+        function registrarDataEHoraAtualizacao() {
             const hoje = new Date();
             const dia = String(hoje.getDate()).padStart(2, '0');
             const mes = String(hoje.getMonth() + 1).padStart(2, '0'); 
             const ano = hoje.getFullYear();
+            const horas = String(hoje.getHours()).padStart(2, '0');
+            const minutos = String(hoje.getMinutes()).padStart(2, '0');
+            
             const badge = document.getElementById('currentDateBadge');
             if (badge) {
-                badge.textContent = 'INTERFACE ATUALIZADA ' + dia + '/' + mes + '/' + ano;
+                badge.textContent = 'ATUALIZADO ' + dia + '/' + mes + '/' + ano + ' às ' + horas + ':' + minutos;
             }
+        }
+
+        // AÇÃO EXECUTADA AO CLICAR NO BOTÃO DA NAVBAR
+        function executarAtualizacaoManual() {
+            const icon = document.getElementById('refreshIcon');
+            if (icon) {
+                icon.classList.add('rotate-180');
+                setTimeout(() => icon.classList.remove('rotate-180'), 500);
+            }
+
+            registrarDataEHoraAtualizacao();
+            renderizarPainel();
+            renderizarGraficos();
         }
 
         function renderizarPainel() {
@@ -372,6 +398,10 @@
 
             const ctxVol = canvasVol.getContext('2d');
             
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
             const bgGradients = datasetOficial.map(function(item) {
                 if (item.pecas >= 3000) {
                     const g = ctxVol.createLinearGradient(0, 0, 0, 250);
@@ -397,7 +427,7 @@
                 return '#6366f1';
             });
 
-            new Chart(ctxVol, {
+            chartInstance = new Chart(ctxVol, {
                 type: 'bar',
                 data: {
                     labels: datasetOficial.map(function(item) { return item.familia.toUpperCase(); }),
@@ -474,7 +504,7 @@
         }
 
         function executarInicilazacao() {
-            atualizarDataAutomaticamente();
+            registrarDataEHoraAtualizacao();
             renderizarPainel();
             renderizarGraficos();
         }
