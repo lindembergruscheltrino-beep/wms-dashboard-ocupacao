@@ -70,17 +70,14 @@
                 </div>
             </div>
             
-            <!-- BOTÃO INTERATIVO DE ATUALIZAÇÃO MANUAL (Com Horário Fixo às 09:00) -->
-            <button onclick="executarAtualizacaoManual()" id="btnRefresh" class="text-xs bg-[#1e293b] hover:bg-slate-800 text-slate-300 hover:text-white px-4 py-2.5 rounded-lg border border-slate-700 hover:border-blue-500/50 flex items-center gap-2.5 transition-all shadow-inner active:scale-95 cursor-pointer group">
+            <!-- BADGE INDICADORA DA DATA REAL DOS DADOS -->
+            <div class="text-xs bg-[#1e293b] px-4 py-2.5 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2.5 shadow-inner">
                 <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                 </span>
-                <span class="font-medium font-mono tracking-tight" id="currentDateBadge">ATUALIZAR DADOS</span>
-                <svg id="refreshIcon" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-400 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                </svg>
-            </button>
+                <span class="font-medium font-mono tracking-tight text-slate-200" id="currentDateBadge">DADOS REFERENTES A --/--/----</span>
+            </div>
         </div>
     </header>
 
@@ -307,7 +304,10 @@
 
         let chartInstance = null;
 
-        // DATASET OFICIAL (DADOS DE HOJE)
+        // DATA FIXA OFICIAL DA PLANILHA (Sempre atualizada com o envio dos dados)
+        const DATA_RELATORIO_OFICIAL = "30/07/2026 às 09:00";
+
+        // DATASET OFICIAL (DADOS DA PLANILHA)
         const rawDataset = [
             { familia: "cervejeira", pecas: 216, area: 39.35, percent: 2 },
             { familia: "fogão", pecas: 465, area: 180.71, percent: 8 },
@@ -321,31 +321,12 @@
         // ORDENANDO OS DADOS DO MAIOR PARA O MENOR PERCENTUAL AUTOMATICAMENTE
         const datasetOficial = rawDataset.sort((a, b) => b.percent - a.percent);
 
-        // FUNÇÃO DE ATUALIZAÇÃO DA DATA ATUAL E HORA FIXADA EM 09:00
+        // EXIBE A DATA FIXA DO CORTE DA PLANILHA
         function registrarDataEHoraAtualizacao() {
-            const hoje = new Date();
-            const dia = String(hoje.getDate()).padStart(2, '0');
-            const mes = String(hoje.getMonth() + 1).padStart(2, '0'); 
-            const ano = hoje.getFullYear();
-            
-            // Horário fixado sempre às 09:00 conforme solicitado
             const badge = document.getElementById('currentDateBadge');
             if (badge) {
-                badge.textContent = 'ATUALIZADO ' + dia + '/' + mes + '/' + ano + ' às 09:00';
+                badge.textContent = 'DADOS REFERENTES A ' + DATA_RELATORIO_OFICIAL;
             }
-        }
-
-        // AÇÃO EXECUTADA AO CLICAR NO BOTÃO DA NAVBAR
-        function executarAtualizacaoManual() {
-            const icon = document.getElementById('refreshIcon');
-            if (icon) {
-                icon.classList.add('rotate-180');
-                setTimeout(() => icon.classList.remove('rotate-180'), 500);
-            }
-
-            registrarDataEHoraAtualizacao();
-            renderizarPainel();
-            renderizarGraficos();
         }
 
         function renderizarPainel() {
