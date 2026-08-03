@@ -47,10 +47,10 @@
         .ticker {
             display: flex;
             white-space: nowrap;
-            animation: marquee 25s linear infinite;
+            animation: marquee 18s linear infinite;
         }
         .ticker:hover { animation-play-state: paused; cursor: pointer; }
-        .ticker__item { display: flex; align-items: center; padding: 0 2rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
+        .ticker__item { display: flex; align-items: center; padding: 0 3rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
@@ -163,7 +163,7 @@
             </div>
         </section>
 
-        <!-- NOVO PAINEL DE OBSERVAÇÕES E ALOCAÇÕES ESPECIAIS (FIXO) -->
+        <!-- PAINEL DE OBSERVAÇÕES E ALOCAÇÕES ESPECIAIS (FIXO) -->
         <section class="bg-[#0f172a] p-3.5 rounded-xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md bg-gradient-to-r from-[#0f172a] via-purple-950/20 to-[#0f172a]">
             <div class="flex items-center gap-2">
                 <span class="text-amber-400 font-bold text-xs uppercase tracking-wider bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md flex items-center gap-1.5">
@@ -357,38 +357,20 @@
             tbody.innerHTML = '';
             marquee.innerHTML = '';
 
-            // MONTAGEM DO SEQUÊNCIAL DO LETREIRO INTERCALANDO DADOS + OBSERVAÇÕES ESPECIAIS
-            const observacoesHtml = 
-                '<div class="ticker__item bg-amber-500/10 border border-amber-500/30 rounded-full px-3.5 py-1 mx-2">' +
-                '  <span class="text-amber-400 font-black text-xs uppercase tracking-wider mr-1.5">📍 MAGALU:</span>' +
-                '  <span class="text-amber-200 font-mono font-bold text-xs">RUA 1 END. 17,30 m²</span>' +
-                '</div>' +
-                '<div class="ticker__item bg-purple-500/10 border border-purple-500/30 rounded-full px-3.5 py-1 mx-2">' +
-                '  <span class="text-purple-400 font-black text-xs uppercase tracking-wider mr-1.5">📍 COOKTOP:</span>' +
-                '  <span class="text-purple-200 font-mono font-bold text-xs">RUA 5 END. 77,76 m²</span>' +
-                '</div>';
+            // MONTAGEM DO LETREIRO EXCLUSIVAMENTE COM AS FAMÍLIAS
+            const tickerData = [...datasetOficial, ...datasetOficial, ...datasetOficial];
 
-            // REPETE O BLOCO DADOS + DESTAQUES 2 VEZES PARA GARANTIR LOOP INFINITO E FLUÍDO
-            for (let i = 0; i < 2; i++) {
-                datasetOficial.forEach(function(item) {
-                    const div = document.createElement('div');
-                    div.className = "ticker__item";
-                    const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
-                    
-                    div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
-                                    '<span class="text-blue-400 font-mono ml-2 font-bold text-sm">' + item.pecas.toLocaleString('pt-BR') + '</span>' +
-                                    '<span class="text-slate-600 mx-2">|</span>' +
-                                    '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
-                    marquee.appendChild(div);
-                });
-
-                // INJETA OS DESTAQUES DENTRO DO SEQUÊNCIAL DO LETREIRO
-                const tempContainer = document.createElement('div');
-                tempContainer.innerHTML = observacoesHtml;
-                while (tempContainer.firstChild) {
-                    marquee.appendChild(tempContainer.firstChild);
-                }
-            }
+            tickerData.forEach(function(item) {
+                const div = document.createElement('div');
+                div.className = "ticker__item";
+                const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
+                
+                div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
+                                '<span class="text-blue-400 font-mono ml-2 font-bold text-sm">' + item.pecas.toLocaleString('pt-BR') + '</span>' +
+                                '<span class="text-slate-600 mx-2">|</span>' +
+                                '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
+                marquee.appendChild(div);
+            });
 
             // RENDERIZAÇÃO DA TABELA DE OCUPAÇÃO FAMÍLIA
             datasetOficial.forEach(function(item) {
