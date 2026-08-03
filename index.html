@@ -35,7 +35,7 @@
         .glow-cyan { border: 1px solid rgba(6, 182, 212, 0.2); box-shadow: 0 4px 20px -2px rgba(6, 182, 212, 0.05); transition: all 0.3s ease; }
         .glow-cyan:hover { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 0 15px 1px rgba(6, 182, 212, 0.15); transform: translateY(-2px); }
 
-        /* Letreiro Rolável Fluido (22s para leitura confortável) */
+        /* Letreiro Rolável Fluido */
         .ticker-wrap {
             width: 100%;
             overflow: hidden;
@@ -47,10 +47,10 @@
         .ticker {
             display: flex;
             white-space: nowrap;
-            animation: marquee 22s linear infinite;
+            animation: marquee 25s linear infinite;
         }
         .ticker:hover { animation-play-state: paused; cursor: pointer; }
-        .ticker__item { display: flex; align-items: center; padding: 0 2.5rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
+        .ticker__item { display: flex; align-items: center; padding: 0 2rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
@@ -307,13 +307,7 @@
         // DATA FIXA OFICIAL DA PLANILHA (03/08/2026)
         const DATA_RELATORIO_OFICIAL = "03/08/2026 às 09:00";
 
-        // INFORMAÇÕES EXTRAS DE DESTAQUE NO LETREIRO
-        const destaquesExtras = [
-            { texto: "Magalu - Rua 1 End. 17,30 m²", tag: "MAGALU" },
-            { texto: "Cooktop - Rua 5 End. 77,76 m²", tag: "COOKTOP" }
-        ];
-
-        // DATASET OFICIAL (DADOS DA PLANILHA DE HOJE)
+        // DATASET OFICIAL
         const rawDataset = [
             { familia: "cervejeira", pecas: 202, area: 37.45, percent: 2 },
             { familia: "fogão", pecas: 423, area: 167.09, percent: 7 },
@@ -344,31 +338,40 @@
             tbody.innerHTML = '';
             marquee.innerHTML = '';
 
-            const tickerData = [...datasetOficial, ...datasetOficial];
+            // MONTAGEM DO SEQUÊNCIAL DO LETREIRO INTERCALANDO DADOS + OBSERVAÇÕES ESPECIAIS
+            const observacoesHtml = 
+                '<div class="ticker__item bg-amber-500/10 border border-amber-500/30 rounded-full px-3.5 py-1 mx-2">' +
+                '  <span class="text-amber-400 font-black text-xs uppercase tracking-wider mr-1.5">📍 MAGALU:</span>' +
+                '  <span class="text-amber-200 font-mono font-bold text-xs">RUA 1 END. 17,30 m²</span>' +
+                '</div>' +
+                '<div class="ticker__item bg-purple-500/10 border border-purple-500/30 rounded-full px-3.5 py-1 mx-2">' +
+                '  <span class="text-purple-400 font-black text-xs uppercase tracking-wider mr-1.5">📍 COOKTOP:</span>' +
+                '  <span class="text-purple-200 font-mono font-bold text-xs">RUA 5 END. 77,76 m²</span>' +
+                '</div>';
 
-            // RENDERIZAR OS ITENS DE FAMÍLIA NO LETREIRO
-            tickerData.forEach(function(item) {
-                const div = document.createElement('div');
-                div.className = "ticker__item";
-                const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
-                
-                div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
-                                '<span class="text-blue-400 font-mono ml-2 font-bold text-sm">' + item.pecas.toLocaleString('pt-BR') + '</span>' +
-                                '<span class="text-slate-600 mx-2">|</span>' +
-                                '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
-                marquee.appendChild(div);
-            });
+            // REPETE O BLOCO DADOS + DESTAQUES 2 VEZES PARA GARANTIR LOOP INFINITO E FLUÍDO
+            for (let i = 0; i < 2; i++) {
+                datasetOficial.forEach(function(item) {
+                    const div = document.createElement('div');
+                    div.className = "ticker__item";
+                    const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
+                    
+                    div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
+                                    '<span class="text-blue-400 font-mono ml-2 font-bold text-sm">' + item.pecas.toLocaleString('pt-BR') + '</span>' +
+                                    '<span class="text-slate-600 mx-2">|</span>' +
+                                    '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
+                    marquee.appendChild(div);
+                });
 
-            // ADICIONAR AS INFORMAÇÕES EXTRAS DE DESTAQUE COM BADGES PULSANTES
-            destaquesExtras.forEach(function(extra) {
-                const div = document.createElement('div');
-                div.className = "ticker__item bg-purple-950/40 border border-purple-500/30 rounded-full px-4 py-1 mx-3 shadow-md shadow-purple-900/20";
-                div.innerHTML = '<span class="flex h-2 w-2 mr-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span></span>' +
-                                '<span class="text-amber-400 font-bold text-xs uppercase tracking-wider mr-2">[' + extra.tag + ']</span>' +
-                                '<span class="text-purple-200 font-bold text-xs">' + extra.texto + '</span>';
-                marquee.appendChild(div);
-            });
+                // INJETA OS DESTAQUES DENTRO DO SEQUÊNCIAL DO LETREIRO
+                const tempContainer = document.createElement('div');
+                tempContainer.innerHTML = observacoesHtml;
+                while (tempContainer.firstChild) {
+                    marquee.appendChild(tempContainer.firstChild);
+                }
+            }
 
+            // RENDERIZAÇÃO DA TABELA DE OCUPAÇÃO FAMÍLIA
             datasetOficial.forEach(function(item) {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/20 transition-colors border-b border-slate-800/50";
