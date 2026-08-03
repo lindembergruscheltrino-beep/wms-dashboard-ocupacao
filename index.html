@@ -35,7 +35,7 @@
         .glow-cyan { border: 1px solid rgba(6, 182, 212, 0.2); box-shadow: 0 4px 20px -2px rgba(6, 182, 212, 0.05); transition: all 0.3s ease; }
         .glow-cyan:hover { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 0 15px 1px rgba(6, 182, 212, 0.15); transform: translateY(-2px); }
 
-        /* Letreiro Rolável Fluido (18s) */
+        /* Letreiro Rolável Fluido (22s para leitura confortável) */
         .ticker-wrap {
             width: 100%;
             overflow: hidden;
@@ -47,10 +47,10 @@
         .ticker {
             display: flex;
             white-space: nowrap;
-            animation: marquee 18s linear infinite;
+            animation: marquee 22s linear infinite;
         }
         .ticker:hover { animation-play-state: paused; cursor: pointer; }
-        .ticker__item { display: flex; align-items: center; padding: 0 3rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
+        .ticker__item { display: flex; align-items: center; padding: 0 2.5rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
@@ -73,8 +73,8 @@
             <!-- BADGE INDICADORA DA DATA REAL DOS DADOS -->
             <div class="text-xs bg-[#1e293b] px-4 py-2.5 rounded-lg border border-slate-700 text-slate-300 flex items-center gap-2.5 shadow-inner">
                 <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <span class="font-medium font-mono tracking-tight text-slate-200" id="currentDateBadge">DADOS REFERENTES A --/--/----</span>
             </div>
@@ -93,37 +93,37 @@
         <!-- Régua de Indicadores Principais -->
         <div class="flex justify-between items-center">
             <h2 class="text-xs font-bold uppercase text-slate-500 tracking-widest pl-1">Métricas de Capacidade</h2>
-            <span class="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 font-mono">Média Geral Ocupação End.: 57%</span>
+            <span class="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 font-mono">Média Geral Ocupação End.: 62%</span>
         </div>
         
         <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Área Total m²</p>
-                <h4 class="text-xl font-black text-white mt-1">2.207</h4>
+                <h4 class="text-xl font-black text-white mt-1">2.346</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber">
                 <p class="text-[10px] font-bold text-amber-500 uppercase tracking-tight truncate">Área Ocupada m²</p>
-                <h4 class="text-xl font-black text-amber-400 mt-1">1.802</h4>
+                <h4 class="text-xl font-black text-amber-400 mt-1">1.962</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
                 <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">Área Livre m²</p>
-                <h4 class="text-xl font-black text-emerald-400 mt-1">405</h4>
+                <h4 class="text-xl font-black text-emerald-400 mt-1">384</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-red">
                 <p class="text-[10px] font-bold text-red-500 uppercase tracking-tight truncate">Ocup. Área %</p>
-                <h4 class="text-xl font-black text-red-400 mt-1">82%</h4>
+                <h4 class="text-xl font-black text-red-400 mt-1">84%</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Total de End.</p>
-                <h4 class="text-xl font-black text-white mt-1">113</h4>
+                <h4 class="text-xl font-black text-white mt-1">129</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
                 <p class="text-[10px] font-bold text-blue-400 uppercase tracking-tight truncate">End. Ocupados</p>
-                <h4 class="text-xl font-black text-blue-400 mt-1">86</h4>
+                <h4 class="text-xl font-black text-blue-400 mt-1">89</h4>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
                 <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">End. Livres</p>
-                <h4 class="text-xl font-black text-emerald-400 mt-1">27</h4>
+                <h4 class="text-xl font-black text-emerald-400 mt-1">40</h4>
             </div>
         </section>
 
@@ -132,23 +132,23 @@
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-blue">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Total: Disp / CQ</p>
-                    <h3 class="text-xl font-black text-blue-400 mt-1">8.400</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Total Sku: <span class="text-slate-300 font-mono font-bold">146</span></p>
+                    <h3 class="text-xl font-black text-blue-400 mt-1">7.701</h3>
+                    <p class="text-[10px] text-slate-500 mt-1">Total Sku: <span class="text-slate-300 font-mono font-bold">132</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">Geral</span>
             </div>
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-emerald">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Disponivel R</p>
-                    <h3 class="text-xl font-black text-emerald-400 mt-1">7.052</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold">103</span></p>
+                    <h3 class="text-xl font-black text-emerald-400 mt-1">6.374</h3>
+                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold">82</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded">Disponível</span>
             </div>
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-purple">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Cooktop P.P</p>
-                    <h3 class="text-xl font-black text-purple-400 mt-1">1.080</h3>
+                    <h3 class="text-xl font-black text-purple-400 mt-1">1.066</h3>
                     <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold">9</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-1 rounded">Cooktop</span>
@@ -156,8 +156,8 @@
             <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-amber">
                 <div>
                     <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">End. Mini Bin</p>
-                    <h3 class="text-xl font-black text-amber-400 mt-1">256 <span class="text-xs text-slate-400 font-normal">peças</span></h3>
-                    <p class="text-[10px] text-slate-500 mt-1">End: <span class="text-white font-bold font-mono">4</span> <span class="text-slate-600">|</span> 95,93 m² <span class="text-slate-600">|</span> Sku: <span class="text-white font-bold font-mono">42</span></p>
+                    <h3 class="text-xl font-black text-amber-400 mt-1">167 <span class="text-xs text-slate-400 font-normal">peças</span></h3>
+                    <p class="text-[10px] text-slate-500 mt-1">End: <span class="text-white font-bold font-mono">5</span> <span class="text-slate-600">|</span> 95,93 m² <span class="text-slate-600">|</span> Sku: <span class="text-white font-bold font-mono">26</span></p>
                 </div>
                 <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-1 rounded">Mini Bin</span>
             </div>
@@ -187,9 +187,9 @@
                         <tfoot>
                             <tr class="bg-blue-950/20 border-t-2 border-blue-900 font-bold text-xs">
                                 <td class="px-4 py-3.5 text-slate-200">Total Geral</td>
-                                <td class="px-4 py-3.5 text-right font-mono text-slate-300 text-xs">7.052</td>
-                                <td class="px-4 py-3.5 text-right font-mono text-slate-300 text-xs">1.802,00</td>
-                                <td class="px-4 py-3.5 text-center font-mono text-blue-400 text-xs font-bold">82%</td>
+                                <td class="px-4 py-3.5 text-right font-mono text-slate-300 text-xs">6.374</td>
+                                <td class="px-4 py-3.5 text-right font-mono text-slate-300 text-xs">1.612,00</td>
+                                <td class="px-4 py-3.5 text-center font-mono text-blue-400 text-xs font-bold">69%</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -214,14 +214,14 @@
                             <tbody class="divide-y divide-slate-800/50 font-medium">
                                 <tr class="hover:bg-slate-800/20"><td class="px-4 py-3 capitalize font-bold text-slate-200">Sucata</td><td class="px-4 py-3 text-right text-red-400 font-mono text-xs">20</td></tr>
                                 <tr class="hover:bg-slate-800/20"><td class="px-4 py-3 capitalize font-bold text-slate-200">Rio Claro</td><td class="px-4 py-3 text-right text-red-400 font-mono text-xs">54</td></tr>
-                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-3 capitalize font-bold text-slate-200">Joinville</td><td class="px-4 py-3 text-right text-red-400 font-mono text-xs">164</td></tr>
+                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-3 capitalize font-bold text-slate-200">Joinville</td><td class="px-4 py-3 text-right text-red-400 font-mono text-xs">166</td></tr>
                                 <tr class="hover:bg-slate-800/20"><td class="px-4 py-3 capitalize font-bold text-slate-200">127v</td><td class="px-4 py-3 text-right text-red-400 font-mono text-xs">21</td></tr>
-                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-3 capitalize font-bold text-slate-200">Reoperação</td><td class="px-4 py-3 text-right text-red-400 font-mono text-xs">9</td></tr>
+                                <tr class="hover:bg-slate-800/20"><td class="px-4 py-3 capitalize font-bold text-slate-200">Reoperação</td><td class="px-4 py-3 text-right text-red-400 font-mono text-xs">0</td></tr>
                             </tbody>
                             <tfoot>
                                 <tr class="bg-red-950/20 border-t-2 border-red-900/50 font-bold text-xs">
                                     <td class="px-4 py-3.5 text-slate-200">Total</td>
-                                    <td class="px-4 py-3.5 text-right text-red-400 font-mono text-xs font-bold">268</td>
+                                    <td class="px-4 py-3.5 text-right text-red-400 font-mono text-xs font-bold">261</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -277,14 +277,14 @@
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">115</td><td class="px-3 py-2 text-slate-400">Endereços sem ampliações</td><td class="px-3 py-2 text-right font-mono">2.349,2 m²</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">6</td><td class="px-3 py-2 text-slate-400">Ampliações (cabeceira de rua)</td><td class="px-3 py-2 text-right font-mono">120,81 m²</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">8</td><td class="px-3 py-2 text-slate-400">Endereços novos (pós desmob.)</td><td class="px-3 py-2 text-right font-mono">138,41 m²</td></tr>
-                            <tr class="hover:bg-slate-800/20 bg-purple-950/10"><td class="px-3 py-2 text-center font-bold font-mono text-purple-400">121</td><td class="px-3 py-2 font-bold text-purple-300">Área total blocado</td><td class="px-3 py-2 text-right font-mono font-bold text-purple-200">2.470,01 m²</td></tr>
+                            <tr class="hover:bg-slate-800/20 bg-purple-950/10"><td class="px-3 py-2 text-center font-bold font-mono text-purple-400">129</td><td class="px-3 py-2 font-bold text-purple-300">Área total blocado</td><td class="px-3 py-2 text-right font-mono font-bold text-purple-200">2.608 m²</td></tr>
                             <tr class="hover:bg-slate-800/20"><td class="px-3 py-2 text-center font-bold font-mono">8</td><td class="px-3 py-2 text-slate-400">Endereços Ocupados por CQ Rua 01</td><td class="px-3 py-2 text-right font-mono">262,41 m²</td></tr>
                             
                             <!-- LINHA DESTAQUE VERDE ESMERALDA -->
                             <tr class="hover:bg-emerald-900/30 bg-emerald-950/40 border-l-4 border-emerald-500">
-                                <td class="px-3 py-2.5 text-center font-black font-mono text-emerald-400 text-xs">113</td>
+                                <td class="px-3 py-2.5 text-center font-black font-mono text-emerald-400 text-xs">121</td>
                                 <td class="px-3 py-2.5 font-black text-emerald-300 uppercase tracking-wide">Área util atual</td>
-                                <td class="px-3 py-2.5 text-right font-mono font-black text-emerald-400 text-xs">2.207,6 m²</td>
+                                <td class="px-3 py-2.5 text-right font-mono font-black text-emerald-400 text-xs">2.346 m²</td>
                             </tr>
                         </tbody>
                     </table>
@@ -304,18 +304,24 @@
 
         let chartInstance = null;
 
-        // DATA FIXA OFICIAL DA PLANILHA (Sempre atualizada com o envio dos dados)
-        const DATA_RELATORIO_OFICIAL = "30/07/2026 às 09:00";
+        // DATA FIXA OFICIAL DA PLANILHA (03/08/2026)
+        const DATA_RELATORIO_OFICIAL = "03/08/2026 às 09:00";
 
-        // DATASET OFICIAL (DADOS DA PLANILHA)
+        // INFORMAÇÕES EXTRAS DE DESTAQUE NO LETREIRO
+        const destaquesExtras = [
+            { texto: "Magalu - Rua 1 End. 17,30 m²", tag: "MAGALU" },
+            { texto: "Cooktop - Rua 5 End. 77,76 m²", tag: "COOKTOP" }
+        ];
+
+        // DATASET OFICIAL (DADOS DA PLANILHA DE HOJE)
         const rawDataset = [
-            { familia: "cervejeira", pecas: 216, area: 39.35, percent: 2 },
-            { familia: "fogão", pecas: 465, area: 180.71, percent: 8 },
-            { familia: "forno", pecas: 600, area: 86.95, percent: 4 },
-            { familia: "freezer", pecas: 750, area: 190.34, percent: 9 },
-            { familia: "lavadora", pecas: 831, area: 210.91, percent: 10 },
-            { familia: "refrigerador", pecas: 3951, area: 1055.95, percent: 48 },
-            { familia: "secadora", pecas: 239, area: 37.92, percent: 2 }
+            { familia: "cervejeira", pecas: 202, area: 37.45, percent: 2 },
+            { familia: "fogão", pecas: 423, area: 167.09, percent: 7 },
+            { familia: "forno", pecas: 575, area: 85.45, percent: 4 },
+            { familia: "freezer", pecas: 702, area: 152.69, percent: 7 },
+            { familia: "lavadora", pecas: 678, area: 169.57, percent: 7 },
+            { familia: "refrigerador", pecas: 3555, area: 960.59, percent: 41 },
+            { familia: "secadora", pecas: 239, area: 39.32, percent: 2 }
         ];
 
         // ORDENANDO OS DADOS DO MAIOR PARA O MENOR PERCENTUAL AUTOMATICAMENTE
@@ -340,6 +346,7 @@
 
             const tickerData = [...datasetOficial, ...datasetOficial];
 
+            // RENDERIZAR OS ITENS DE FAMÍLIA NO LETREIRO
             tickerData.forEach(function(item) {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
@@ -349,6 +356,16 @@
                                 '<span class="text-blue-400 font-mono ml-2 font-bold text-sm">' + item.pecas.toLocaleString('pt-BR') + '</span>' +
                                 '<span class="text-slate-600 mx-2">|</span>' +
                                 '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
+                marquee.appendChild(div);
+            });
+
+            // ADICIONAR AS INFORMAÇÕES EXTRAS DE DESTAQUE COM BADGES PULSANTES
+            destaquesExtras.forEach(function(extra) {
+                const div = document.createElement('div');
+                div.className = "ticker__item bg-purple-950/40 border border-purple-500/30 rounded-full px-4 py-1 mx-3 shadow-md shadow-purple-900/20";
+                div.innerHTML = '<span class="flex h-2 w-2 mr-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span></span>' +
+                                '<span class="text-amber-400 font-bold text-xs uppercase tracking-wider mr-2">[' + extra.tag + ']</span>' +
+                                '<span class="text-purple-200 font-bold text-xs">' + extra.texto + '</span>';
                 marquee.appendChild(div);
             });
 
