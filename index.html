@@ -524,7 +524,7 @@
             renderizarGraficos();
         }
 
-        if (documentreadyState === 'loading') {
+        if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', executarInicilazacao);
         } else {
             executarInicilazacao();
