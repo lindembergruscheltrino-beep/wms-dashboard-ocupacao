@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full">
 <head>
     <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q30GKGZL64"></script>
@@ -25,16 +25,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
-        body, button, input, select, table {
-            font-family: 'JetBrains Mono', 'Product Sans Mono', 'Google Sans Mono', monospace !important;
+        html, body {
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden !important;
+            background-color: #070a13;
+            color: #f8fafc;
+            font-family: 'JetBrains Mono', 'Product Sans Mono', monospace !important;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Classe para nitidez máxima na badge de data */
         .badge-date-clean {
-            font-family: 'Product Sans', 'Google Sans', system-ui, -apple-system, sans-serif !important;
-            letter-spacing: 0.02em;
+            font-family: 'Product Sans', 'Google Sans', sans-serif !important;
         }
 
         /* Remoção Total de Bordas de Tabelas */
@@ -44,265 +46,208 @@
             box-shadow: none !important;
         }
 
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #334155; }
-
-        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(59, 130, 246, 0.05); }
-        .glow-blue:hover { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 0 15px 1px rgba(59, 130, 246, 0.15); }
-
-        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.2); box-shadow: 0 4px 20px -2px rgba(245, 158, 11, 0.05); }
-        .glow-amber:hover { border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 0 15px 1px rgba(245, 158, 11, 0.15); }
-
-        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.05); }
-        .glow-emerald:hover { border-color: rgba(16, 185, 129, 0.6); box-shadow: 0 0 15px 1px rgba(16, 185, 129, 0.15); }
-
-        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(139, 92, 246, 0.05); }
-        .glow-purple:hover { border-color: rgba(139, 92, 246, 0.6); box-shadow: 0 0 15px 1px rgba(139, 92, 246, 0.15); }
+        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.2); }
+        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.2); }
+        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.2); }
+        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.2); }
+        .glow-red { border: 1px solid rgba(239, 68, 68, 0.2); }
 
         .ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #0f172a; border-bottom: 1px solid #1e293b; padding: 10px 0; display: flex;
+            width: 100%; overflow: hidden; background-color: #0f172a; border-bottom: 1px solid #1e293b; padding: 4px 0; display: flex;
         }
-        .ticker { display: flex; white-space: nowrap; animation: marquee 20s linear infinite; }
-        .ticker:hover { animation-play-state: paused; cursor: pointer; }
-        .ticker__item { display: flex; align-items: center; padding: 0 2.5rem; font-size: 0.8rem; font-weight: 700; }
+        .ticker { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; }
+        .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.7rem; font-weight: 700; }
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
     </style>
 </head>
-<body class="bg-[#070a13] text-slate-100 font-sans antialiased">
+<body class="flex flex-col h-screen overflow-hidden antialiased">
 
-    <!-- Header com Status de Conectividade e Botão Modo TV -->
-    <header class="bg-[#0f172a] border-b border-slate-800 text-white shadow-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="p-2 bg-blue-600 rounded-lg text-white font-black text-xl tracking-wider shadow-lg shadow-blue-500/30">PCO</div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="text-lg font-bold tracking-tight text-slate-100">Control Tower WMS Alhandra</h1>
-                        <span class="flex h-2 w-2 relative" title="Sistema Sincronizado">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
-                    </div>
-                    <p class="text-xs text-slate-400">CD Alhandra PB • Whirlpool • Trino</p>
-                </div>
+    <!-- HEADER DE ALTA DENSIDADE (COMPACTO PARA TV) -->
+    <header class="bg-[#0f172a] border-b border-slate-800 text-white px-3 py-1.5 flex justify-between items-center shrink-0">
+        <div class="flex items-center gap-2">
+            <div class="px-2 py-0.5 bg-blue-600 rounded text-white font-black text-sm tracking-wider shadow">PCO</div>
+            <div>
+                <h1 class="text-xs font-bold text-slate-100 leading-tight">Control Tower WMS Alhandra</h1>
+                <p class="text-[9px] text-slate-400 leading-none">CD Alhandra PB • Whirlpool • Trino</p>
             </div>
-            
-            <div class="flex items-center gap-3">
-                <!-- Data de Atualização Nítida & Refinada -->
-                <div class="badge-date-clean flex items-center gap-2 bg-[#1e293b] px-3.5 py-1.5 rounded-lg border border-slate-700 text-slate-100 text-xs font-bold">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    Atualizado em 16 Out 09:00
-                </div>
-
-                <!-- Botão Modo TV / Fullscreen -->
-                <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-bold flex items-center gap-1.5">
-                    📺 Modo TV
-                </button>
+        </div>
+        
+        <div class="flex items-center gap-2">
+            <div class="badge-date-clean flex items-center gap-1.5 bg-[#1e293b] px-2.5 py-1 rounded border border-slate-700 text-slate-100 text-[10px] font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Atualizado em 16 Out 09:00
             </div>
+            <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-[10px] text-slate-300 hover:text-white px-2 py-1 rounded cursor-pointer font-bold">
+                📺 Tela Cheia
+            </button>
         </div>
     </header>
 
-    <!-- Marquee com Giro de Densidade -->
-    <div class="ticker-wrap">
+    <!-- MARQUEE COMPACTO -->
+    <div class="ticker-wrap shrink-0">
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+    <!-- PAINEL PRINCIPAL GRID 2x2 (LAYOUT FIT TELA TV) -->
+    <main class="p-2 gap-2 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
 
-        <!-- Métricas PCO Globais + Card de Risco de Saturação -->
-        <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-3">
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue flex flex-col justify-between">
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Locações (Ocup / Total)</p>
-                <h4 class="text-base font-black text-white mt-1.5 whitespace-nowrap tracking-tighter" id="uiLocacoes">115 / 191</h4>
-                <p class="text-[10px] text-blue-400 font-mono font-bold mt-1" id="uiLocacoesPct">60,0% Ocupado</p>
-            </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber flex flex-col justify-between">
-                <p class="text-[10px] font-bold text-amber-500 uppercase tracking-tight">Área (Ocup / Total)</p>
-                <h4 class="text-base font-black text-amber-400 mt-1.5 whitespace-nowrap tracking-tighter" id="uiArea">2.181m² / 3.574m²</h4>
-                <p class="text-[10px] text-amber-300 font-mono font-bold mt-1" id="uiAreaPct">61,0% Área Ocupada</p>
-            </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald flex flex-col justify-between">
-                <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight">Saldo Estocado (Vol)</p>
-                <h4 class="text-base font-black text-emerald-400 mt-1.5 whitespace-nowrap tracking-tighter" id="uiSaldoEstoque">11.033 un</h4>
-                <p class="text-[10px] text-emerald-300 font-mono font-bold mt-1" id="uiCapacidadeNominal">Cap: 13.811 un (79,9%)</p>
-            </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-purple flex flex-col justify-between">
-                <p class="text-[10px] font-bold text-purple-400 uppercase tracking-tight">Mini Bins (MB)</p>
-                <h4 class="text-base font-black text-purple-300 mt-1.5 whitespace-nowrap tracking-tighter" id="uiMiniBinPecas">1.302 un</h4>
-                <p class="text-[10px] text-purple-400 font-mono mt-1" id="uiMiniBinLoc">15 Loc | 230,6 m²</p>
-            </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue flex flex-col justify-between">
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Área Livre Global</p>
-                <h4 class="text-base font-black text-emerald-400 mt-1.5 whitespace-nowrap tracking-tighter" id="uiAreaLivre">1.392,69 m²</h4>
-                <p class="text-[10px] text-slate-500 font-mono mt-1" id="uiLocacoesLivres">76 Loc Livres</p>
-            </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald flex flex-col justify-between">
-                <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-tight">Eficiência Otimização</p>
-                <h4 class="text-base font-black text-emerald-400 mt-1.5 whitespace-nowrap tracking-tighter">100%</h4>
-                <p class="text-[10px] text-slate-400 font-mono mt-1">10 de 10 Concluídas</p>
-            </div>
-            
-            <!-- CARD: RISCO DE SATURAÇÃO / RECEBIMENTO -->
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center border border-emerald-500/30 flex flex-col justify-between bg-gradient-to-b from-[#0f172a] to-emerald-950/20">
-                <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-tight">Status Recebimento</p>
-                <h4 class="text-base font-black text-emerald-400 mt-1.5 tracking-tighter">SAUDÁVEL</h4>
-                <p class="text-[10px] text-slate-400 font-mono mt-1">Margem Livre: 39%</p>
-            </div>
-        </section>
-
-        <!-- Bloco Ocupação Por Ruas e Por Família -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <!-- Tabela Ocupação por Rua com Termômetro -->
-            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-sm tracking-wide text-slate-300 flex items-center gap-2">
-                        <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> 📍 Saturação Física por Rua
-                    </h3>
-                    <span class="text-[10px] text-slate-500 uppercase font-mono">Termômetro</span>
+        <!-- QUADRANTE 1 (SUPERIOR ESQUERDO): RÉGUA DE MÉTRICAS + RUAS -->
+        <div class="flex flex-col gap-2 overflow-hidden">
+            <!-- Régua 6 Cards Principais -->
+            <div class="grid grid-cols-6 gap-1.5 shrink-0">
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-blue">
+                    <p class="text-[8px] font-bold text-slate-400 uppercase truncate">Locações</p>
+                    <h4 class="text-xs font-black text-white" id="uiLocacoes">115/191</h4>
+                    <p class="text-[8px] text-blue-400 font-bold" id="uiLocacoesPct">60% Ocup</p>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-amber">
+                    <p class="text-[8px] font-bold text-amber-500 uppercase truncate">Área m²</p>
+                    <h4 class="text-xs font-black text-amber-400" id="uiArea">2.181/3.574</h4>
+                    <p class="text-[8px] text-amber-300 font-bold" id="uiAreaPct">61% Área</p>
+                </div>
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-emerald">
+                    <p class="text-[8px] font-bold text-emerald-500 uppercase truncate">Saldo (Vol)</p>
+                    <h4 class="text-xs font-black text-emerald-400" id="uiSaldoEstoque">11.033 un</h4>
+                    <p class="text-[8px] text-emerald-300 font-bold">79,9% Cap</p>
+                </div>
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-purple">
+                    <p class="text-[8px] font-bold text-purple-400 uppercase truncate">Mini Bin</p>
+                    <h4 class="text-xs font-black text-purple-300" id="uiMiniBinPecas">1.302 un</h4>
+                    <p class="text-[8px] text-purple-400">15 Loc</p>
+                </div>
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-blue">
+                    <p class="text-[8px] font-bold text-slate-400 uppercase truncate">Área Livre</p>
+                    <h4 class="text-xs font-black text-emerald-400" id="uiAreaLivre">1.392m²</h4>
+                    <p class="text-[8px] text-slate-500">76 Loc Livres</p>
+                </div>
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center border border-emerald-500/30 bg-emerald-950/20">
+                    <p class="text-[8px] font-bold text-emerald-400 uppercase truncate">Status WMS</p>
+                    <h4 class="text-xs font-black text-emerald-400">SAUDÁVEL</h4>
+                    <p class="text-[8px] text-slate-400">Livre: 39%</p>
+                </div>
+            </div>
+
+            <!-- Tabela Saturação de Ruas com Termômetro -->
+            <div class="bg-[#0f172a] p-2.5 rounded-xl border border-slate-800 flex-1 flex flex-col overflow-hidden">
+                <div class="flex justify-between items-center mb-1 shrink-0">
+                    <h3 class="font-bold text-xs text-slate-300 flex items-center gap-1.5">
+                        <span class="w-1.5 h-3 bg-blue-500 rounded-full inline-block"></span> 📍 Saturação Física por Rua
+                    </h3>
+                    <span class="text-[9px] text-slate-500 font-mono">Termômetro</span>
+                </div>
+                <div class="overflow-hidden flex-1">
+                    <table class="w-full text-left text-[10px] text-slate-300 h-full">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
                             <tr>
-                                <th class="px-2 py-2.5">Rua</th>
-                                <th class="px-2 py-2.5 text-center">Ocupação</th>
-                                <th class="px-2 py-2.5 text-right">Estoque (un)</th>
+                                <th class="px-2 py-1">Rua</th>
+                                <th class="px-2 py-1 text-center">Ocupação</th>
+                                <th class="px-2 py-1 text-right">Estoque (un)</th>
                             </tr>
                         </thead>
-                        <tbody id="ruasTableBody" class="font-medium">
-                            <!-- Injetado via JS -->
-                        </tbody>
+                        <tbody id="ruasTableBody" class="font-medium"></tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
-            <!-- Tabela Ocupação por Família com Destaque de Densidade -->
-            <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-sm tracking-wide text-slate-300 flex items-center gap-2">
-                        <span class="w-1.5 h-3.5 bg-purple-500 rounded-full inline-block"></span> 📊 Análise por Família e Densidade
-                    </h3>
-                    <span class="bg-purple-500/10 border border-purple-500/30 text-purple-300 px-2 py-0.5 rounded text-[10px] font-mono font-bold">
-                        Top Giro: Frigobar (11,79 un/m²)
-                    </span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
-                            <tr>
-                                <th class="px-3 py-2.5">Família</th>
-                                <th class="px-3 py-2.5 text-center">Loc. Ocupadas</th>
-                                <th class="px-3 py-2.5 text-right">Área m² (% Armazém)</th>
-                                <th class="px-3 py-2.5 text-right">Estoque (un)</th>
-                                <th class="px-3 py-2.5 text-center">Densidade (un/m²)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="familyTableBody" class="font-medium">
-                            <!-- Injetado via JS -->
-                        </tbody>
-                    </table>
-                </div>
+        <!-- QUADRANTE 2 (SUPERIOR DIREITO): ANÁLISE POR FAMÍLIA -->
+        <div class="bg-[#0f172a] p-2.5 rounded-xl border border-slate-800 flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center mb-1 shrink-0">
+                <h3 class="font-bold text-xs text-slate-300 flex items-center gap-1.5">
+                    <span class="w-1.5 h-3 bg-purple-500 rounded-full inline-block"></span> 📊 Análise por Família e Densidade
+                </h3>
+                <span class="bg-purple-500/10 border border-purple-500/30 text-purple-300 px-1.5 py-0.5 rounded text-[9px] font-bold">
+                    Top Giro: Frigobar (11,79 un/m²)
+                </span>
             </div>
-        </section>
-
-        <!-- Bloco Intermediário: Estoque Bloqueado + Donut Chart Proporção -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Gráfico Horizontal Comparativo -->
-            <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-sm text-slate-300 flex items-center gap-2">
-                        <span class="w-1.5 h-3.5 bg-cyan-400 rounded-full inline-block"></span> Estoque por Família
-                    </h3>
-                    <div class="flex items-center gap-4 text-[10px] font-mono">
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-cyan-400 rounded-sm"></span> Saldo Estocado</span>
-                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-purple-500 rounded-sm"></span> Cap. Nominal</span>
-                    </div>
-                </div>
-                <div class="relative h-[320px] w-full">
-                    <canvas id="chartVolumetria"></canvas>
-                </div>
-            </div>
-
-            <!-- Coluna Estoque Bloqueado + Mini Donut Chart -->
-            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red flex flex-col justify-between space-y-4">
-                <div>
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-sm tracking-wide text-red-400 flex items-center gap-2">
-                            <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
-                        </h3>
-                        <span class="text-[10px] text-red-400 font-mono font-bold bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded">Total: 589 vol</span>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
-                                <tr>
-                                    <th class="px-3 py-2">Categoria</th>
-                                    <th class="px-3 py-2 text-right">Qtd (Vol)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bloqueadoTableBody" class="font-medium">
-                                <!-- Injetado via JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Gráfico de Rosca (Proporção Disponível vs Bloqueado) -->
-                <div class="border-t border-slate-800/80 pt-3 flex items-center justify-between">
-                    <div class="w-24 h-24 relative">
-                        <canvas id="chartBloqueadoDonut"></canvas>
-                    </div>
-                    <div class="text-right text-[11px] font-mono space-y-1">
-                        <p class="text-emerald-400"><strong>95%</strong> Disponível (11.033 un)</p>
-                        <p class="text-red-400"><strong>5%</strong> Bloqueado (589 vol)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO -->
-        <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                <div>
-                    <h3 class="font-bold text-sm text-emerald-400 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        Missões de Otimização
-                    </h3>
-                </div>
-                <div class="flex items-center gap-3 font-mono text-xs">
-                    <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1 rounded-lg"><strong>10</strong> Posições Liberadas</span>
-                    <span class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1 rounded-lg"><strong>85</strong> Unidades Movimentadas</span>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs text-slate-300">
+            <div class="overflow-hidden flex-1">
+                <table class="w-full text-left text-[10px] text-slate-300 h-full">
                     <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
                         <tr>
-                            <th class="px-3 py-2.5">ID</th>
-                            <th class="px-3 py-2.5">Tipo de Missão</th>
-                            <th class="px-3 py-2.5">SKU / Família</th>
-                            <th class="px-3 py-2.5 text-center">Origem (Qtd)</th>
-                            <th class="px-3 py-2.5 text-center">Destino</th>
-                            <th class="px-3 py-2.5 text-center">Zera Origem?</th>
-                            <th class="px-3 py-2.5 text-center">Status</th>
+                            <th class="px-2 py-1">Família</th>
+                            <th class="px-2 py-1 text-center">Loc.</th>
+                            <th class="px-2 py-1 text-right">Área m² (%)</th>
+                            <th class="px-2 py-1 text-right">Estoque</th>
+                            <th class="px-2 py-1 text-center">un/m²</th>
                         </tr>
                     </thead>
-                    <tbody id="missoesTableBody" class="font-medium">
-                        <!-- JS Injeta Missões -->
-                    </tbody>
+                    <tbody id="familyTableBody" class="font-medium"></tbody>
                 </table>
             </div>
-        </section>
+        </div>
+
+        <!-- QUADRANTE 3 (INFERIOR ESQUERDO): GRÁFICO COMPARATIVO ESTOQUE -->
+        <div class="bg-[#0f172a] p-2.5 rounded-xl border border-slate-800 flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center mb-1 shrink-0">
+                <h3 class="font-bold text-xs text-slate-300 flex items-center gap-1.5">
+                    <span class="w-1.5 h-3 bg-cyan-400 rounded-full inline-block"></span> Estoque por Família (Saldo vs Cap)
+                </h3>
+                <div class="flex items-center gap-3 text-[9px]">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 bg-cyan-400 rounded-sm"></span> Saldo</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-sm"></span> Cap</span>
+                </div>
+            </div>
+            <div class="relative flex-1 w-full overflow-hidden">
+                <canvas id="chartVolumetria"></canvas>
+            </div>
+        </div>
+
+        <!-- QUADRANTE 4 (INFERIOR DIREITO): BLOQUEADOS + MISSÕES DE OTIMIZAÇÃO -->
+        <div class="grid grid-cols-12 gap-2 overflow-hidden">
+            
+            <!-- Estoque Bloqueado (4 colunas) -->
+            <div class="col-span-4 bg-[#0f172a] p-2 rounded-xl border border-slate-800 glow-red flex flex-col justify-between overflow-hidden">
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="font-bold text-[11px] text-red-400">Bloqueados</h3>
+                        <span class="text-[9px] text-red-400 font-bold bg-red-500/10 px-1 py-0.5 rounded">589 vol</span>
+                    </div>
+                    <table class="w-full text-left text-[9px] text-slate-300">
+                        <tbody id="bloqueadoTableBody" class="font-medium"></tbody>
+                    </table>
+                </div>
+                <div class="border-t border-slate-800 pt-1 flex items-center justify-between">
+                    <div class="w-12 h-12 relative">
+                        <canvas id="chartBloqueadoDonut"></canvas>
+                    </div>
+                    <div class="text-right text-[8px] leading-tight font-mono">
+                        <p class="text-emerald-400"><strong>95%</strong> Disp</p>
+                        <p class="text-red-400"><strong>5%</strong> Bloq</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missões de Otimização (8 colunas) -->
+            <div class="col-span-8 bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col overflow-hidden">
+                <div class="flex justify-between items-center mb-1 shrink-0">
+                    <h3 class="font-bold text-xs text-emerald-400 flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Missões de Otimização
+                    </h3>
+                    <div class="flex items-center gap-1.5 text-[9px]">
+                        <span class="bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-bold">10 Liberadas</span>
+                        <span class="bg-blue-500/10 text-blue-400 px-1.5 py-0.5 rounded font-bold">85 Mov.</span>
+                    </div>
+                </div>
+                <div class="overflow-hidden flex-1">
+                    <table class="w-full text-left text-[9px] text-slate-300">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
+                            <tr>
+                                <th class="px-1 py-1">ID</th>
+                                <th class="px-1 py-1">Missão</th>
+                                <th class="px-1 py-1">SKU</th>
+                                <th class="px-1 py-1 text-center">Orig.</th>
+                                <th class="px-1 py-1 text-center">Dest.</th>
+                                <th class="px-1 py-1 text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="missoesTableBody" class="font-medium"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
 
     </main>
-
-    <footer class="bg-[#0f172a] border-t border-slate-800 text-slate-500 text-center py-4 text-xs tracking-wide">
-        <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento PCO Control Tower Integrado</p>
-    </footer>
 
     <script>
         Chart.register(ChartDataLabels);
@@ -310,45 +255,43 @@
         let donutChartInstance = null;
 
         const currentData = {
-            locacoes: "115 / 191",
-            locacoesPct: "60,0% Ocupado",
-            area: "2.181m² / 3.574m²",
-            areaPct: "61,0% Área Ocupada",
+            locacoes: "115/191",
+            locacoesPct: "60% Ocup",
+            area: "2.181/3.574",
+            areaPct: "61% Área",
             saldoEstoque: "11.033 un",
-            capacidadeNominal: "Cap: 13.811 un (79,9%)",
+            capacidadeNominal: "79,9% Cap",
             miniBinPecas: "1.302 un",
-            miniBinLoc: "15 Loc | 230,6 m²",
-            areaLivre: "1.392,69 m²",
-            locacoesLivres: "76 Loc Livres",
+            miniBinLoc: "15 Loc",
+            areaLivre: "1.392m²",
+            locacoesLivres: "76 Livres",
             ruas: [
-                { rua: "RUA 01", loc: "9 / 9", pct: 100, area: "279,01", est: 1944 },
-                { rua: "RUA 02", loc: "9 / 36", pct: 25, area: "168,60", est: 943 },
-                { rua: "RUA 03", loc: "28 / 41", pct: 68, area: "500,34", est: 1996 },
-                { rua: "RUA 04", loc: "32 / 36", pct: 88, area: "582,17", est: 2919 },
-                { rua: "RUA 05", loc: "34 / 36", pct: 94, area: "597,09", est: 2649 },
-                { rua: "RUA 06", loc: "3 / 33", pct: 9, area: "54,60", est: 582 }
+                { rua: "RUA 01", loc: "9/9", pct: 100, area: "279,01", est: 1944 },
+                { rua: "RUA 02", loc: "9/36", pct: 25, area: "168,60", est: 943 },
+                { rua: "RUA 03", loc: "28/41", pct: 68, area: "500,34", est: 1996 },
+                { rua: "RUA 04", loc: "32/36", pct: 88, area: "582,17", est: 2919 },
+                { rua: "RUA 05", loc: "34/36", pct: 94, area: "597,09", est: 2649 },
+                { rua: "RUA 06", loc: "3/33", pct: 9, area: "54,60", est: 582 }
             ],
             familias: [
-                { familia: "REFRIGERADOR", loc: 62, area: "1.243,17", pctArea: "34.8%", est: 6672, cap: 8285, densidade: "5.37" },
-                { familia: "LAVADORA", loc: 12, area: "215,54", pctArea: "6.0%", est: 989, cap: 1996, densidade: "4.59" },
-                { familia: "FOGÃO", loc: 12, area: "211,88", pctArea: "5.9%", est: 577, cap: 1408, densidade: "2.72" },
-                { familia: "FORNO", loc: 4, area: "78,77", pctArea: "2.2%", est: 530, cap: 720, densidade: "6.73" },
-                { familia: "FREEZER", loc: 6, area: "126,86", pctArea: "3.5%", est: 425, cap: 706, densidade: "3.35" },
-                { familia: "SECADORA", loc: 2, area: "38,64", pctArea: "1.1%", est: 244, cap: 288, densidade: "6.31" },
-                { familia: "FRIGOBAR", loc: 1, area: "16,80", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
-                { familia: "CERVEJEIRA", loc: 1, area: "19,60", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" }
+                { familia: "REFRIGERADOR", loc: 62, area: "1.243m²", pctArea: "34.8%", est: 6672, cap: 8285, densidade: "5.37" },
+                { familia: "LAVADORA", loc: 12, area: "215m²", pctArea: "6.0%", est: 989, cap: 1996, densidade: "4.59" },
+                { familia: "FOGÃO", loc: 12, area: "211m²", pctArea: "5.9%", est: 577, cap: 1408, densidade: "2.72" },
+                { familia: "FORNO", loc: 4, area: "78m²", pctArea: "2.2%", est: 530, cap: 720, densidade: "6.73" },
+                { familia: "FREEZER", loc: 6, area: "126m²", pctArea: "3.5%", est: 425, cap: 706, densidade: "3.35" },
+                { familia: "SECADORA", loc: 2, area: "38m²", pctArea: "1.1%", est: 244, cap: 288, densidade: "6.31" },
+                { familia: "FRIGOBAR", loc: 1, area: "16m²", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
+                { familia: "CERVEJEIRA", loc: 1, area: "19m²", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" }
             ],
             missoes: [
-                { id: "MIS-001", tipo: "Movimentar para Bin", sku: "BRO88AKXNA", fam: "REFRIGERADOR", orig: "R.05.B32 (8)", dest: "R.03.B27 (Pulmão)", zera: "Sim", status: "Concluído" },
-                { id: "MIS-002", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "BRE68AEBNA", fam: "REFRIGERADOR", orig: "R.02.B03 (5)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
-                { id: "MIS-003", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "CVU20MBBNA", fam: "FREEZER", orig: "R.05.B23 (8)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
-                { id: "MIS-004", tipo: "Mini Bin -> Rua", sku: "CHB53MBBNA", fam: "FREEZER", orig: "R.03.B02 (1)", dest: "R.03.B10 (Pulmão)", zera: "Sim", status: "Concluído" },
-                { id: "MIS-005", tipo: "Consolidação Mini Bin", sku: "BRM52MKBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                { id: "MIS-006", tipo: "Consolidação Mini Bin", sku: "CRE45MBBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                { id: "MIS-007", tipo: "Consolidação Mini Bin", sku: "BOB47AEBNA", fam: "FORNO", orig: "R.03.B02 (8)", dest: "R.04.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                { id: "MIS-008", tipo: "Consolidação Mini Bin", sku: "BRA08MZBNA", fam: "REFRIGERADOR", orig: "R.05.B01 (26)", dest: "R.05.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                { id: "MIS-009", tipo: "Consolidação Mini Bin", sku: "BRA08MNBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (25)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                { id: "MIS-010", tipo: "Consolidação Mini Bin", sku: "CRM40MBBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (2)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" }
+                { id: "MIS-001", tipo: "Mov. Bin", sku: "BRO88A", orig: "R.05 (8)", dest: "R.03 (Pulmão)", status: "Concluído" },
+                { id: "MIS-002", tipo: "Crit. -> Bin", sku: "BRE68A", orig: "R.02 (5)", dest: "Mini Bin", status: "Concluído" },
+                { id: "MIS-003", tipo: "Crit. -> Bin", sku: "CVU20M", orig: "R.05 (8)", dest: "Mini Bin", status: "Concluído" },
+                { id: "MIS-004", tipo: "Bin -> Rua", sku: "CHB53M", orig: "R.03 (1)", dest: "R.03 (Pulmão)", status: "Concluído" },
+                { id: "MIS-005", tipo: "Consolid. Bin", sku: "BRM52M", orig: "R.03 (1)", dest: "R.03 (Mini Bin)", status: "Concluído" },
+                { id: "MIS-006", tipo: "Consolid. Bin", sku: "CRE45M", orig: "R.03 (1)", dest: "R.03 (Mini Bin)", status: "Concluído" },
+                { id: "MIS-007", tipo: "Consolid. Bin", sku: "BOB47A", orig: "R.03 (8)", dest: "R.04 (Mini Bin)", status: "Concluído" },
+                { id: "MIS-008", tipo: "Consolid. Bin", sku: "BRA08M", orig: "R.05 (26)", dest: "R.05 (Mini Bin)", status: "Concluído" }
             ],
             bloqueado: [
                 { cat: "Sucata", qtd: 141 },
@@ -356,8 +299,7 @@
                 { cat: "Joinville", qtd: 52 },
                 { cat: "127v", qtd: 136 },
                 { cat: "Reoperação", qtd: 44 }
-            ],
-            totBloqueado: 589
+            ]
         };
 
         function carregarPainel() {
@@ -366,53 +308,46 @@
             document.getElementById('uiArea').textContent = currentData.area;
             document.getElementById('uiAreaPct').textContent = currentData.areaPct;
             document.getElementById('uiSaldoEstoque').textContent = currentData.saldoEstoque;
-            document.getElementById('uiCapacidadeNominal').textContent = currentData.capacidadeNominal;
             document.getElementById('uiMiniBinPecas').textContent = currentData.miniBinPecas;
-            document.getElementById('uiMiniBinLoc').textContent = currentData.miniBinLoc;
             document.getElementById('uiAreaLivre').textContent = currentData.areaLivre;
-            document.getElementById('uiLocacoesLivres').textContent = currentData.locacoesLivres;
 
-            // Renderiza Ruas com Termômetro
+            // Ruas com Termômetro
             const ruasBody = document.getElementById('ruasTableBody');
             ruasBody.innerHTML = '';
             currentData.ruas.forEach(r => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/30";
-                
                 let barColor = "bg-emerald-500";
                 if (r.pct > 80) barColor = "bg-amber-500";
                 if (r.pct >= 95) barColor = "bg-red-500";
 
-                tr.innerHTML = `<td class="px-2 py-2 font-bold text-blue-400">${r.rua}</td>
-                                <td class="px-2 py-2">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                            <div class="${barColor} h-2 rounded-full" style="width: ${r.pct}%"></div>
+                tr.innerHTML = `<td class="px-2 py-1 font-bold text-blue-400">${r.rua}</td>
+                                <td class="px-2 py-1">
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                            <div class="${barColor} h-1.5 rounded-full" style="width: ${r.pct}%"></div>
                                         </div>
-                                        <span class="font-mono text-[10px] font-bold text-slate-300 min-w-[32px] text-right">${r.pct}%</span>
+                                        <span class="text-[9px] font-bold text-slate-300 min-w-[26px] text-right">${r.pct}%</span>
                                     </div>
                                 </td>
-                                <td class="px-2 py-2 text-right font-mono text-emerald-400 font-bold">${r.est.toLocaleString('pt-BR')}</td>`;
+                                <td class="px-2 py-1 text-right font-bold text-emerald-400">${r.est.toLocaleString('pt-BR')}</td>`;
                 ruasBody.appendChild(tr);
             });
 
-            // Renderiza Missões
+            // Missões Operacionais
             const missoesBody = document.getElementById('missoesTableBody');
             missoesBody.innerHTML = '';
             currentData.missoes.forEach(m => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/30";
-                tr.innerHTML = `<td class="px-3 py-2 font-mono font-bold text-blue-400">${m.id}</td>
-                                <td class="px-3 py-2 text-slate-300">${m.tipo}</td>
-                                <td class="px-3 py-2 font-mono text-white"><strong>${m.sku}</strong> <span class="text-[10px] text-slate-500">(${m.fam})</span></td>
-                                <td class="px-3 py-2 text-center font-mono text-amber-400">${m.orig}</td>
-                                <td class="px-3 py-2 text-center font-mono text-emerald-400">${m.dest}</td>
-                                <td class="px-3 py-2 text-center"><span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 rounded font-mono font-bold text-[10px]">${m.zera}</span></td>
-                                <td class="px-3 py-2 text-center"><span class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-2 py-0.5 rounded font-mono font-bold text-[10px] shadow-sm">${m.status}</span></td>`;
+                tr.innerHTML = `<td class="px-1 py-0.5 font-bold text-blue-400">${m.id}</td>
+                                <td class="px-1 py-0.5 text-slate-300 truncate">${m.tipo}</td>
+                                <td class="px-1 py-0.5 text-white font-bold">${m.sku}</td>
+                                <td class="px-1 py-0.5 text-center text-amber-400">${m.orig}</td>
+                                <td class="px-1 py-0.5 text-center text-emerald-400">${m.dest}</td>
+                                <td class="px-1 py-0.5 text-center"><span class="bg-blue-500/20 text-blue-400 px-1 py-0.2 rounded font-bold">${m.status}</span></td>`;
                 missoesBody.appendChild(tr);
             });
 
-            // Renderiza Famílias
+            // Famílias
             const familyBody = document.getElementById('familyTableBody');
             const marquee = document.getElementById('tickerMarquee');
             familyBody.innerHTML = '';
@@ -423,31 +358,29 @@
                 const div = document.createElement('div');
                 div.className = "ticker__item";
                 div.innerHTML = `<span class="text-white font-black">${item.familia}</span>
-                                 <span class="text-blue-400 font-mono ml-2">${item.est.toLocaleString('pt-BR')} un</span>
-                                 <span class="text-slate-600 mx-2">|</span>
-                                 <span class="text-emerald-400 font-mono">${item.densidade} un/m²</span>`;
+                                 <span class="text-blue-400 ml-1.5">${item.est.toLocaleString('pt-BR')} un</span>
+                                 <span class="text-slate-600 mx-1.5">|</span>
+                                 <span class="text-emerald-400">${item.densidade} un/m²</span>`;
                 marquee.appendChild(div);
             });
 
             currentData.familias.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/30";
-                tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-slate-200 text-xs">${item.familia}</td>
-                                <td class="px-3 py-2.5 text-center font-mono text-slate-300">${item.loc}</td>
-                                <td class="px-3 py-2.5 text-right font-mono text-slate-300">${item.area} <span class="text-slate-500 text-[10px]">(${item.pctArea})</span></td>
-                                <td class="px-3 py-2.5 text-right font-mono font-bold text-blue-400">${item.est.toLocaleString('pt-BR')}</td>
-                                <td class="px-3 py-2.5 text-center"><span class="bg-purple-500/10 border border-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-mono font-bold">${item.densidade}</span></td>`;
+                tr.innerHTML = `<td class="px-2 py-1 font-bold text-slate-200">${item.familia}</td>
+                                <td class="px-2 py-1 text-center text-slate-300">${item.loc}</td>
+                                <td class="px-2 py-1 text-right text-slate-300">${item.area} <span class="text-slate-500 text-[8px]">(${item.pctArea})</span></td>
+                                <td class="px-2 py-1 text-right font-bold text-blue-400">${item.est.toLocaleString('pt-BR')}</td>
+                                <td class="px-2 py-1 text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold">${item.densidade}</span></td>`;
                 familyBody.appendChild(tr);
             });
 
-            // Renderiza Bloqueados
+            // Bloqueados
             const bloqueadoBody = document.getElementById('bloqueadoTableBody');
             bloqueadoBody.innerHTML = '';
             currentData.bloqueado.forEach(b => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/30";
-                tr.innerHTML = `<td class="px-3 py-1.5 font-bold text-slate-200">${b.cat}</td>
-                                <td class="px-3 py-1.5 text-right text-red-400 font-mono">${b.qtd}</td>`;
+                tr.innerHTML = `<td class="px-2 py-0.5 font-bold text-slate-200">${b.cat}</td>
+                                <td class="px-2 py-0.5 text-right text-red-400 font-bold">${b.qtd}</td>`;
                 bloqueadoBody.appendChild(tr);
             });
 
@@ -470,15 +403,15 @@
                             label: 'Saldo Estocado',
                             data: dataset.map(item => item.est),
                             backgroundColor: '#06b6d4',
-                            borderRadius: 4,
-                            barThickness: 10
+                            borderRadius: 3,
+                            barThickness: 8
                         },
                         {
                             label: 'Capacidade Nominal',
                             data: dataset.map(item => item.cap),
                             backgroundColor: '#a855f7',
-                            borderRadius: 4,
-                            barThickness: 10
+                            borderRadius: 3,
+                            barThickness: 8
                         }
                     ]
                 },
@@ -492,20 +425,13 @@
                             anchor: 'end',
                             align: 'right',
                             color: '#e2e8f0',
-                            font: { family: 'JetBrains Mono', weight: 'bold', size: 9 },
+                            font: { family: 'JetBrains Mono', weight: 'bold', size: 8 },
                             formatter: val => val.toLocaleString('pt-BR')
                         }
                     },
                     scales: {
-                        x: { 
-                            ticks: { color: '#64748b', font: { size: 9 } }, 
-                            grid: { display: false },
-                            grace: '15%'
-                        },
-                        y: { 
-                            ticks: { color: '#94a3b8', font: { size: 10, weight: 'bold' } }, 
-                            grid: { display: false } 
-                        }
+                        x: { ticks: { color: '#64748b', font: { size: 8 } }, grid: { display: false }, grace: '15%' },
+                        y: { ticks: { color: '#94a3b8', font: { size: 9, weight: 'bold' } }, grid: { display: false } }
                     }
                 }
             });
@@ -531,17 +457,14 @@
                     cutout: '70%',
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: { display: false }
-                    }
+                    plugins: { legend: { display: false }, datalabels: { display: false } }
                 }
             });
         }
 
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => alert("Erro ao ativar Tela Cheia: " + err.message));
+                document.documentElement.requestFullscreen().catch(err => alert("Erro: " + err.message));
             } else {
                 if (document.exitFullscreen) document.exitFullscreen();
             }
