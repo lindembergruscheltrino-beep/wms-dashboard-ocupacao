@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS Control Tower - CD Alhandra PB</title>
     
-    <!-- Importação das Fontes Google Sans Mono / JetBrains Mono -->
+    <!-- Importação das Fontes Google Sans / Product Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -27,6 +27,14 @@
     <style>
         body, button, input, select, table {
             font-family: 'JetBrains Mono', 'Product Sans Mono', 'Google Sans Mono', monospace !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Classe para nitidez máxima na badge de data */
+        .badge-date-clean {
+            font-family: 'Product Sans', 'Google Sans', system-ui, -apple-system, sans-serif !important;
+            letter-spacing: 0.02em;
         }
 
         /* Remoção Total de Bordas de Tabelas */
@@ -82,13 +90,14 @@
             </div>
             
             <div class="flex items-center gap-3">
-                <!-- Data de Atualização -->
-                <div class="flex items-center gap-2 bg-[#1e293b] px-3.5 py-1.5 rounded-lg border border-slate-700 text-slate-200 shadow-inner text-xs font-bold font-mono">
+                <!-- Data de Atualização Nítida & Refinada -->
+                <div class="badge-date-clean flex items-center gap-2 bg-[#1e293b] px-3.5 py-1.5 rounded-lg border border-slate-700 text-slate-100 text-xs font-bold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     Atualizado em 16 Out 09:00
                 </div>
 
                 <!-- Botão Modo TV / Fullscreen -->
-                <button onclick="toggleFullscreen()" class="bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-bold flex items-center gap-1.5">
+                <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-bold flex items-center gap-1.5">
                     📺 Modo TV
                 </button>
             </div>
@@ -135,7 +144,7 @@
                 <p class="text-[10px] text-slate-400 font-mono mt-1">10 de 10 Concluídas</p>
             </div>
             
-            <!-- NOVO CARD: RISCO DE SATURAÇÃO / RECEBIMENTO -->
+            <!-- CARD: RISCO DE SATURAÇÃO / RECEBIMENTO -->
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center border border-emerald-500/30 flex flex-col justify-between bg-gradient-to-b from-[#0f172a] to-emerald-950/20">
                 <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-tight">Status Recebimento</p>
                 <h4 class="text-base font-black text-emerald-400 mt-1.5 tracking-tighter">SAUDÁVEL</h4>
@@ -143,10 +152,10 @@
             </div>
         </section>
 
-        <!-- Bloco Ocupação Por Ruas (Com Barra Termômetro) e Por Família -->
+        <!-- Bloco Ocupação Por Ruas e Por Família -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Ocupação por Rua com Barras Visuais -->
+            <!-- Tabela Ocupação por Rua com Termômetro -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold text-sm tracking-wide text-slate-300 flex items-center gap-2">
@@ -199,7 +208,7 @@
             </div>
         </section>
 
-        <!-- Bloco Intermediário: Estoque Bloqueado + Novo Gráfico Donut de Proporção CQ -->
+        <!-- Bloco Intermediário: Estoque Bloqueado + Donut Chart Proporção -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Gráfico Horizontal Comparativo -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
@@ -217,7 +226,7 @@
                 </div>
             </div>
 
-            <!-- Coluna Estoque Bloqueado + Mini Donut Chart Proporção -->
+            <!-- Coluna Estoque Bloqueado + Mini Donut Chart -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red flex flex-col justify-between space-y-4">
                 <div>
                     <div class="flex justify-between items-center mb-3">
@@ -254,7 +263,7 @@
             </div>
         </section>
 
-        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO COM BADGES GLOW -->
+        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO -->
         <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <div>
