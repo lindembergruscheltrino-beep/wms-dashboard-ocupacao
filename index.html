@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WMS PCO - Ocupação & Otimização CD Alhandra PB</title>
+    <title>WMS Control Tower - CD Alhandra PB</title>
     
     <!-- Importação das Fontes Google Sans Mono / JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,37 +64,46 @@
 </head>
 <body class="bg-[#070a13] text-slate-100 font-sans antialiased">
 
-    <!-- Header -->
+    <!-- Header com Status de Conectividade e Botão Modo TV -->
     <header class="bg-[#0f172a] border-b border-slate-800 text-white shadow-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-blue-600 rounded-lg text-white font-black text-xl tracking-wider shadow-lg shadow-blue-500/30">PCO</div>
                 <div>
-                    <h1 class="text-lg font-bold tracking-tight text-slate-100">Painel Gerencial de Ocupação e Otimização</h1>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg font-bold tracking-tight text-slate-100">Control Tower WMS Alhandra</h1>
+                        <span class="flex h-2 w-2 relative" title="Sistema Sincronizado">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                    </div>
                     <p class="text-xs text-slate-400">CD Alhandra PB • Whirlpool • Trino</p>
                 </div>
             </div>
             
-            <!-- BADGE DE DATA FIXA SOLICITADA -->
-            <div class="flex items-center gap-2 bg-[#1e293b] px-3.5 py-2 rounded-lg border border-slate-700 text-slate-200 shadow-inner">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span class="text-xs font-bold font-mono tracking-tight">Atualizado em 16 Out 09:00</span>
+            <div class="flex items-center gap-3">
+                <!-- Data de Atualização -->
+                <div class="flex items-center gap-2 bg-[#1e293b] px-3.5 py-1.5 rounded-lg border border-slate-700 text-slate-200 shadow-inner text-xs font-bold font-mono">
+                    Atualizado em 16 Out 09:00
+                </div>
+
+                <!-- Botão Modo TV / Fullscreen -->
+                <button onclick="toggleFullscreen()" class="bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-bold flex items-center gap-1.5">
+                    📺 Modo TV
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Marquee -->
+    <!-- Marquee com Giro de Densidade -->
     <div class="ticker-wrap">
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Métricas PCO Globais (Horizontal) -->
-        <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <!-- Métricas PCO Globais + Card de Risco de Saturação -->
+        <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-3">
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue flex flex-col justify-between">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Locações (Ocup / Total)</p>
                 <h4 class="text-base font-black text-white mt-1.5 whitespace-nowrap tracking-tighter" id="uiLocacoes">115 / 191</h4>
@@ -125,24 +134,33 @@
                 <h4 class="text-base font-black text-emerald-400 mt-1.5 whitespace-nowrap tracking-tighter">100%</h4>
                 <p class="text-[10px] text-slate-400 font-mono mt-1">10 de 10 Concluídas</p>
             </div>
+            
+            <!-- NOVO CARD: RISCO DE SATURAÇÃO / RECEBIMENTO -->
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center border border-emerald-500/30 flex flex-col justify-between bg-gradient-to-b from-[#0f172a] to-emerald-950/20">
+                <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-tight">Status Recebimento</p>
+                <h4 class="text-base font-black text-emerald-400 mt-1.5 tracking-tighter">SAUDÁVEL</h4>
+                <p class="text-[10px] text-slate-400 font-mono mt-1">Margem Livre: 39%</p>
+            </div>
         </section>
 
-        <!-- Bloco Ocupação Por Ruas e Por Família -->
+        <!-- Bloco Ocupação Por Ruas (Com Barra Termômetro) e Por Família -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Ocupação por Rua -->
+            <!-- Tabela Ocupação por Rua com Barras Visuais -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
-                <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
-                    <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> 📍 Ocupação Física por Rua
-                </h3>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-sm tracking-wide text-slate-300 flex items-center gap-2">
+                        <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> 📍 Saturação Física por Rua
+                    </h3>
+                    <span class="text-[10px] text-slate-500 uppercase font-mono">Termômetro</span>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
                         <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
                             <tr>
-                                <th class="px-3 py-2.5">Rua</th>
-                                <th class="px-3 py-2.5 text-center">Locações</th>
-                                <th class="px-3 py-2.5 text-right">Área (m²)</th>
-                                <th class="px-3 py-2.5 text-right">Estoque (un)</th>
+                                <th class="px-2 py-2.5">Rua</th>
+                                <th class="px-2 py-2.5 text-center">Ocupação</th>
+                                <th class="px-2 py-2.5 text-right">Estoque (un)</th>
                             </tr>
                         </thead>
                         <tbody id="ruasTableBody" class="font-medium">
@@ -152,11 +170,16 @@
                 </div>
             </div>
 
-            <!-- Tabela Ocupação por Família -->
+            <!-- Tabela Ocupação por Família com Destaque de Densidade -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
-                <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
-                    <span class="w-1.5 h-3.5 bg-purple-500 rounded-full inline-block"></span> 📊 Análise por Família e Densidade (un/m²)
-                </h3>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-sm tracking-wide text-slate-300 flex items-center gap-2">
+                        <span class="w-1.5 h-3.5 bg-purple-500 rounded-full inline-block"></span> 📊 Análise por Família e Densidade
+                    </h3>
+                    <span class="bg-purple-500/10 border border-purple-500/30 text-purple-300 px-2 py-0.5 rounded text-[10px] font-mono font-bold">
+                        Top Giro: Frigobar (11,79 un/m²)
+                    </span>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
                         <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
@@ -176,7 +199,7 @@
             </div>
         </section>
 
-        <!-- Bloco Intermediário: Estoque Bloqueado e Gráfico Horizontal -->
+        <!-- Bloco Intermediário: Estoque Bloqueado + Novo Gráfico Donut de Proporção CQ -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Gráfico Horizontal Comparativo -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
@@ -194,34 +217,44 @@
                 </div>
             </div>
 
-            <!-- Estoque Bloqueado -->
-            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
-                <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
-                    <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
-                </h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
-                            <tr>
-                                <th class="px-4 py-3">Categoria</th>
-                                <th class="px-4 py-3 text-right">Qtd (Vol)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bloqueadoTableBody" class="font-medium">
-                            <!-- Injetado via JS -->
-                        </tbody>
-                        <tfoot>
-                            <tr class="bg-red-950/20 font-bold text-xs">
-                                <td class="px-4 py-3 text-slate-200">Total</td>
-                                <td class="px-4 py-3 text-right text-red-400 font-mono font-bold" id="uiTotBloqueado">589</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+            <!-- Coluna Estoque Bloqueado + Mini Donut Chart Proporção -->
+            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red flex flex-col justify-between space-y-4">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-bold text-sm tracking-wide text-red-400 flex items-center gap-2">
+                            <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
+                        </h3>
+                        <span class="text-[10px] text-red-400 font-mono font-bold bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded">Total: 589 vol</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
+                                <tr>
+                                    <th class="px-3 py-2">Categoria</th>
+                                    <th class="px-3 py-2 text-right">Qtd (Vol)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bloqueadoTableBody" class="font-medium">
+                                <!-- Injetado via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Rosca (Proporção Disponível vs Bloqueado) -->
+                <div class="border-t border-slate-800/80 pt-3 flex items-center justify-between">
+                    <div class="w-24 h-24 relative">
+                        <canvas id="chartBloqueadoDonut"></canvas>
+                    </div>
+                    <div class="text-right text-[11px] font-mono space-y-1">
+                        <p class="text-emerald-400"><strong>95%</strong> Disponível (11.033 un)</p>
+                        <p class="text-red-400"><strong>5%</strong> Bloqueado (589 vol)</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO -->
+        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO COM BADGES GLOW -->
         <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <div>
@@ -259,14 +292,14 @@
     </main>
 
     <footer class="bg-[#0f172a] border-t border-slate-800 text-slate-500 text-center py-4 text-xs tracking-wide">
-        <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento PCO Integrado</p>
+        <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento PCO Control Tower Integrado</p>
     </footer>
 
     <script>
         Chart.register(ChartDataLabels);
         let chartInstance = null;
+        let donutChartInstance = null;
 
-        // DADOS FÍSICOS E ESTÁTICOS DA ÚLTIMA IMPORTAÇÃO (16/10/2026)
         const currentData = {
             locacoes: "115 / 191",
             locacoesPct: "60,0% Ocupado",
@@ -279,12 +312,12 @@
             areaLivre: "1.392,69 m²",
             locacoesLivres: "76 Loc Livres",
             ruas: [
-                { rua: "RUA 01", loc: "9 / 9", area: "279,01", est: 1944 },
-                { rua: "RUA 02", loc: "9 / 36", area: "168,60", est: 943 },
-                { rua: "RUA 03", loc: "28 / 41", area: "500,34", est: 1996 },
-                { rua: "RUA 04", loc: "32 / 36", area: "582,17", est: 2919 },
-                { rua: "RUA 05", loc: "34 / 36", area: "597,09", est: 2649 },
-                { rua: "RUA 06", loc: "3 / 33", area: "54,60", est: 582 }
+                { rua: "RUA 01", loc: "9 / 9", pct: 100, area: "279,01", est: 1944 },
+                { rua: "RUA 02", loc: "9 / 36", pct: 25, area: "168,60", est: 943 },
+                { rua: "RUA 03", loc: "28 / 41", pct: 68, area: "500,34", est: 1996 },
+                { rua: "RUA 04", loc: "32 / 36", pct: 88, area: "582,17", est: 2919 },
+                { rua: "RUA 05", loc: "34 / 36", pct: 94, area: "597,09", est: 2649 },
+                { rua: "RUA 06", loc: "3 / 33", pct: 9, area: "54,60", est: 582 }
             ],
             familias: [
                 { familia: "REFRIGERADOR", loc: 62, area: "1.243,17", pctArea: "34.8%", est: 6672, cap: 8285, densidade: "5.37" },
@@ -329,18 +362,28 @@
             document.getElementById('uiMiniBinLoc').textContent = currentData.miniBinLoc;
             document.getElementById('uiAreaLivre').textContent = currentData.areaLivre;
             document.getElementById('uiLocacoesLivres').textContent = currentData.locacoesLivres;
-            document.getElementById('uiTotBloqueado').textContent = currentData.totBloqueado;
 
-            // Renderiza Ruas
+            // Renderiza Ruas com Termômetro
             const ruasBody = document.getElementById('ruasTableBody');
             ruasBody.innerHTML = '';
             currentData.ruas.forEach(r => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/30";
-                tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-blue-400">${r.rua}</td>
-                                <td class="px-3 py-2.5 text-center font-mono">${r.loc}</td>
-                                <td class="px-3 py-2.5 text-right font-mono">${r.area}</td>
-                                <td class="px-3 py-2.5 text-right font-mono text-emerald-400 font-bold">${r.est.toLocaleString('pt-BR')}</td>`;
+                
+                let barColor = "bg-emerald-500";
+                if (r.pct > 80) barColor = "bg-amber-500";
+                if (r.pct >= 95) barColor = "bg-red-500";
+
+                tr.innerHTML = `<td class="px-2 py-2 font-bold text-blue-400">${r.rua}</td>
+                                <td class="px-2 py-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                            <div class="${barColor} h-2 rounded-full" style="width: ${r.pct}%"></div>
+                                        </div>
+                                        <span class="font-mono text-[10px] font-bold text-slate-300 min-w-[32px] text-right">${r.pct}%</span>
+                                    </div>
+                                </td>
+                                <td class="px-2 py-2 text-right font-mono text-emerald-400 font-bold">${r.est.toLocaleString('pt-BR')}</td>`;
                 ruasBody.appendChild(tr);
             });
 
@@ -355,8 +398,8 @@
                                 <td class="px-3 py-2 font-mono text-white"><strong>${m.sku}</strong> <span class="text-[10px] text-slate-500">(${m.fam})</span></td>
                                 <td class="px-3 py-2 text-center font-mono text-amber-400">${m.orig}</td>
                                 <td class="px-3 py-2 text-center font-mono text-emerald-400">${m.dest}</td>
-                                <td class="px-3 py-2 text-center"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono font-bold text-[10px]">${m.zera}</span></td>
-                                <td class="px-3 py-2 text-center"><span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-mono font-bold text-[10px]">${m.status}</span></td>`;
+                                <td class="px-3 py-2 text-center"><span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 rounded font-mono font-bold text-[10px]">${m.zera}</span></td>
+                                <td class="px-3 py-2 text-center"><span class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-2 py-0.5 rounded font-mono font-bold text-[10px] shadow-sm">${m.status}</span></td>`;
                 missoesBody.appendChild(tr);
             });
 
@@ -394,12 +437,13 @@
             currentData.bloqueado.forEach(b => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/30";
-                tr.innerHTML = `<td class="px-4 py-2.5 font-bold text-slate-200">${b.cat}</td>
-                                <td class="px-4 py-2.5 text-right text-red-400 font-mono">${b.qtd}</td>`;
+                tr.innerHTML = `<td class="px-3 py-1.5 font-bold text-slate-200">${b.cat}</td>
+                                <td class="px-3 py-1.5 text-right text-red-400 font-mono">${b.qtd}</td>`;
                 bloqueadoBody.appendChild(tr);
             });
 
             renderizarGraficoHorizontal(currentData.familias);
+            renderizarDonutBloqueado();
         }
 
         function renderizarGraficoHorizontal(dataset) {
@@ -456,6 +500,42 @@
                     }
                 }
             });
+        }
+
+        function renderizarDonutBloqueado() {
+            const canvas = document.getElementById('chartBloqueadoDonut');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (donutChartInstance) donutChartInstance.destroy();
+
+            donutChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Disponível', 'Bloqueado'],
+                    datasets: [{
+                        data: [11033, 589],
+                        backgroundColor: ['#10b981', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '70%',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: { display: false }
+                    }
+                }
+            });
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => alert("Erro ao ativar Tela Cheia: " + err.message));
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
         }
 
         document.addEventListener('DOMContentLoaded', carregarPainel);
