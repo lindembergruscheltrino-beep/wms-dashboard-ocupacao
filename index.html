@@ -114,42 +114,6 @@
             </div>
         </section>
 
-        <!-- NOVO PAINEL: MISSÕES DE OTIMIZAÇÃO DE ESTOQUE -->
-        <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                <div>
-                    <h3 class="font-bold text-sm text-emerald-400 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        📦 Painel Operacional de Missões de Otimização
-                    </h3>
-                    <p class="text-xs text-slate-400 mt-0.5">Desocupação de saldos críticos (<10%), consolidação de SKUs e liberação de espaço físico</p>
-                </div>
-                <div class="flex items-center gap-3 font-mono text-xs">
-                    <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1 rounded-lg"><strong>10</strong> Posições Liberadas</span>
-                    <span class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1 rounded-lg"><strong>85</strong> Unidades Movimentadas</span>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs text-slate-300">
-                    <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold border-b border-slate-800">
-                        <tr>
-                            <th class="px-3 py-2.5">ID</th>
-                            <th class="px-3 py-2.5">Tipo de Missão</th>
-                            <th class="px-3 py-2.5">SKU / Família</th>
-                            <th class="px-3 py-2.5 text-center">Origem (Qtd)</th>
-                            <th class="px-3 py-2.5 text-center">Destino</th>
-                            <th class="px-3 py-2.5 text-center">Zera Origem?</th>
-                            <th class="px-3 py-2.5 text-center">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="missoesTableBody" class="divide-y divide-slate-800/50 font-medium">
-                        <!-- JS Injeta Missões -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
         <!-- Bloco Ocupação Por Ruas e Por Família -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
@@ -199,7 +163,7 @@
             </div>
         </section>
 
-        <!-- Bloco Inferior: Estoque Bloqueado e Gráfico -->
+        <!-- Bloco Intermediário: Estoque Bloqueado e Gráfico -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Gráfico Visão de Peças por Família -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
@@ -240,6 +204,43 @@
                 </div>
             </div>
         </section>
+
+        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO -->
+        <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                <div>
+                    <h3 class="font-bold text-sm text-emerald-400 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        Missões de Otimização
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Desocupação de saldos críticos (<10%), consolidação de SKUs e liberação de espaço físico</p>
+                </div>
+                <div class="flex items-center gap-3 font-mono text-xs">
+                    <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1 rounded-lg"><strong>10</strong> Posições Liberadas</span>
+                    <span class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1 rounded-lg"><strong>85</strong> Unidades Movimentadas</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold border-b border-slate-800">
+                        <tr>
+                            <th class="px-3 py-2.5">ID</th>
+                            <th class="px-3 py-2.5">Tipo de Missão</th>
+                            <th class="px-3 py-2.5">SKU / Família</th>
+                            <th class="px-3 py-2.5 text-center">Origem (Qtd)</th>
+                            <th class="px-3 py-2.5 text-center">Destino</th>
+                            <th class="px-3 py-2.5 text-center">Zera Origem?</th>
+                            <th class="px-3 py-2.5 text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="missoesTableBody" class="divide-y divide-slate-800/50 font-medium">
+                        <!-- JS Injeta Missões -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-[#0f172a] border-t border-slate-800 text-slate-500 text-center py-4 text-xs tracking-wide">
