@@ -75,17 +75,13 @@
                 </div>
             </div>
             
-            <div class="flex items-center gap-3 bg-[#1e293b] px-3 py-1.5 rounded-lg border border-slate-700 text-slate-300">
-                <label for="dateSelect" class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    DATA RELATÓRIO:
-                </label>
-                <select id="dateSelect" onchange="trocarData(this.value)" class="bg-[#0f172a] text-xs font-mono font-bold text-white border border-slate-700 rounded px-2.5 py-1 focus:outline-none cursor-pointer">
-                    <option value="16.10.2026">16/10/2026</option>
-                </select>
+            <!-- BADGE DE DATA FIXA SOLICITADA -->
+            <div class="flex items-center gap-2 bg-[#1e293b] px-3.5 py-2 rounded-lg border border-slate-700 text-slate-200 shadow-inner">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-xs font-bold font-mono tracking-tight">Atualizado em 16 Out 09:00</span>
             </div>
         </div>
     </header>
@@ -134,7 +130,7 @@
         <!-- Bloco Ocupação Por Ruas e Por Família -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Ocupação por Rua (Sem linhas de grade) -->
+            <!-- Tabela Ocupação por Rua -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> 📍 Ocupação Física por Rua
@@ -156,7 +152,7 @@
                 </div>
             </div>
 
-            <!-- Tabela Ocupação por Família (Sem linhas de grade) -->
+            <!-- Tabela Ocupação por Família -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-purple-500 rounded-full inline-block"></span> 📊 Análise por Família e Densidade (un/m²)
@@ -182,7 +178,7 @@
 
         <!-- Bloco Intermediário: Estoque Bloqueado e Gráfico Horizontal -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Gráfico Horizontal Comparativo: Estoque por Família -->
+            <!-- Gráfico Horizontal Comparativo -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold text-sm text-slate-300 flex items-center gap-2">
@@ -198,7 +194,7 @@
                 </div>
             </div>
 
-            <!-- Estoque Bloqueado (Sem linhas de grade) -->
+            <!-- Estoque Bloqueado -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
                 <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
@@ -225,7 +221,7 @@
             </div>
         </section>
 
-        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO (Sem linhas de grade) -->
+        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO -->
         <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <div>
@@ -270,79 +266,75 @@
         Chart.register(ChartDataLabels);
         let chartInstance = null;
 
-        const database = {
-            "16.10.2026": {
-                locacoes: "115 / 191",
-                locacoesPct: "60,0% Ocupado",
-                area: "2.181m² / 3.574m²",
-                areaPct: "61,0% Área Ocupada",
-                saldoEstoque: "11.033 un",
-                capacidadeNominal: "Cap: 13.811 un (79,9%)",
-                miniBinPecas: "1.302 un",
-                miniBinLoc: "15 Loc | 230,6 m²",
-                areaLivre: "1.392,69 m²",
-                locacoesLivres: "76 Loc Livres",
-                ruas: [
-                    { rua: "RUA 01", loc: "9 / 9", area: "279,01", est: 1944 },
-                    { rua: "RUA 02", loc: "9 / 36", area: "168,60", est: 943 },
-                    { rua: "RUA 03", loc: "28 / 41", area: "500,34", est: 1996 },
-                    { rua: "RUA 04", loc: "32 / 36", area: "582,17", est: 2919 },
-                    { rua: "RUA 05", loc: "34 / 36", area: "597,09", est: 2649 },
-                    { rua: "RUA 06", loc: "3 / 33", area: "54,60", est: 582 }
-                ],
-                familias: [
-                    { familia: "REFRIGERADOR", loc: 62, area: "1.243,17", pctArea: "34.8%", est: 6672, cap: 8285, densidade: "5.37" },
-                    { familia: "LAVADORA", loc: 12, area: "215,54", pctArea: "6.0%", est: 989, cap: 1996, densidade: "4.59" },
-                    { familia: "FOGÃO", loc: 12, area: "211,88", pctArea: "5.9%", est: 577, cap: 1408, densidade: "2.72" },
-                    { familia: "FORNO", loc: 4, area: "78,77", pctArea: "2.2%", est: 530, cap: 720, densidade: "6.73" },
-                    { familia: "FREEZER", loc: 6, area: "126,86", pctArea: "3.5%", est: 425, cap: 706, densidade: "3.35" },
-                    { familia: "SECADORA", loc: 2, area: "38,64", pctArea: "1.1%", est: 244, cap: 288, densidade: "6.31" },
-                    { familia: "FRIGOBAR", loc: 1, area: "16,80", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
-                    { familia: "CERVEJEIRA", loc: 1, area: "19,60", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" }
-                ],
-                missoes: [
-                    { id: "MIS-001", tipo: "Movimentar para Bin", sku: "BRO88AKXNA", fam: "REFRIGERADOR", orig: "R.05.B32 (8)", dest: "R.03.B27 (Pulmão)", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-002", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "BRE68AEBNA", fam: "REFRIGERADOR", orig: "R.02.B03 (5)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-003", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "CVU20MBBNA", fam: "FREEZER", orig: "R.05.B23 (8)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-004", tipo: "Mini Bin -> Rua", sku: "CHB53MBBNA", fam: "FREEZER", orig: "R.03.B02 (1)", dest: "R.03.B10 (Pulmão)", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-005", tipo: "Consolidação Mini Bin", sku: "BRM52MKBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-006", tipo: "Consolidação Mini Bin", sku: "CRE45MBBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-007", tipo: "Consolidação Mini Bin", sku: "BOB47AEBNA", fam: "FORNO", orig: "R.03.B02 (8)", dest: "R.04.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-008", tipo: "Consolidação Mini Bin", sku: "BRA08MZBNA", fam: "REFRIGERADOR", orig: "R.05.B01 (26)", dest: "R.05.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-009", tipo: "Consolidação Mini Bin", sku: "BRA08MNBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (25)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" },
-                    { id: "MIS-010", tipo: "Consolidação Mini Bin", sku: "CRM40MBBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (2)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" }
-                ],
-                bloqueado: [
-                    { cat: "Sucata", qtd: 141 },
-                    { cat: "Rio Claro", qtd: 216 },
-                    { cat: "Joinville", qtd: 52 },
-                    { cat: "127v", qtd: 136 },
-                    { cat: "Reoperação", qtd: 44 }
-                ],
-                totBloqueado: 589
-            }
+        // DADOS FÍSICOS E ESTÁTICOS DA ÚLTIMA IMPORTAÇÃO (16/10/2026)
+        const currentData = {
+            locacoes: "115 / 191",
+            locacoesPct: "60,0% Ocupado",
+            area: "2.181m² / 3.574m²",
+            areaPct: "61,0% Área Ocupada",
+            saldoEstoque: "11.033 un",
+            capacidadeNominal: "Cap: 13.811 un (79,9%)",
+            miniBinPecas: "1.302 un",
+            miniBinLoc: "15 Loc | 230,6 m²",
+            areaLivre: "1.392,69 m²",
+            locacoesLivres: "76 Loc Livres",
+            ruas: [
+                { rua: "RUA 01", loc: "9 / 9", area: "279,01", est: 1944 },
+                { rua: "RUA 02", loc: "9 / 36", area: "168,60", est: 943 },
+                { rua: "RUA 03", loc: "28 / 41", area: "500,34", est: 1996 },
+                { rua: "RUA 04", loc: "32 / 36", area: "582,17", est: 2919 },
+                { rua: "RUA 05", loc: "34 / 36", area: "597,09", est: 2649 },
+                { rua: "RUA 06", loc: "3 / 33", area: "54,60", est: 582 }
+            ],
+            familias: [
+                { familia: "REFRIGERADOR", loc: 62, area: "1.243,17", pctArea: "34.8%", est: 6672, cap: 8285, densidade: "5.37" },
+                { familia: "LAVADORA", loc: 12, area: "215,54", pctArea: "6.0%", est: 989, cap: 1996, densidade: "4.59" },
+                { familia: "FOGÃO", loc: 12, area: "211,88", pctArea: "5.9%", est: 577, cap: 1408, densidade: "2.72" },
+                { familia: "FORNO", loc: 4, area: "78,77", pctArea: "2.2%", est: 530, cap: 720, densidade: "6.73" },
+                { familia: "FREEZER", loc: 6, area: "126,86", pctArea: "3.5%", est: 425, cap: 706, densidade: "3.35" },
+                { familia: "SECADORA", loc: 2, area: "38,64", pctArea: "1.1%", est: 244, cap: 288, densidade: "6.31" },
+                { familia: "FRIGOBAR", loc: 1, area: "16,80", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
+                { familia: "CERVEJEIRA", loc: 1, area: "19,60", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" }
+            ],
+            missoes: [
+                { id: "MIS-001", tipo: "Movimentar para Bin", sku: "BRO88AKXNA", fam: "REFRIGERADOR", orig: "R.05.B32 (8)", dest: "R.03.B27 (Pulmão)", zera: "Sim", status: "Concluído" },
+                { id: "MIS-002", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "BRE68AEBNA", fam: "REFRIGERADOR", orig: "R.02.B03 (5)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
+                { id: "MIS-003", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "CVU20MBBNA", fam: "FREEZER", orig: "R.05.B23 (8)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
+                { id: "MIS-004", tipo: "Mini Bin -> Rua", sku: "CHB53MBBNA", fam: "FREEZER", orig: "R.03.B02 (1)", dest: "R.03.B10 (Pulmão)", zera: "Sim", status: "Concluído" },
+                { id: "MIS-005", tipo: "Consolidação Mini Bin", sku: "BRM52MKBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                { id: "MIS-006", tipo: "Consolidação Mini Bin", sku: "CRE45MBBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                { id: "MIS-007", tipo: "Consolidação Mini Bin", sku: "BOB47AEBNA", fam: "FORNO", orig: "R.03.B02 (8)", dest: "R.04.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                { id: "MIS-008", tipo: "Consolidação Mini Bin", sku: "BRA08MZBNA", fam: "REFRIGERADOR", orig: "R.05.B01 (26)", dest: "R.05.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                { id: "MIS-009", tipo: "Consolidação Mini Bin", sku: "BRA08MNBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (25)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                { id: "MIS-010", tipo: "Consolidação Mini Bin", sku: "CRM40MBBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (2)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" }
+            ],
+            bloqueado: [
+                { cat: "Sucata", qtd: 141 },
+                { cat: "Rio Claro", qtd: 216 },
+                { cat: "Joinville", qtd: 52 },
+                { cat: "127v", qtd: 136 },
+                { cat: "Reoperação", qtd: 44 }
+            ],
+            totBloqueado: 589
         };
 
-        function trocarData(dataKey) {
-            const data = database[dataKey];
-            if (!data) return;
-
-            document.getElementById('uiLocacoes').textContent = data.locacoes;
-            document.getElementById('uiLocacoesPct').textContent = data.locacoesPct;
-            document.getElementById('uiArea').textContent = data.area;
-            document.getElementById('uiAreaPct').textContent = data.areaPct;
-            document.getElementById('uiSaldoEstoque').textContent = data.saldoEstoque;
-            document.getElementById('uiCapacidadeNominal').textContent = data.capacidadeNominal;
-            document.getElementById('uiMiniBinPecas').textContent = data.miniBinPecas;
-            document.getElementById('uiMiniBinLoc').textContent = data.miniBinLoc;
-            document.getElementById('uiAreaLivre').textContent = data.areaLivre;
-            document.getElementById('uiLocacoesLivres').textContent = data.locacoesLivres;
-            document.getElementById('uiTotBloqueado').textContent = data.totBloqueado;
+        function carregarPainel() {
+            document.getElementById('uiLocacoes').textContent = currentData.locacoes;
+            document.getElementById('uiLocacoesPct').textContent = currentData.locacoesPct;
+            document.getElementById('uiArea').textContent = currentData.area;
+            document.getElementById('uiAreaPct').textContent = currentData.areaPct;
+            document.getElementById('uiSaldoEstoque').textContent = currentData.saldoEstoque;
+            document.getElementById('uiCapacidadeNominal').textContent = currentData.capacidadeNominal;
+            document.getElementById('uiMiniBinPecas').textContent = currentData.miniBinPecas;
+            document.getElementById('uiMiniBinLoc').textContent = currentData.miniBinLoc;
+            document.getElementById('uiAreaLivre').textContent = currentData.areaLivre;
+            document.getElementById('uiLocacoesLivres').textContent = currentData.locacoesLivres;
+            document.getElementById('uiTotBloqueado').textContent = currentData.totBloqueado;
 
             // Renderiza Ruas
             const ruasBody = document.getElementById('ruasTableBody');
             ruasBody.innerHTML = '';
-            data.ruas.forEach(r => {
+            currentData.ruas.forEach(r => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-blue-400">${r.rua}</td>
@@ -355,7 +347,7 @@
             // Renderiza Missões
             const missoesBody = document.getElementById('missoesTableBody');
             missoesBody.innerHTML = '';
-            data.missoes.forEach(m => {
+            currentData.missoes.forEach(m => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-3 py-2 font-mono font-bold text-blue-400">${m.id}</td>
@@ -374,7 +366,7 @@
             familyBody.innerHTML = '';
             marquee.innerHTML = '';
 
-            const tickerData = [...data.familias, ...data.familias];
+            const tickerData = [...currentData.familias, ...currentData.familias];
             tickerData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
@@ -385,7 +377,7 @@
                 marquee.appendChild(div);
             });
 
-            data.familias.forEach(item => {
+            currentData.familias.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-slate-200 text-xs">${item.familia}</td>
@@ -399,7 +391,7 @@
             // Renderiza Bloqueados
             const bloqueadoBody = document.getElementById('bloqueadoTableBody');
             bloqueadoBody.innerHTML = '';
-            data.bloqueado.forEach(b => {
+            currentData.bloqueado.forEach(b => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-4 py-2.5 font-bold text-slate-200">${b.cat}</td>
@@ -407,7 +399,7 @@
                 bloqueadoBody.appendChild(tr);
             });
 
-            renderizarGraficoHorizontal(data.familias);
+            renderizarGraficoHorizontal(currentData.familias);
         }
 
         function renderizarGraficoHorizontal(dataset) {
@@ -466,7 +458,7 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', () => trocarData("16.10.2026"));
+        document.addEventListener('DOMContentLoaded', carregarPainel);
     </script>
 </body>
 </html>
