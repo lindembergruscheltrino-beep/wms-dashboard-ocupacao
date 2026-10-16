@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS PCO - Ocupação & Otimização CD Alhandra PB</title>
     
-    <!-- Importação das Fontes Google Sans Mono / Product Sans Mono -->
+    <!-- Importação das Fontes Google Sans Mono / JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -25,7 +25,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
-        /* Aplicação Global da Fonte Monospaçada Google Sans / JetBrains Mono */
         body, button, input, select, table {
             font-family: 'JetBrains Mono', 'Product Sans Mono', 'Google Sans Mono', monospace !important;
         }
@@ -91,37 +90,37 @@
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Métricas PCO Globais -->
-        <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
-                <p class="text-[10px] font-bold text-slate-400 uppercase truncate">Locações (Ocup / Total)</p>
-                <h4 class="text-lg font-black text-white mt-1" id="uiLocacoes">115 / 191</h4>
-                <p class="text-[10px] text-blue-400 font-mono font-bold mt-0.5" id="uiLocacoesPct">60,0% Ocupado</p>
+        <!-- Métricas PCO Globais (Horizontal Ajustado) -->
+        <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue flex flex-col justify-between">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Locações (Ocup / Total)</p>
+                <h4 class="text-base font-black text-white mt-1.5 whitespace-nowrap tracking-tighter" id="uiLocacoes">115 / 191</h4>
+                <p class="text-[10px] text-blue-400 font-mono font-bold mt-1" id="uiLocacoesPct">60,0% Ocupado</p>
             </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber">
-                <p class="text-[10px] font-bold text-amber-500 uppercase truncate">Área (Ocup / Total)</p>
-                <h4 class="text-lg font-black text-amber-400 mt-1" id="uiArea">2.181m² / 3.574m²</h4>
-                <p class="text-[10px] text-amber-300 font-mono font-bold mt-0.5" id="uiAreaPct">61,0% Área Ocupada</p>
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber flex flex-col justify-between">
+                <p class="text-[10px] font-bold text-amber-500 uppercase tracking-tight">Área (Ocup / Total)</p>
+                <h4 class="text-base font-black text-amber-400 mt-1.5 whitespace-nowrap tracking-tighter" id="uiArea">2.181m² / 3.574m²</h4>
+                <p class="text-[10px] text-amber-300 font-mono font-bold mt-1" id="uiAreaPct">61,0% Área Ocupada</p>
             </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
-                <p class="text-[10px] font-bold text-emerald-500 uppercase truncate">Saldo Estocado (Volumetria)</p>
-                <h4 class="text-lg font-black text-emerald-400 mt-1" id="uiSaldoEstoque">11.033 un</h4>
-                <p class="text-[10px] text-emerald-300 font-mono font-bold mt-0.5" id="uiCapacidadeNominal">Cap. Nominal: 13.811 un (79,9%)</p>
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald flex flex-col justify-between">
+                <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight">Saldo Estocado (Vol)</p>
+                <h4 class="text-base font-black text-emerald-400 mt-1.5 whitespace-nowrap tracking-tighter" id="uiSaldoEstoque">11.033 un</h4>
+                <p class="text-[10px] text-emerald-300 font-mono font-bold mt-1" id="uiCapacidadeNominal">Cap: 13.811 un (79,9%)</p>
             </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-purple">
-                <p class="text-[10px] font-bold text-purple-400 uppercase truncate">Mini Bins (MB)</p>
-                <h4 class="text-lg font-black text-purple-300 mt-1" id="uiMiniBinPecas">1.302 un</h4>
-                <p class="text-[10px] text-purple-400 font-mono mt-0.5" id="uiMiniBinLoc">15 Posições | 230,6 m²</p>
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-purple flex flex-col justify-between">
+                <p class="text-[10px] font-bold text-purple-400 uppercase tracking-tight">Mini Bins (MB)</p>
+                <h4 class="text-base font-black text-purple-300 mt-1.5 whitespace-nowrap tracking-tighter" id="uiMiniBinPecas">1.302 un</h4>
+                <p class="text-[10px] text-purple-400 font-mono mt-1" id="uiMiniBinLoc">15 Loc | 230,6 m²</p>
             </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
-                <p class="text-[10px] font-bold text-slate-400 uppercase truncate">Área Livre Global</p>
-                <h4 class="text-lg font-black text-emerald-400 mt-1" id="uiAreaLivre">1.392,69 m²</h4>
-                <p class="text-[10px] text-slate-500 font-mono mt-0.5" id="uiLocacoesLivres">76 Locações Livres</p>
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue flex flex-col justify-between">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Área Livre Global</p>
+                <h4 class="text-base font-black text-emerald-400 mt-1.5 whitespace-nowrap tracking-tighter" id="uiAreaLivre">1.392,69 m²</h4>
+                <p class="text-[10px] text-slate-500 font-mono mt-1" id="uiLocacoesLivres">76 Loc Livres</p>
             </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
-                <p class="text-[10px] font-bold text-emerald-400 uppercase truncate">Eficiência de Otimização</p>
-                <h4 class="text-lg font-black text-emerald-400 mt-1">100%</h4>
-                <p class="text-[10px] text-slate-400 font-mono mt-0.5">10 de 10 Concluídas</p>
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald flex flex-col justify-between">
+                <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-tight">Eficiência Otimização</p>
+                <h4 class="text-base font-black text-emerald-400 mt-1.5 whitespace-nowrap tracking-tighter">100%</h4>
+                <p class="text-[10px] text-slate-400 font-mono mt-1">10 de 10 Concluídas</p>
             </div>
         </section>
 
@@ -268,11 +267,11 @@
                 area: "2.181m² / 3.574m²",
                 areaPct: "61,0% Área Ocupada",
                 saldoEstoque: "11.033 un",
-                capacidadeNominal: "Cap. Nominal: 13.811 un (79,9%)",
+                capacidadeNominal: "Cap: 13.811 un (79,9%)",
                 miniBinPecas: "1.302 un",
-                miniBinLoc: "15 Posições | 230,6 m²",
+                miniBinLoc: "15 Loc | 230,6 m²",
                 areaLivre: "1.392,69 m²",
-                locacoesLivres: "76 Locações Livres",
+                locacoesLivres: "76 Loc Livres",
                 ruas: [
                     { rua: "RUA 01", loc: "9 / 9", area: "279,01", est: 1944 },
                     { rua: "RUA 02", loc: "9 / 36", area: "168,60", est: 943 },
