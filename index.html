@@ -7,311 +7,235 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-Q30GKGZL64');
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WMS - Ocupação CD Alhandra PB</title>
+    <title>WMS PCO - Ocupação & Otimização CD Alhandra PB</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Chart.js + Plugin DataLabels -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
-        /* Scrollbar Personalizada */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
-        /* Neon Glows */
-        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(59, 130, 246, 0.05); transition: all 0.3s ease; }
-        .glow-blue:hover { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 0 15px 1px rgba(59, 130, 246, 0.15); transform: translateY(-2px); }
+        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(59, 130, 246, 0.05); }
+        .glow-blue:hover { border-color: rgba(59, 130, 246, 0.6); box-shadow: 0 0 15px 1px rgba(59, 130, 246, 0.15); }
 
-        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.2); box-shadow: 0 4px 20px -2px rgba(245, 158, 11, 0.05); transition: all 0.3s ease; }
-        .glow-amber:hover { border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 0 15px 1px rgba(245, 158, 11, 0.15); transform: translateY(-2px); }
+        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.2); box-shadow: 0 4px 20px -2px rgba(245, 158, 11, 0.05); }
+        .glow-amber:hover { border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 0 15px 1px rgba(245, 158, 11, 0.15); }
 
-        .glow-orange { border: 1px solid rgba(245, 107, 0, 0.3); box-shadow: 0 4px 20px -2px rgba(245, 107, 0, 0.1); transition: all 0.3s ease; }
-        .glow-orange:hover { border-color: rgba(245, 107, 0, 0.7); box-shadow: 0 0 15px 1px rgba(245, 107, 0, 0.25); transform: translateY(-2px); }
+        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.05); }
+        .glow-emerald:hover { border-color: rgba(16, 185, 129, 0.6); box-shadow: 0 0 15px 1px rgba(16, 185, 129, 0.15); }
 
-        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.05); transition: all 0.3s ease; }
-        .glow-emerald:hover { border-color: rgba(16, 185, 129, 0.6); box-shadow: 0 0 15px 1px rgba(16, 185, 129, 0.15); transform: translateY(-2px); }
+        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(139, 92, 246, 0.05); }
+        .glow-purple:hover { border-color: rgba(139, 92, 246, 0.6); box-shadow: 0 0 15px 1px rgba(139, 92, 246, 0.15); }
 
-        .glow-red { border: 1px solid rgba(239, 68, 68, 0.2); box-shadow: 0 4px 20px -2px rgba(239, 68, 68, 0.05); transition: all 0.3s ease; }
-        .glow-red:hover { border-color: rgba(239, 68, 68, 0.6); box-shadow: 0 0 15px 1px rgba(239, 68, 68, 0.15); transform: translateY(-2px); }
-
-        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 4px 20px -2px rgba(139, 92, 246, 0.05); transition: all 0.3s ease; }
-        .glow-purple:hover { border-color: rgba(139, 92, 246, 0.6); box-shadow: 0 0 15px 1px rgba(139, 92, 246, 0.15); transform: translateY(-2px); }
-
-        .glow-cyan { border: 1px solid rgba(6, 182, 212, 0.2); box-shadow: 0 4px 20px -2px rgba(6, 182, 212, 0.05); transition: all 0.3s ease; }
-        .glow-cyan:hover { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 0 15px 1px rgba(6, 182, 212, 0.15); transform: translateY(-2px); }
-
-        /* Marquee Letreiro Rolável */
         .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            background-color: #0f172a;
-            border-bottom: 1px solid #1e293b;
-            padding: 12px 0;
-            display: flex;
+            width: 100%; overflow: hidden; background-color: #0f172a; border-bottom: 1px solid #1e293b; padding: 10px 0; display: flex;
         }
-        .ticker {
-            display: flex;
-            white-space: nowrap;
-            animation: marquee 18s linear infinite;
-        }
+        .ticker { display: flex; white-space: nowrap; animation: marquee 20s linear infinite; }
         .ticker:hover { animation-play-state: paused; cursor: pointer; }
-        .ticker__item { display: flex; align-items: center; padding: 0 3rem; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; }
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
+        .ticker__item { display: flex; align-items: center; padding: 0 2.5rem; font-size: 0.8rem; font-weight: 700; }
+        @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
     </style>
 </head>
 <body class="bg-[#070a13] text-slate-100 font-sans antialiased">
 
-    <!-- Header / Navbar -->
+    <!-- Header -->
     <header class="bg-[#0f172a] border-b border-slate-800 text-white shadow-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
-                <div class="p-2 bg-blue-600 rounded-lg text-white font-black text-xl tracking-wider shadow-lg shadow-blue-500/30">WMS</div>
+                <div class="p-2 bg-blue-600 rounded-lg text-white font-black text-xl tracking-wider shadow-lg shadow-blue-500/30">PCO</div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-tight text-slate-100">Ocupação – CD Alhandra PB</h1>
-                    <p class="text-xs text-slate-400">Whirlpool • Trino</p>
+                    <h1 class="text-lg font-bold tracking-tight text-slate-100">Painel Gerencial de Ocupação e Otimização</h1>
+                    <p class="text-xs text-slate-400">CD Alhandra PB • Whirlpool • Trino</p>
                 </div>
             </div>
             
-            <!-- SELETOR DINÂMICO DE DATA -->
-            <div class="flex items-center gap-3 bg-[#1e293b] px-3 py-1.5 rounded-lg border border-slate-700 text-slate-300 shadow-inner">
+            <div class="flex items-center gap-3 bg-[#1e293b] px-3 py-1.5 rounded-lg border border-slate-700 text-slate-300">
                 <label for="dateSelect" class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                    SELECIONAR DATA:
+                    DATA RELATÓRIO:
                 </label>
-                <select id="dateSelect" onchange="trocarData(this.value)" class="bg-[#0f172a] text-xs font-mono font-bold text-white border border-slate-700 rounded px-2.5 py-1 focus:outline-none focus:border-blue-500 cursor-pointer">
-                    <option value="08.10.2026">08/10/2026</option>
-                    <option value="06.10.2026">06/10/2026</option>
+                <select id="dateSelect" onchange="trocarData(this.value)" class="bg-[#0f172a] text-xs font-mono font-bold text-white border border-slate-700 rounded px-2.5 py-1 focus:outline-none cursor-pointer">
+                    <option value="16.10.2026">16/10/2026</option>
                 </select>
             </div>
         </div>
     </header>
 
-    <!-- BARRA ROLÁVEL -->
+    <!-- Marquee -->
     <div class="ticker-wrap">
-        <div class="ticker" id="tickerMarquee">
-            <!-- Gerado via JS -->
-        </div>
+        <div class="ticker" id="tickerMarquee"></div>
     </div>
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Régua de Indicadores Principais -->
-        <div class="flex justify-between items-center">
-            <h2 class="text-xs font-bold uppercase text-slate-500 tracking-widest pl-1">Métricas de Capacidade</h2>
-            <span class="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20 font-mono" id="mediaGeralBadge">Média Geral Ocupação End.: --</span>
-        </div>
-        
-        <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+        <!-- Métricas PCO Globais -->
+        <section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Área Total m²</p>
-                <h4 class="text-xl font-black text-white mt-1" id="uiAreaTotal">--</h4>
+                <p class="text-[10px] font-bold text-slate-400 uppercase truncate">Locações (Ocup / Total)</p>
+                <h4 class="text-lg font-black text-white mt-1" id="uiLocacoes">115 / 191</h4>
+                <p class="text-[10px] text-blue-400 font-mono font-bold mt-0.5" id="uiLocacoesPct">60,0% Ocupado</p>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-amber">
-                <p class="text-[10px] font-bold text-amber-500 uppercase tracking-tight truncate">Área Ocupada m²</p>
-                <h4 class="text-xl font-black text-amber-400 mt-1" id="uiAreaOcupada">--</h4>
+                <p class="text-[10px] font-bold text-amber-500 uppercase truncate">Área (Ocup / Total)</p>
+                <h4 class="text-lg font-black text-amber-400 mt-1" id="uiArea">2.181m² / 3.574m²</h4>
+                <p class="text-[10px] text-amber-300 font-mono font-bold mt-0.5" id="uiAreaPct">61,0% Área Ocupada</p>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
-                <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">Área Livre m²</p>
-                <h4 class="text-xl font-black text-emerald-400 mt-1" id="uiAreaLivre">--</h4>
+                <p class="text-[10px] font-bold text-emerald-500 uppercase truncate">Saldo Estocado (Volumetria)</p>
+                <h4 class="text-lg font-black text-emerald-400 mt-1" id="uiSaldoEstoque">11.033 un</h4>
+                <p class="text-[10px] text-emerald-300 font-mono font-bold mt-0.5" id="uiCapacidadeNominal">Cap. Nominal: 13.811 un (79,9%)</p>
             </div>
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-red">
-                <p class="text-[10px] font-bold text-red-500 uppercase tracking-tight truncate">Ocup. Área %</p>
-                <h4 class="text-xl font-black text-red-400 mt-1" id="uiOcupAreaPct">--</h4>
+            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-purple">
+                <p class="text-[10px] font-bold text-purple-400 uppercase truncate">Mini Bins (MB)</p>
+                <h4 class="text-lg font-black text-purple-300 mt-1" id="uiMiniBinPecas">1.302 un</h4>
+                <p class="text-[10px] text-purple-400 font-mono mt-0.5" id="uiMiniBinLoc">15 Posições | 230,6 m²</p>
             </div>
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue">
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight truncate">Total Locação</p>
-                <h4 class="text-xl font-black text-white mt-1" id="uiTotalLocacao">--</h4>
+                <p class="text-[10px] font-bold text-slate-400 uppercase truncate">Área Livre Global</p>
+                <h4 class="text-lg font-black text-emerald-400 mt-1" id="uiAreaLivre">1.392,69 m²</h4>
+                <p class="text-[10px] text-slate-500 font-mono mt-0.5" id="uiLocacoesLivres">76 Locações Livres</p>
             </div>
-            
-            <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-orange">
-                <p class="text-[10px] font-bold text-[#f56b00] uppercase tracking-tight truncate">End. Ocupados</p>
-                <h4 class="text-xl font-black text-[#f56b00] mt-1" id="uiEndOcupados">--</h4>
-            </div>
-
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-emerald">
-                <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-tight truncate">End. Livres</p>
-                <h4 class="text-xl font-black text-emerald-400 mt-1" id="uiEndLivres">--</h4>
+                <p class="text-[10px] font-bold text-emerald-400 uppercase truncate">Eficiência de Otimização</p>
+                <h4 class="text-lg font-black text-emerald-400 mt-1">100%</h4>
+                <p class="text-[10px] text-slate-400 font-mono mt-0.5">10 de 10 Concluídas</p>
             </div>
         </section>
 
-        <!-- Detalhes de Volumes, SKUs e Estruturas Avançadas -->
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-blue">
+        <!-- NOVO PAINEL: MISSÕES DE OTIMIZAÇÃO DE ESTOQUE -->
+        <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <div>
-                    <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Total: Disp / CQ</p>
-                    <h3 class="text-xl font-black text-blue-400 mt-1" id="uiEstTotal">--</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Total Sku: <span class="text-slate-300 font-mono font-bold" id="uiTotalSku">--</span></p>
+                    <h3 class="font-bold text-sm text-emerald-400 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        📦 Painel Operacional de Missões de Otimização
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Desocupação de saldos críticos (<10%), consolidação de SKUs e liberação de espaço físico</p>
                 </div>
-                <span class="text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">Geral</span>
+                <div class="flex items-center gap-3 font-mono text-xs">
+                    <span class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1 rounded-lg"><strong>10</strong> Posições Liberadas</span>
+                    <span class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1 rounded-lg"><strong>85</strong> Unidades Movimentadas</span>
+                </div>
             </div>
-            <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-emerald">
-                <div>
-                    <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Est. Disponivel R</p>
-                    <h3 class="text-xl font-black text-emerald-400 mt-1" id="uiEstDispR">--</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold" id="uiQtdSku">--</span></p>
-                </div>
-                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded">Disponível</span>
-            </div>
-            <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-purple">
-                <div>
-                    <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Cooktop R</p>
-                    <h3 class="text-xl font-black text-purple-400 mt-1" id="uiCooktopR">--</h3>
-                    <p class="text-[10px] text-slate-500 mt-1">Qtd. Sku: <span class="text-slate-300 font-mono font-bold" id="uiCooktopSku">--</span></p>
-                </div>
-                <span class="text-[10px] font-bold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-1 rounded">Cooktop</span>
-            </div>
-            <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 flex justify-between items-center shadow-md glow-amber">
-                <div>
-                    <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">End. Mini Bin</p>
-                    <h3 class="text-xl font-black text-amber-400 mt-1"><span id="uiMiniBinPecas">--</span> <span class="text-xs text-slate-400 font-normal">peças</span></h3>
-                    <p class="text-[10px] text-slate-500 mt-1">End: <span class="text-white font-bold font-mono" id="uiMiniBinEnd">--</span> <span class="text-slate-600">|</span> <span id="uiMiniBinArea">--</span> m² <span class="text-slate-600">|</span> Sku: <span class="text-white font-bold font-mono" id="uiMiniBinSku">--</span></p>
-                </div>
-                <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-1 rounded">Mini Bin</span>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold border-b border-slate-800">
+                        <tr>
+                            <th class="px-3 py-2.5">ID</th>
+                            <th class="px-3 py-2.5">Tipo de Missão</th>
+                            <th class="px-3 py-2.5">SKU / Família</th>
+                            <th class="px-3 py-2.5 text-center">Origem (Qtd)</th>
+                            <th class="px-3 py-2.5 text-center">Destino</th>
+                            <th class="px-3 py-2.5 text-center">Zera Origem?</th>
+                            <th class="px-3 py-2.5 text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="missoesTableBody" class="divide-y divide-slate-800/50 font-medium">
+                        <!-- JS Injeta Missões -->
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <!-- PAINEL DE OBSERVAÇÕES E ALOCAÇÕES TEMPORÁRIAS -->
-        <section class="bg-[#0f172a] p-3.5 rounded-xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md bg-gradient-to-r from-[#0f172a] via-purple-950/20 to-[#0f172a]">
-            <div class="flex items-center gap-2">
-                <span class="text-amber-400 font-bold text-xs uppercase tracking-wider bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Alocações Temporárias
-                </span>
-            </div>
-            <div class="flex flex-wrap items-center gap-4 text-xs font-mono">
-                <div class="bg-[#0b0f19] px-3 py-1.5 rounded-lg border border-slate-800 flex items-center gap-2">
-                    <span class="text-purple-400 font-bold">📍 127V:</span>
-                    <span class="text-slate-300">Em Rua 1 End. <strong class="text-white">17,30 m²</strong></span>
-                </div>
-                <div class="bg-[#0b0f19] px-3 py-1.5 rounded-lg border border-slate-800 flex items-center gap-2" id="uiDocaBox">
-                    <span class="text-cyan-400 font-bold">📍 EM DOCA:</span>
-                    <span class="text-slate-300"><strong class="text-white" id="uiDocaText">113 PC</strong></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Corpo Principal: Tabelas de Ocupação e Bloco Bloqueado + B2B -->
+        <!-- Bloco Ocupação Por Ruas e Por Família -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Central: Ocupação Família M² -->
-            <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
+            <!-- Tabela Ocupação por Rua -->
+            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
-                    <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block animate-pulse"></span> Ocupação Família M²
+                    <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> 📍 Ocupação Física por Rua
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
                         <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
                             <tr>
-                                <th class="px-4 py-3.5">Família</th>
-                                <th class="px-4 py-3.5 text-right">Qtd. Peças</th>
-                                <th class="px-4 py-3.5 text-right">Área M²</th>
-                                <th class="px-4 py-3.5 text-center w-1/3">Percent. Família</th>
+                                <th class="px-3 py-2.5">Rua</th>
+                                <th class="px-3 py-2.5 text-center">Locações</th>
+                                <th class="px-3 py-2.5 text-right">Área (m²)</th>
+                                <th class="px-3 py-2.5 text-right">Estoque (un)</th>
                             </tr>
                         </thead>
-                        <tbody id="familyTableBody" class="divide-y divide-slate-800/50 font-medium">
-                            <!-- Injetado via Javascript -->
+                        <tbody id="ruasTableBody" class="divide-y divide-slate-800/50 font-medium">
+                            <!-- Injetado via JS -->
                         </tbody>
-                        <tfoot>
-                            <tr class="bg-blue-950/20 border-t-2 border-blue-900 font-bold text-xs">
-                                <td class="px-4 py-3.5 text-slate-200">Total Geral</td>
-                                <td class="px-4 py-3.5 text-right font-mono text-slate-300 text-xs" id="uiTotFamPecas">--</td>
-                                <td class="px-4 py-3.5 text-right font-mono text-slate-300 text-xs" id="uiTotFamArea">--</td>
-                                <td class="px-4 py-3.5 text-center font-mono text-blue-400 text-xs font-bold" id="uiTotFamPct">--</td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>
 
-            <!-- Coluna Direita: Estoque Bloqueado + Estoque B2B -->
-            <div class="space-y-6">
-                <!-- Estoque Bloqueado -->
-                <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
-                    <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
-                    </h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
-                                <tr>
-                                    <th class="px-4 py-3.5">Categoria</th>
-                                    <th class="px-4 py-3.5 text-right">Qtd (Vol)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bloqueadoTableBody" class="divide-y divide-slate-800/50 font-medium">
-                                <!-- Injetado via Javascript -->
-                            </tbody>
-                            <tfoot>
-                                <tr class="bg-red-950/20 border-t-2 border-red-900/50 font-bold text-xs">
-                                    <td class="px-4 py-3.5 text-slate-200">Total</td>
-                                    <td class="px-4 py-3.5 text-right text-red-400 font-mono text-xs font-bold" id="uiTotBloqueado">--</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Estoque B2B -->
-                <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 shadow-md glow-cyan flex justify-between items-center bg-gradient-to-r from-[#0f172a] to-cyan-950/20">
-                    <div>
-                        <p class="text-xs font-bold uppercase text-cyan-400 tracking-wider">Est. B2B</p>
-                        <h3 class="text-2xl font-black text-white mt-1"><span id="uiEstB2b">--</span> <span class="text-xs font-normal text-slate-400">vol</span></h3>
-                        <p class="text-[11px] text-slate-400 mt-1">Área M²: <span class="text-cyan-300 font-mono font-bold" id="uiM2B2b">--</span></p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-[10px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-1 rounded uppercase">Canal B2B</span>
-                        <p class="text-[11px] text-slate-400 mt-3">End. Ocup: <span class="text-white font-mono font-bold text-sm" id="uiEndOcupB2b">--</span></p>
-                    </div>
+            <!-- Tabela Ocupação por Família com Densidade -->
+            <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
+                <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-3.5 bg-purple-500 rounded-full inline-block"></span> 📊 Análise por Família e Densidade (un/m²)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+                            <tr>
+                                <th class="px-3 py-2.5">Família</th>
+                                <th class="px-3 py-2.5 text-center">Loc. Ocupadas</th>
+                                <th class="px-3 py-2.5 text-right">Área m² (% Armazém)</th>
+                                <th class="px-3 py-2.5 text-right">Estoque (un)</th>
+                                <th class="px-3 py-2.5 text-center">Densidade (un/m²)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="familyTableBody" class="divide-y divide-slate-800/50 font-medium">
+                            <!-- Injetado via JS -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
-        <!-- Seção Inferior: Gráfico e Dados de Referência -->
+        <!-- Bloco Inferior: Estoque Bloqueado e Gráfico -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Gráfico Visão Geral de Peças -->
+            <!-- Gráfico Visão de Peças por Família -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold text-sm text-slate-300 flex items-center gap-2">
-                        <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span>
-                        Densidade Por Família
+                        <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> Volumetria de Estoque por Família
                     </h3>
-                    <span class="text-[10px] font-bold uppercase text-slate-400 bg-slate-800/60 px-2.5 py-1 rounded border border-slate-700">Volume Total</span>
+                    <span class="text-[10px] font-bold uppercase text-slate-400 bg-slate-800/60 px-2.5 py-1 rounded border border-slate-700">Visão Geral</span>
                 </div>
                 <div class="relative h-[250px] w-full">
                     <canvas id="chartVolumetria"></canvas>
                 </div>
             </div>
 
-            <!-- Tabela Dinâmica: Dados Referência -->
-            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-purple">
-                <h3 class="font-bold text-sm tracking-wide text-purple-400 mb-4 flex items-center gap-2">
-                    📐 Dados de Referência (Infraestrutura)
+            <!-- Estoque Bloqueado -->
+            <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
+                <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold border-b border-slate-800">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
                             <tr>
-                                <th class="px-3 py-2 text-center">Pos.</th>
-                                <th class="px-3 py-2">Descrição da Região</th>
-                                <th class="px-3 py-2 text-right">Área total</th>
+                                <th class="px-4 py-3">Categoria</th>
+                                <th class="px-4 py-3 text-right">Qtd (Vol)</th>
                             </tr>
                         </thead>
-                        <tbody id="refTableBody" class="divide-y divide-slate-800/40 text-[11px]">
-                            <!-- Injetado via Javascript -->
+                        <tbody id="bloqueadoTableBody" class="divide-y divide-slate-800/50 font-medium">
+                            <!-- Injetado via JS -->
                         </tbody>
+                        <tfoot>
+                            <tr class="bg-red-950/20 border-t-2 border-red-900/50 font-bold text-xs">
+                                <td class="px-4 py-3 text-slate-200">Total</td>
+                                <td class="px-4 py-3 text-right text-red-400 font-mono font-bold" id="uiTotBloqueado">589</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -319,52 +243,54 @@
     </main>
 
     <footer class="bg-[#0f172a] border-t border-slate-800 text-slate-500 text-center py-4 text-xs tracking-wide">
-        <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento Integrado Core</p>
+        <p>© 2026 Alhandra Whirlpool Enterprise • Monitoramento PCO Integrado</p>
     </footer>
 
-    <!-- JAVASCRIPT DINÂMICO DE DADOS E NAVEGAÇÃO -->
     <script>
         Chart.register(ChartDataLabels);
         let chartInstance = null;
 
-        // BASE HISTÓRICA MULTI-DATA (08/10/2026 E 06/10/2026)
         const database = {
-            "08.10.2026": {
-                mediaGeralOcup: "72%",
-                areaTotal: "3.574",
-                areaOcupada: "2.481",
-                areaLivre: "1.093",
-                ocupAreaPct: "69%",
-                totalLocacao: 191,
-                endOcupados: 140,
-                endLivres: 51,
-                estTotal: "13.612",
-                totalSku: 143,
-                estDispR: "13.447",
-                qtdSku: 139,
-                cooktopR: "1.127",
-                cooktopSku: 9,
-                miniBinPecas: 205,
-                miniBinEnd: 7,
-                miniBinArea: "91,9",
-                miniBinSku: 38,
-                docaText: "113 PC",
-                totFamPecas: "12.064",
-                totFamArea: "2.481,15",
-                totFamPct: "64%",
-                totBloqueado: 589,
-                estB2b: 482,
-                endOcupB2b: 3,
-                m2B2b: "51,9",
-                rawDataset: [
-                    { familia: "cervejeira", pecas: 285, area: 37.45, percent: 1 },
-                    { familia: "cooktop", pecas: 1127, area: 94.73, percent: 3 },
-                    { familia: "fogão", pecas: 938, area: 330.91, percent: 9 },
-                    { familia: "forno", pecas: 665, area: 135.68, percent: 4 },
-                    { familia: "freezer", pecas: 544, area: 114.15, percent: 3 },
-                    { familia: "lavadora", pecas: 1284, area: 243.92, percent: 7 },
-                    { familia: "refrigerador", pecas: 6860, area: 1282.87, percent: 36 },
-                    { familia: "secadora", pecas: 248, area: 41.42, percent: 1 }
+            "16.10.2026": {
+                locacoes: "115 / 191",
+                locacoesPct: "60,0% Ocupado",
+                area: "2.181m² / 3.574m²",
+                areaPct: "61,0% Área Ocupada",
+                saldoEstoque: "11.033 un",
+                capacidadeNominal: "Cap. Nominal: 13.811 un (79,9%)",
+                miniBinPecas: "1.302 un",
+                miniBinLoc: "15 Posições | 230,6 m²",
+                areaLivre: "1.392,69 m²",
+                locacoesLivres: "76 Locações Livres",
+                ruas: [
+                    { rua: "RUA 01", loc: "9 / 9", area: "279,01", est: 1944 },
+                    { rua: "RUA 02", loc: "9 / 36", area: "168,60", est: 943 },
+                    { rua: "RUA 03", loc: "28 / 41", area: "500,34", est: 1996 },
+                    { rua: "RUA 04", loc: "32 / 36", area: "582,17", est: 2919 },
+                    { rua: "RUA 05", loc: "34 / 36", area: "597,09", est: 2649 },
+                    { rua: "RUA 06", loc: "3 / 33", area: "54,60", est: 582 }
+                ],
+                familias: [
+                    { familia: "REFRIGERADOR", loc: 62, area: "1.243,17", pctArea: "34.8%", est: 6672, densidade: "5.37" },
+                    { familia: "LAVADORA", loc: 12, area: "215,54", pctArea: "6.0%", est: 989, densidade: "4.59" },
+                    { familia: "FOGÃO", loc: 12, area: "211,88", pctArea: "5.9%", est: 577, densidade: "2.72" },
+                    { familia: "FREEZER", loc: 6, area: "126,86", pctArea: "3.5%", est: 425, densidade: "3.35" },
+                    { familia: "FORNO", loc: 4, area: "78,77", pctArea: "2.2%", est: 530, densidade: "6.73" },
+                    { familia: "SECADORA", loc: 2, area: "38,64", pctArea: "1.1%", est: 244, densidade: "6.31" },
+                    { familia: "CERVEJEIRA", loc: 1, area: "19,60", pctArea: "0.5%", est: 96, densidade: "4.90" },
+                    { familia: "FRIGOBAR", loc: 1, area: "16,80", pctArea: "0.5%", est: 198, densidade: "11.79" }
+                ],
+                missoes: [
+                    { id: "MIS-001", tipo: "Movimentar para Bin", sku: "BRO88AKXNA", fam: "REFRIGERADOR", orig: "R.05.B32 (8)", dest: "R.03.B27 (Pulmão)", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-002", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "BRE68AEBNA", fam: "REFRIGERADOR", orig: "R.02.B03 (5)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-003", tipo: "Saldo Crítico (<10%) -> Mini Bin", sku: "CVU20MBBNA", fam: "FREEZER", orig: "R.05.B23 (8)", dest: "Mini Bin", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-004", tipo: "Mini Bin -> Rua", sku: "CHB53MBBNA", fam: "FREEZER", orig: "R.03.B02 (1)", dest: "R.03.B10 (Pulmão)", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-005", tipo: "Consolidação Mini Bin", sku: "BRM52MKBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-006", tipo: "Consolidação Mini Bin", sku: "CRE45MBBNA", fam: "REFRIGERADOR", orig: "R.03.B02 (1)", dest: "R.03.B20 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-007", tipo: "Consolidação Mini Bin", sku: "BOB47AEBNA", fam: "FORNO", orig: "R.03.B02 (8)", dest: "R.04.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-008", tipo: "Consolidação Mini Bin", sku: "BRA08MZBNA", fam: "REFRIGERADOR", orig: "R.05.B01 (26)", dest: "R.05.B02 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-009", tipo: "Consolidação Mini Bin", sku: "BRA08MNBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (25)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" },
+                    { id: "MIS-010", tipo: "Consolidação Mini Bin", sku: "CRM40MBBNA", fam: "REFRIGERADOR", orig: "R.05.B02 (2)", dest: "R.05.B19 (Mini Bin)", zera: "Sim", status: "Concluído" }
                 ],
                 bloqueado: [
                     { cat: "Sucata", qtd: 141 },
@@ -373,65 +299,7 @@
                     { cat: "127v", qtd: 136 },
                     { cat: "Reoperação", qtd: 44 }
                 ],
-                ref: [
-                    { pos: 202, desc: "Total de Locações", area: "3.892,94 m²" },
-                    { pos: 8, desc: "Endereços Ocupados por CQ Rua 01", area: "262,41 m²" },
-                    { pos: 3, desc: "B2B", area: "56,1 m²" }
-                ]
-            },
-            "06.10.2026": {
-                mediaGeralOcup: "92%",
-                areaTotal: "2.360",
-                areaOcupada: "2.481",
-                areaLivre: "-121",
-                ocupAreaPct: "105%",
-                totalLocacao: 134,
-                endOcupados: 134,
-                endLivres: 0,
-                estTotal: "13.612",
-                totalSku: 143,
-                estDispR: "13.447",
-                qtdSku: 139,
-                cooktopR: "1.127",
-                cooktopSku: 9,
-                miniBinPecas: 205,
-                miniBinEnd: 7,
-                miniBinArea: "91,9",
-                miniBinSku: 38,
-                docaText: "113 PC",
-                totFamPecas: "12.064",
-                totFamArea: "2.481,15",
-                totFamPct: "97%",
-                totBloqueado: 589,
-                estB2b: 482,
-                endOcupB2b: 3,
-                m2B2b: "51,9",
-                rawDataset: [
-                    { familia: "cervejeira", pecas: 285, area: 37.45, percent: 2 },
-                    { familia: "cooktop", pecas: 1127, area: 94.73, percent: 4 },
-                    { familia: "fogão", pecas: 938, area: 330.91, percent: 14 },
-                    { familia: "forno", pecas: 665, area: 135.68, percent: 6 },
-                    { familia: "freezer", pecas: 544, area: 114.15, percent: 5 },
-                    { familia: "lavadora", pecas: 1284, area: 243.92, percent: 10 },
-                    { familia: "refrigerador", pecas: 6860, area: 1282.87, percent: 54 },
-                    { familia: "secadora", pecas: 248, area: 41.42, percent: 2 }
-                ],
-                bloqueado: [
-                    { cat: "Sucata", qtd: 141 },
-                    { cat: "Rio Claro", qtd: 216 },
-                    { cat: "Joinville", qtd: 52 },
-                    { cat: "127v", qtd: 136 },
-                    { cat: "Reoperação", qtd: 44 }
-                ],
-                ref: [
-                    { pos: 134, desc: "Total de Locações", area: "2.692 m²" },
-                    { pos: 6, desc: "Endereços Ocupados por CQ Rua 01", area: "196,8 m²" },
-                    { pos: 2, desc: "Mlog", area: "65,6 m²" },
-                    { pos: 1, desc: "127v", area: "17,45 m²" },
-                    { pos: 3, desc: "B2B", area: "51,9 m²" },
-                    { pos: 3, desc: "Cooktop", area: "94,73 m²" },
-                    { pos: 7, desc: "Mini Bin", area: "91,9 m²" }
-                ]
+                totBloqueado: 589
             }
         };
 
@@ -439,198 +307,130 @@
             const data = database[dataKey];
             if (!data) return;
 
-            // Atualiza Elementos Textuais Principais
-            document.getElementById('mediaGeralBadge').textContent = 'Média Geral Ocupação End.: ' + data.mediaGeralOcup;
-            document.getElementById('uiAreaTotal').textContent = data.areaTotal;
-            document.getElementById('uiAreaOcupada').textContent = data.areaOcupada;
-            document.getElementById('uiAreaLivre').textContent = data.areaLivre;
-            document.getElementById('uiOcupAreaPct').textContent = data.ocupAreaPct;
-            document.getElementById('uiTotalLocacao').textContent = data.totalLocacao;
-            document.getElementById('uiEndOcupados').textContent = data.endOcupados;
-            document.getElementById('uiEndLivres').textContent = data.endLivres;
-
-            document.getElementById('uiEstTotal').textContent = data.estTotal;
-            document.getElementById('uiTotalSku').textContent = data.totalSku;
-            document.getElementById('uiEstDispR').textContent = data.estDispR;
-            document.getElementById('uiQtdSku').textContent = data.qtdSku;
-            document.getElementById('uiCooktopR').textContent = data.cooktopR;
-            document.getElementById('uiCooktopSku').textContent = data.cooktopSku;
-
+            document.getElementById('uiLocacoes').textContent = data.locacoes;
+            document.getElementById('uiLocacoesPct').textContent = data.locacoesPct;
+            document.getElementById('uiArea').textContent = data.area;
+            document.getElementById('uiAreaPct').textContent = data.areaPct;
+            document.getElementById('uiSaldoEstoque').textContent = data.saldoEstoque;
+            document.getElementById('uiCapacidadeNominal').textContent = data.capacidadeNominal;
             document.getElementById('uiMiniBinPecas').textContent = data.miniBinPecas;
-            document.getElementById('uiMiniBinEnd').textContent = data.miniBinEnd;
-            document.getElementById('uiMiniBinArea').textContent = data.miniBinArea;
-            document.getElementById('uiMiniBinSku').textContent = data.miniBinSku;
-
-            document.getElementById('uiDocaText').textContent = data.docaText;
-
-            document.getElementById('uiTotFamPecas').textContent = data.totFamPecas;
-            document.getElementById('uiTotFamArea').textContent = data.totFamArea;
-            document.getElementById('uiTotFamPct').textContent = data.totFamPct;
-
+            document.getElementById('uiMiniBinLoc').textContent = data.miniBinLoc;
+            document.getElementById('uiAreaLivre').textContent = data.areaLivre;
+            document.getElementById('uiLocacoesLivres').textContent = data.locacoesLivres;
             document.getElementById('uiTotBloqueado').textContent = data.totBloqueado;
-            document.getElementById('uiEstB2b').textContent = data.estB2b;
-            document.getElementById('uiEndOcupB2b').textContent = data.endOcupB2b;
-            document.getElementById('uiM2B2b').textContent = data.m2B2b;
 
-            // Tabela Ocupação Família (Ordenada por percentual decrescente)
-            const sortedFamilies = [...data.rawDataset].sort((a, b) => b.percent - a.percent);
+            // Renderiza Ruas
+            const ruasBody = document.getElementById('ruasTableBody');
+            ruasBody.innerHTML = '';
+            data.ruas.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/20";
+                tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-blue-400">${r.rua}</td>
+                                <td class="px-3 py-2.5 text-center font-mono">${r.loc}</td>
+                                <td class="px-3 py-2.5 text-right font-mono">${r.area}</td>
+                                <td class="px-3 py-2.5 text-right font-mono text-emerald-400 font-bold">${r.est.toLocaleString('pt-BR')}</td>`;
+                ruasBody.appendChild(tr);
+            });
+
+            // Renderiza Missões
+            const missoesBody = document.getElementById('missoesTableBody');
+            missoesBody.innerHTML = '';
+            data.missoes.forEach(m => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/20";
+                tr.innerHTML = `<td class="px-3 py-2 font-mono font-bold text-blue-400">${m.id}</td>
+                                <td class="px-3 py-2 text-slate-300">${m.tipo}</td>
+                                <td class="px-3 py-2 font-mono text-white"><strong>${m.sku}</strong> <span class="text-[10px] text-slate-500">(${m.fam})</span></td>
+                                <td class="px-3 py-2 text-center font-mono text-amber-400">${m.orig}</td>
+                                <td class="px-3 py-2 text-center font-mono text-emerald-400">${m.dest}</td>
+                                <td class="px-3 py-2 text-center"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono font-bold text-[10px]">${m.zera}</span></td>
+                                <td class="px-3 py-2 text-center"><span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-mono font-bold text-[10px]">${m.status}</span></td>`;
+                missoesBody.appendChild(tr);
+            });
+
+            // Renderiza Famílias
             const familyBody = document.getElementById('familyTableBody');
             const marquee = document.getElementById('tickerMarquee');
             familyBody.innerHTML = '';
             marquee.innerHTML = '';
 
-            const tickerData = [...sortedFamilies, ...sortedFamilies, ...sortedFamilies];
-            tickerData.forEach(function(item) {
+            const tickerData = [...data.familias, ...data.familias];
+            tickerData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = "ticker__item";
-                const colorClass = item.percent >= 30 ? "text-red-400" : "text-emerald-400";
-                div.innerHTML = '<span class="text-white font-black">' + item.familia.toUpperCase() + '</span>' +
-                                '<span class="text-blue-400 font-mono ml-2 font-bold text-sm">' + item.pecas.toLocaleString('pt-BR') + '</span>' +
-                                '<span class="text-slate-600 mx-2">|</span>' +
-                                '<span class="' + colorClass + ' font-mono font-bold text-base">' + item.percent + '%</span>';
+                div.innerHTML = `<span class="text-white font-black">${item.familia}</span>
+                                 <span class="text-blue-400 font-mono ml-2">${item.est.toLocaleString('pt-BR')} un</span>
+                                 <span class="text-slate-600 mx-2">|</span>
+                                 <span class="text-emerald-400 font-mono">${item.densidade} un/m²</span>`;
                 marquee.appendChild(div);
             });
 
-            sortedFamilies.forEach(function(item) {
+            data.familias.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/20 transition-colors border-b border-slate-800/50";
-                const barColor = item.percent >= 30 ? "bg-gradient-to-r from-red-500 to-amber-500" : "bg-gradient-to-r from-blue-500 to-indigo-500";
-                tr.innerHTML = '<td class="px-4 py-3.5 capitalize font-black text-slate-200 text-sm">' + item.familia + '</td>' +
-                               '<td class="px-4 py-3.5 text-right font-mono text-slate-300">' + item.pecas.toLocaleString('pt-BR') + '</td>' +
-                               '<td class="px-4 py-3.5 text-right font-mono text-slate-300">' + item.area.toLocaleString('pt-BR', {minimumFractionDigits: 2}) + '</td>' +
-                               '<td class="px-4 py-3.5">' +
-                               '    <div class="flex items-center gap-3 justify-center">' +
-                               '        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden hidden sm:block">' +
-                               '            <div class="' + barColor + ' h-2 rounded-full" style="width: ' + (item.percent * 2) + '%"></div>' +
-                               '        </div>' +
-                               '        <span class="inline-block px-2 py-0.5 rounded bg-[#0b0f19] border border-slate-800 text-blue-400 font-mono text-[11px] font-bold min-w-[40px] text-center">' + item.percent + '%</span>' +
-                               '    </div>' +
-                               '</td>';
+                tr.className = "hover:bg-slate-800/20 border-b border-slate-800/50";
+                tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-slate-200 text-xs">${item.familia}</td>
+                                <td class="px-3 py-2.5 text-center font-mono text-slate-300">${item.loc}</td>
+                                <td class="px-3 py-2.5 text-right font-mono text-slate-300">${item.area} <span class="text-slate-500 text-[10px]">(${item.pctArea})</span></td>
+                                <td class="px-3 py-2.5 text-right font-mono font-bold text-blue-400">${item.est.toLocaleString('pt-BR')}</td>
+                                <td class="px-3 py-2.5 text-center"><span class="bg-purple-500/10 border border-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-mono font-bold">${item.densidade}</span></td>`;
                 familyBody.appendChild(tr);
             });
 
-            // Tabela Estoque Bloqueado
+            // Renderiza Bloqueados
             const bloqueadoBody = document.getElementById('bloqueadoTableBody');
             bloqueadoBody.innerHTML = '';
-            data.bloqueado.forEach(function(b) {
+            data.bloqueado.forEach(b => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-800/20";
-                tr.innerHTML = '<td class="px-4 py-3 capitalize font-bold text-slate-200">' + b.cat + '</td>' +
-                               '<td class="px-4 py-3 text-right text-red-400 font-mono text-xs">' + b.qtd + '</td>';
+                tr.innerHTML = `<td class="px-4 py-2.5 font-bold text-slate-200">${b.cat}</td>
+                                <td class="px-4 py-2.5 text-right text-red-400 font-mono">${b.qtd}</td>`;
                 bloqueadoBody.appendChild(tr);
             });
 
-            // Tabela Referência
-            const refBody = document.getElementById('refTableBody');
-            refBody.innerHTML = '';
-            data.ref.forEach(function(r, idx) {
-                const tr = document.createElement('tr');
-                tr.className = idx === 0 ? "hover:bg-slate-800/20 bg-purple-950/10" : "hover:bg-slate-800/20";
-                tr.innerHTML = '<td class="px-3 py-2 text-center font-bold font-mono text-purple-400">' + r.pos + '</td>' +
-                               '<td class="px-3 py-2 text-slate-300">' + r.desc + '</td>' +
-                               '<td class="px-3 py-2 text-right font-mono font-bold text-purple-200">' + r.area + '</td>';
-                refBody.appendChild(tr);
-            });
-
-            // Gráfico
-            renderizarGrafico(sortedFamilies);
+            renderizarGrafico(data.familias);
         }
 
         function renderizarGrafico(dataset) {
             const canvasVol = document.getElementById('chartVolumetria');
             if (!canvasVol) return;
-
             const ctxVol = canvasVol.getContext('2d');
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
-
-            const bgGradients = dataset.map(function(item) {
-                if (item.pecas >= 3000) {
-                    const g = ctxVol.createLinearGradient(0, 0, 0, 250);
-                    g.addColorStop(0, 'rgba(6, 182, 212, 0.9)');
-                    g.addColorStop(1, 'rgba(59, 130, 246, 0.2)');
-                    return g;
-                } else if (item.pecas >= 1000) {
-                    const g = ctxVol.createLinearGradient(0, 0, 0, 250);
-                    g.addColorStop(0, 'rgba(59, 130, 246, 0.85)');
-                    g.addColorStop(1, 'rgba(30, 58, 138, 0.2)');
-                    return g;
-                } else {
-                    const g = ctxVol.createLinearGradient(0, 0, 0, 250);
-                    g.addColorStop(0, 'rgba(99, 102, 241, 0.7)');
-                    g.addColorStop(1, 'rgba(30, 41, 59, 0.2)');
-                    return g;
-                }
-            });
-
-            const borderColors = dataset.map(function(item) {
-                if (item.pecas >= 3000) return '#06b6d4';
-                if (item.pecas >= 1000) return '#3b82f6';
-                return '#6366f1';
-            });
+            if (chartInstance) chartInstance.destroy();
 
             chartInstance = new Chart(ctxVol, {
                 type: 'bar',
                 data: {
-                    labels: dataset.map(function(item) { return item.familia.toUpperCase(); }),
+                    labels: dataset.map(item => item.familia),
                     datasets: [{
-                        label: 'Quantidade de Peças',
-                        data: dataset.map(function(item) { return item.pecas; }),
-                        backgroundColor: bgGradients,
-                        borderColor: borderColors,
+                        label: 'Unidades em Estoque',
+                        data: dataset.map(item => item.est),
+                        backgroundColor: 'rgba(59, 130, 246, 0.75)',
+                        borderColor: '#3b82f6',
                         borderWidth: 1.5,
-                        borderRadius: 8,
-                        borderSkipped: false,
-                        barThickness: 32
+                        borderRadius: 6
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    layout: { padding: { top: 25 } },
-                    plugins: { 
+                    plugins: {
                         legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#0f172a',
-                            titleColor: '#f8fafc',
-                            bodyColor: '#38bdf8',
-                            borderColor: '#334155',
-                            borderWidth: 1,
-                            padding: 10,
-                            displayColors: false,
-                            callbacks: {
-                                label: function(context) { return 'Total: ' + context.parsed.y.toLocaleString('pt-BR') + ' peças'; }
-                            }
-                        },
                         datalabels: {
                             anchor: 'end',
                             align: 'top',
-                            color: function(context) {
-                                const val = context.dataset.data[context.dataIndex];
-                                return val >= 3000 ? '#22d3ee' : '#cbd5e1';
-                            },
-                            font: { family: 'ui-monospace, monospace', weight: 'bold', size: 11 },
-                            formatter: function(value) { return value.toLocaleString('pt-BR'); }
+                            color: '#38bdf8',
+                            font: { family: 'monospace', weight: 'bold', size: 10 },
+                            formatter: val => val.toLocaleString('pt-BR')
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#94a3b8', font: { weight: 'bold', size: 10 } }, grid: { display: false } },
-                        y: { 
-                            ticks: { color: '#64748b', font: { size: 10 }, callback: function(value) { return value.toLocaleString('pt-BR'); } }, 
-                            grid: { display: false },
-                            border: { display: false },
-                            grace: '15%'
-                        }
+                        x: { ticks: { color: '#94a3b8', font: { size: 9, weight: 'bold' } }, grid: { display: false } },
+                        y: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { display: false } }
                     }
                 }
             });
         }
 
-        // Inicialização com a data mais recente
-        document.addEventListener('DOMContentLoaded', function() {
-            trocarData("08.10.2026");
-        });
+        document.addEventListener('DOMContentLoaded', () => trocarData("16.10.2026"));
     </script>
 </body>
 </html>
