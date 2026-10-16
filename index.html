@@ -29,6 +29,13 @@
             font-family: 'JetBrains Mono', 'Product Sans Mono', 'Google Sans Mono', monospace !important;
         }
 
+        /* Remoção Total de Bordas de Tabelas */
+        table, th, td, tr, thead, tbody, tfoot {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
@@ -127,14 +134,14 @@
         <!-- Bloco Ocupação Por Ruas e Por Família -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Tabela Ocupação por Rua -->
+            <!-- Tabela Ocupação por Rua (Sem linhas de grade) -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> 📍 Ocupação Física por Rua
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
                             <tr>
                                 <th class="px-3 py-2.5">Rua</th>
                                 <th class="px-3 py-2.5 text-center">Locações</th>
@@ -142,21 +149,21 @@
                                 <th class="px-3 py-2.5 text-right">Estoque (un)</th>
                             </tr>
                         </thead>
-                        <tbody id="ruasTableBody" class="divide-y divide-slate-800/50 font-medium">
+                        <tbody id="ruasTableBody" class="font-medium">
                             <!-- Injetado via JS -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Tabela Ocupação por Família com Densidade -->
+            <!-- Tabela Ocupação por Família (Sem linhas de grade) -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md">
                 <h3 class="font-bold text-sm tracking-wide text-slate-300 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-purple-500 rounded-full inline-block"></span> 📊 Análise por Família e Densidade (un/m²)
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
                             <tr>
                                 <th class="px-3 py-2.5">Família</th>
                                 <th class="px-3 py-2.5 text-center">Loc. Ocupadas</th>
@@ -165,7 +172,7 @@
                                 <th class="px-3 py-2.5 text-center">Densidade (un/m²)</th>
                             </tr>
                         </thead>
-                        <tbody id="familyTableBody" class="divide-y divide-slate-800/50 font-medium">
+                        <tbody id="familyTableBody" class="font-medium">
                             <!-- Injetado via JS -->
                         </tbody>
                     </table>
@@ -173,7 +180,7 @@
             </div>
         </section>
 
-        <!-- Bloco Intermediário: Estoque Bloqueado e Gráfico Horizontal Ajustado -->
+        <!-- Bloco Intermediário: Estoque Bloqueado e Gráfico Horizontal -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Gráfico Horizontal Comparativo: Estoque por Família -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
@@ -191,24 +198,24 @@
                 </div>
             </div>
 
-            <!-- Estoque Bloqueado -->
+            <!-- Estoque Bloqueado (Sem linhas de grade) -->
             <div class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md glow-red">
                 <h3 class="font-bold text-sm tracking-wide text-red-400 mb-4 flex items-center gap-2">
                     <span class="w-1.5 h-3.5 bg-red-500 rounded-full inline-block"></span> Estoque Bloqueado
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold border-b border-slate-800">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase tracking-wider font-bold">
                             <tr>
                                 <th class="px-4 py-3">Categoria</th>
                                 <th class="px-4 py-3 text-right">Qtd (Vol)</th>
                             </tr>
                         </thead>
-                        <tbody id="bloqueadoTableBody" class="divide-y divide-slate-800/50 font-medium">
+                        <tbody id="bloqueadoTableBody" class="font-medium">
                             <!-- Injetado via JS -->
                         </tbody>
                         <tfoot>
-                            <tr class="bg-red-950/20 border-t-2 border-red-900/50 font-bold text-xs">
+                            <tr class="bg-red-950/20 font-bold text-xs">
                                 <td class="px-4 py-3 text-slate-200">Total</td>
                                 <td class="px-4 py-3 text-right text-red-400 font-mono font-bold" id="uiTotBloqueado">589</td>
                             </tr>
@@ -218,7 +225,7 @@
             </div>
         </section>
 
-        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO -->
+        <!-- PARTE INFERIOR: MISSÕES DE OTIMIZAÇÃO (Sem linhas de grade) -->
         <section class="bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-lg">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                 <div>
@@ -235,7 +242,7 @@
 
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs text-slate-300">
-                    <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold border-b border-slate-800">
+                    <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
                         <tr>
                             <th class="px-3 py-2.5">ID</th>
                             <th class="px-3 py-2.5">Tipo de Missão</th>
@@ -246,7 +253,7 @@
                             <th class="px-3 py-2.5 text-center">Status</th>
                         </tr>
                     </thead>
-                    <tbody id="missoesTableBody" class="divide-y divide-slate-800/50 font-medium">
+                    <tbody id="missoesTableBody" class="font-medium">
                         <!-- JS Injeta Missões -->
                     </tbody>
                 </table>
@@ -337,7 +344,7 @@
             ruasBody.innerHTML = '';
             data.ruas.forEach(r => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/20";
+                tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-blue-400">${r.rua}</td>
                                 <td class="px-3 py-2.5 text-center font-mono">${r.loc}</td>
                                 <td class="px-3 py-2.5 text-right font-mono">${r.area}</td>
@@ -350,7 +357,7 @@
             missoesBody.innerHTML = '';
             data.missoes.forEach(m => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/20";
+                tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-3 py-2 font-mono font-bold text-blue-400">${m.id}</td>
                                 <td class="px-3 py-2 text-slate-300">${m.tipo}</td>
                                 <td class="px-3 py-2 font-mono text-white"><strong>${m.sku}</strong> <span class="text-[10px] text-slate-500">(${m.fam})</span></td>
@@ -380,7 +387,7 @@
 
             data.familias.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/20 border-b border-slate-800/50";
+                tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-3 py-2.5 font-bold text-slate-200 text-xs">${item.familia}</td>
                                 <td class="px-3 py-2.5 text-center font-mono text-slate-300">${item.loc}</td>
                                 <td class="px-3 py-2.5 text-right font-mono text-slate-300">${item.area} <span class="text-slate-500 text-[10px]">(${item.pctArea})</span></td>
@@ -394,7 +401,7 @@
             bloqueadoBody.innerHTML = '';
             data.bloqueado.forEach(b => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/20";
+                tr.className = "hover:bg-slate-800/30";
                 tr.innerHTML = `<td class="px-4 py-2.5 font-bold text-slate-200">${b.cat}</td>
                                 <td class="px-4 py-2.5 text-right text-red-400 font-mono">${b.qtd}</td>`;
                 bloqueadoBody.appendChild(tr);
