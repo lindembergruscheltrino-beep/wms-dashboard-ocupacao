@@ -90,7 +90,7 @@
 
     <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Métricas PCO Globais (Horizontal Ajustado) -->
+        <!-- Métricas PCO Globais (Horizontal) -->
         <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
             <div class="bg-[#0f172a] p-3.5 rounded-xl text-center glow-blue flex flex-col justify-between">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Locações (Ocup / Total)</p>
@@ -173,17 +173,20 @@
             </div>
         </section>
 
-        <!-- Bloco Intermediário: Estoque Bloqueado e Gráfico -->
+        <!-- Bloco Intermediário: Estoque Bloqueado e Gráfico Horizontal Ajustado -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Gráfico Visão de Peças por Família -->
+            <!-- Gráfico Horizontal Comparativo: Estoque por Família -->
             <div class="lg:col-span-2 bg-[#0f172a] p-5 rounded-xl border border-slate-800 shadow-md flex flex-col justify-between">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold text-sm text-slate-300 flex items-center gap-2">
-                        <span class="w-1.5 h-3.5 bg-blue-500 rounded-full inline-block"></span> Volumetria de Estoque por Família
+                        <span class="w-1.5 h-3.5 bg-cyan-400 rounded-full inline-block"></span> Estoque por Família
                     </h3>
-                    <span class="text-[10px] font-bold uppercase text-slate-400 bg-slate-800/60 px-2.5 py-1 rounded border border-slate-700">Visão Geral</span>
+                    <div class="flex items-center gap-4 text-[10px] font-mono">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-cyan-400 rounded-sm"></span> Saldo Estocado</span>
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-purple-500 rounded-sm"></span> Cap. Nominal</span>
+                    </div>
                 </div>
-                <div class="relative h-[250px] w-full">
+                <div class="relative h-[320px] w-full">
                     <canvas id="chartVolumetria"></canvas>
                 </div>
             </div>
@@ -281,14 +284,14 @@
                     { rua: "RUA 06", loc: "3 / 33", area: "54,60", est: 582 }
                 ],
                 familias: [
-                    { familia: "REFRIGERADOR", loc: 62, area: "1.243,17", pctArea: "34.8%", est: 6672, densidade: "5.37" },
-                    { familia: "LAVADORA", loc: 12, area: "215,54", pctArea: "6.0%", est: 989, densidade: "4.59" },
-                    { familia: "FOGÃO", loc: 12, area: "211,88", pctArea: "5.9%", est: 577, densidade: "2.72" },
-                    { familia: "FREEZER", loc: 6, area: "126,86", pctArea: "3.5%", est: 425, densidade: "3.35" },
-                    { familia: "FORNO", loc: 4, area: "78,77", pctArea: "2.2%", est: 530, densidade: "6.73" },
-                    { familia: "SECADORA", loc: 2, area: "38,64", pctArea: "1.1%", est: 244, densidade: "6.31" },
-                    { familia: "CERVEJEIRA", loc: 1, area: "19,60", pctArea: "0.5%", est: 96, densidade: "4.90" },
-                    { familia: "FRIGOBAR", loc: 1, area: "16,80", pctArea: "0.5%", est: 198, densidade: "11.79" }
+                    { familia: "REFRIGERADOR", loc: 62, area: "1.243,17", pctArea: "34.8%", est: 6672, cap: 8285, densidade: "5.37" },
+                    { familia: "LAVADORA", loc: 12, area: "215,54", pctArea: "6.0%", est: 989, cap: 1996, densidade: "4.59" },
+                    { familia: "FOGÃO", loc: 12, area: "211,88", pctArea: "5.9%", est: 577, cap: 1408, densidade: "2.72" },
+                    { familia: "FORNO", loc: 4, area: "78,77", pctArea: "2.2%", est: 530, cap: 720, densidade: "6.73" },
+                    { familia: "FREEZER", loc: 6, area: "126,86", pctArea: "3.5%", est: 425, cap: 706, densidade: "3.35" },
+                    { familia: "SECADORA", loc: 2, area: "38,64", pctArea: "1.1%", est: 244, cap: 288, densidade: "6.31" },
+                    { familia: "FRIGOBAR", loc: 1, area: "16,80", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
+                    { familia: "CERVEJEIRA", loc: 1, area: "19,60", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" }
                 ],
                 missoes: [
                     { id: "MIS-001", tipo: "Movimentar para Bin", sku: "BRO88AKXNA", fam: "REFRIGERADOR", orig: "R.05.B32 (8)", dest: "R.03.B27 (Pulmão)", zera: "Sim", status: "Concluído" },
@@ -397,10 +400,10 @@
                 bloqueadoBody.appendChild(tr);
             });
 
-            renderizarGrafico(data.familias);
+            renderizarGraficoHorizontal(data.familias);
         }
 
-        function renderizarGrafico(dataset) {
+        function renderizarGraficoHorizontal(dataset) {
             const canvasVol = document.getElementById('chartVolumetria');
             if (!canvasVol) return;
             const ctxVol = canvasVol.getContext('2d');
@@ -410,31 +413,47 @@
                 type: 'bar',
                 data: {
                     labels: dataset.map(item => item.familia),
-                    datasets: [{
-                        label: 'Unidades em Estoque',
-                        data: dataset.map(item => item.est),
-                        backgroundColor: 'rgba(59, 130, 246, 0.75)',
-                        borderColor: '#3b82f6',
-                        borderWidth: 1.5,
-                        borderRadius: 6
-                    }]
+                    datasets: [
+                        {
+                            label: 'Saldo Estocado',
+                            data: dataset.map(item => item.est),
+                            backgroundColor: '#06b6d4',
+                            borderRadius: 4,
+                            barThickness: 10
+                        },
+                        {
+                            label: 'Capacidade Nominal',
+                            data: dataset.map(item => item.cap),
+                            backgroundColor: '#a855f7',
+                            borderRadius: 4,
+                            barThickness: 10
+                        }
+                    ]
                 },
                 options: {
+                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
                         datalabels: {
                             anchor: 'end',
-                            align: 'top',
-                            color: '#38bdf8',
-                            font: { family: 'monospace', weight: 'bold', size: 10 },
+                            align: 'right',
+                            color: '#e2e8f0',
+                            font: { family: 'JetBrains Mono', weight: 'bold', size: 9 },
                             formatter: val => val.toLocaleString('pt-BR')
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#94a3b8', font: { size: 9, weight: 'bold' } }, grid: { display: false } },
-                        y: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { display: false } }
+                        x: { 
+                            ticks: { color: '#64748b', font: { size: 9 } }, 
+                            grid: { display: false },
+                            grace: '15%'
+                        },
+                        y: { 
+                            ticks: { color: '#94a3b8', font: { size: 10, weight: 'bold' } }, 
+                            grid: { display: false } 
+                        }
                     }
                 }
             });
