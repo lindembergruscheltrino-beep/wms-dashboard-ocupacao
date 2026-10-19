@@ -62,7 +62,7 @@
 </head>
 <body class="flex flex-col h-screen overflow-hidden antialiased">
 
-    <!-- HEADER COM MARGEM DE SEGURANÇA SUPERIOR PARA EVITAR CORTE NA MOLDURA DA TV -->
+    <!-- HEADER COM MARGEM DE SEGURANÇA SUPERIOR PARA MOLDURA DA TV -->
     <header class="bg-[#0f172a] border-b border-slate-800 text-white px-4 pt-2.5 pb-1 flex justify-between items-center shrink-0">
         <div class="flex items-center gap-2">
             <div class="px-2 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">PCO</div>
@@ -88,7 +88,7 @@
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <!-- PAINEL PRINCIPAL GRID 2x2 COM COMPENSAÇÃO DAS MOLDURAS DA TV -->
+    <!-- PAINEL PRINCIPAL GRID 2x2 AJUSTADO PARA TVS -->
     <main class="p-3 gap-x-4 gap-y-3 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
 
         <!-- QUADRANTE 1 (SUPERIOR ESQUERDO / TV 1) -->
@@ -127,7 +127,7 @@
                 </div>
             </div>
 
-            <!-- Tabela Saturação de Ruas (Com recuo inferior para não encostar na fresta da TV) -->
+            <!-- Tabela Saturação de Ruas -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col overflow-hidden pb-1">
                 <div class="flex justify-between items-center mb-1 shrink-0">
                     <h3 class="font-bold text-[10px] text-slate-300 flex items-center gap-1">
@@ -192,10 +192,10 @@
             </div>
         </div>
 
-        <!-- QUADRANTE 4 (INFERIOR DIREITO / TV 4) -->
+        <!-- QUADRANTE 4 (INFERIOR DIREITO / TV 4): BLOQUEADOS + NOVOS KPIS DE MOVIMENTAÇÃO & NEXT DAY -->
         <div class="grid grid-cols-12 gap-2 overflow-hidden pl-1 pt-1">
             
-            <!-- Estoque Bloqueado -->
+            <!-- Estoque Bloqueado (4 colunas) -->
             <div class="col-span-4 bg-[#0f172a] p-2 rounded-xl border border-slate-800 glow-red flex flex-col justify-between overflow-hidden">
                 <div>
                     <div class="flex justify-between items-center mb-1">
@@ -217,32 +217,57 @@
                 </div>
             </div>
 
-            <!-- Missões de Otimização -->
-            <div class="col-span-8 bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col overflow-hidden">
-                <div class="flex justify-between items-center mb-1 shrink-0">
-                    <h3 class="font-bold text-[10px] text-emerald-400 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Missões de Otimização
-                    </h3>
-                    <div class="flex items-center gap-1 text-[8px]">
-                        <span class="bg-emerald-500/10 text-emerald-400 px-1 py-0.2 rounded font-bold">10 Lib.</span>
-                        <span class="bg-blue-500/10 text-blue-400 px-1 py-0.2 rounded font-bold">85 Mov.</span>
+            <!-- NOVOS INDICADORES DE FLUXO & KPIS DE ENTREGA (8 colunas) -->
+            <div class="col-span-8 grid grid-rows-2 gap-1.5 overflow-hidden">
+                
+                <!-- Bloco Recebimento x Expedição (Média Diária & Mês) -->
+                <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-[10px] text-cyan-400 flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> Movimentação de Estoque (Mês)
+                        </h3>
+                        <span class="text-[8px] text-slate-400 font-mono">Média Diária</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-center my-1">
+                        <div class="bg-[#0b0f19] p-1 rounded border border-emerald-500/20">
+                            <p class="text-[7.5px] font-bold text-slate-400 uppercase">Recebimento (In)</p>
+                            <p class="text-[11px] font-black text-emerald-400 mt-0.5">16.125 <span class="text-[7.5px] font-normal text-slate-400">un</span></p>
+                            <p class="text-[7.5px] text-emerald-300 font-mono">701 un/dia</p>
+                        </div>
+                        <div class="bg-[#0b0f19] p-1 rounded border border-blue-500/20">
+                            <p class="text-[7.5px] font-bold text-slate-400 uppercase">Expedição (Out)</p>
+                            <p class="text-[11px] font-black text-blue-400 mt-0.5">14.665 <span class="text-[7.5px] font-normal text-slate-400">un</span></p>
+                            <p class="text-[7.5px] text-blue-300 font-mono">611 un/dia</p>
+                        </div>
                     </div>
                 </div>
-                <div class="overflow-hidden flex-1">
-                    <table class="w-full text-left text-[8px] text-slate-300">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
-                            <tr>
-                                <th class="px-1 py-0.5">ID</th>
-                                <th class="px-1 py-0.5">Missão</th>
-                                <th class="px-1 py-0.5">SKU</th>
-                                <th class="px-1 py-0.5 text-center">Orig.</th>
-                                <th class="px-1 py-0.5 text-center">Dest.</th>
-                                <th class="px-1 py-0.5 text-center">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="missoesTableBody" class="font-medium"></tbody>
-                    </table>
+
+                <!-- Bloco KPIs Next Day & Entregas -->
+                <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-[10px] text-amber-400 flex items-center gap-1">
+                            ⭐ Performance Next Day
+                        </h3>
+                        <span class="bg-amber-500/10 text-amber-300 border border-amber-500/30 px-1.5 py-0.2 rounded text-[8px] font-bold">
+                            4,75 ★ (125 av.)
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-1.5 text-center mt-1">
+                        <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
+                            <p class="text-[7px] text-slate-400 uppercase">Programadas</p>
+                            <p class="text-[10px] font-bold text-white">915 rotas</p>
+                        </div>
+                        <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
+                            <p class="text-[7px] text-slate-400 uppercase">1ª Tentativa</p>
+                            <p class="text-[10px] font-bold text-emerald-400">786 (85,9%)</p>
+                        </div>
+                        <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
+                            <p class="text-[7px] text-slate-400 uppercase">Top Driver</p>
+                            <p class="text-[10px] font-bold text-amber-400">Cleiton (4.89)</p>
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -283,16 +308,6 @@
                 { familia: "FRIGOBAR", loc: 1, area: "16m²", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
                 { familia: "CERVEJEIRA", loc: 1, area: "19m²", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" }
             ],
-            missoes: [
-                { id: "MIS-001", tipo: "Mov. Bin", sku: "BRO88A", orig: "R.05 (8)", dest: "R.03 (Pulmão)", status: "Concluído" },
-                { id: "MIS-002", tipo: "Crit. -> Bin", sku: "BRE68A", orig: "R.02 (5)", dest: "Mini Bin", status: "Concluído" },
-                { id: "MIS-003", tipo: "Crit. -> Bin", sku: "CVU20M", orig: "R.05 (8)", dest: "Mini Bin", status: "Concluído" },
-                { id: "MIS-004", tipo: "Bin -> Rua", sku: "CHB53M", orig: "R.03 (1)", dest: "R.03 (Pulmão)", status: "Concluído" },
-                { id: "MIS-005", tipo: "Consolid. Bin", sku: "BRM52M", orig: "R.03 (1)", dest: "R.03 (Mini Bin)", status: "Concluído" },
-                { id: "MIS-006", tipo: "Consolid. Bin", sku: "CRE45M", orig: "R.03 (1)", dest: "R.03 (Mini Bin)", status: "Concluído" },
-                { id: "MIS-007", tipo: "Consolid. Bin", sku: "BOB47A", orig: "R.03 (8)", dest: "R.04 (Mini Bin)", status: "Concluído" },
-                { id: "MIS-008", tipo: "Consolid. Bin", sku: "BRA08M", orig: "R.05 (26)", dest: "R.05 (Mini Bin)", status: "Concluído" }
-            ],
             bloqueado: [
                 { cat: "Sucata", qtd: 141 },
                 { cat: "Rio Claro", qtd: 216 },
@@ -326,25 +341,11 @@
                                         <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
                                             <div class="${barColor} h-1.5 rounded-full" style="width: ${r.pct}%"></div>
                                         </div>
-                                        <span class="text-[8px] font-bold text-slate-300 min-w-[22px] text-right">${r.pct}%</span>
+                                        <span class="text-[8.5px] font-bold text-slate-300 min-w-[24px] text-right">${r.pct}%</span>
                                     </div>
                                 </td>
                                 <td class="px-1.5 py-0.5 text-right font-bold text-emerald-400">${r.est.toLocaleString('pt-BR')}</td>`;
                 ruasBody.appendChild(tr);
-            });
-
-            // Missões Operacionais
-            const missoesBody = document.getElementById('missoesTableBody');
-            missoesBody.innerHTML = '';
-            currentData.missoes.forEach(m => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td class="px-1 py-0.2 font-bold text-blue-400">${m.id}</td>
-                                <td class="px-1 py-0.2 text-slate-300 truncate">${m.tipo}</td>
-                                <td class="px-1 py-0.2 text-white font-bold">${m.sku}</td>
-                                <td class="px-1 py-0.2 text-center text-amber-400">${m.orig}</td>
-                                <td class="px-1 py-0.2 text-center text-emerald-400">${m.dest}</td>
-                                <td class="px-1 py-0.2 text-center"><span class="bg-blue-500/20 text-blue-400 px-1 py-0.2 rounded font-bold">${m.status}</span></td>`;
-                missoesBody.appendChild(tr);
             });
 
             // Famílias
