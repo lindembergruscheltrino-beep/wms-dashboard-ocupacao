@@ -80,16 +80,15 @@
         </div>
     </header>
 
-    <!-- MARQUEE REFINADO -->
+    <!-- MARQUEE -->
     <div class="ticker-wrap shrink-0">
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <!-- MAIN GRID 2x2 - UMA PÁGINA POR TV COM MARGENS AJUSTADAS -->
+    <!-- MAIN GRID 2x2 - UMA PÁGINA POR TV -->
     <main class="p-2.5 gap-x-4 gap-y-3 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
 
         <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
-        <!-- ESTOQUE GERAL - CAPACIDADE & RUAS -->
         <div class="flex flex-col gap-1 overflow-hidden pr-1 pb-2">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
                 <h2 class="text-[9.5px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1">
@@ -142,10 +141,9 @@
         </div>
 
         <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
-        <!-- ESTOQUE GERAL - FAMÍLIAS, MINI BIN & GIRO -->
         <div class="flex flex-col gap-1 overflow-hidden pl-1 pb-2">
             <div class="flex justify-between items-center shrink-0 mb-1">
-                <h2 class="text-[10px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+                <h2 class="text-[9.5px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> TV 02: Estoque Geral - Famílias & Densidade
                 </h2>
                 <span class="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded text-[8px] font-bold">
@@ -153,7 +151,6 @@
                 </span>
             </div>
 
-            <!-- Tabela Ocupação por Família Ocupando Tela Cheia da TV 02 -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col overflow-hidden">
                 <div class="overflow-hidden flex-1">
                     <table class="w-full text-left text-[9px] text-slate-300 h-full">
@@ -174,7 +171,7 @@
         </div>
 
         <!-- ==================== TV 03 (INFERIOR ESQUERDA) ==================== -->
-        <!-- PÁGINA "ESTOQUE" (BLOQUEADO & B2B) + PÁGINA "NEXT DAY" (KPIS DE ENTREGA) -->
+        <!-- PÁGINA "ESTOQUE" + "NEXT DAY" (COM DESVIOS E MOTIVOS) -->
         <div class="grid grid-cols-2 gap-2 overflow-hidden pr-1 pt-2">
             
             <!-- Estoque Bloqueado + B2B -->
@@ -206,19 +203,20 @@
                 </div>
             </div>
 
-            <!-- Next Day KPIs -->
-            <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden">
-                <div>
-                    <div class="flex justify-between items-center mb-1">
-                        <h3 class="font-bold text-[9.5px] text-amber-400 flex items-center gap-1">
+            <!-- Next Day COMPLETO (Com Rotas, Desvios e Top 5 Motivos) -->
+            <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden">
+                <div class="flex flex-col gap-1 overflow-hidden">
+                    <div class="flex justify-between items-center shrink-0">
+                        <h3 class="font-bold text-[9px] text-amber-400 flex items-center gap-1">
                             🚚 Fechamento Next Day
                         </h3>
-                        <span class="bg-amber-500/10 text-amber-300 px-1 py-0.2 rounded text-[7.5px] font-bold">
+                        <span class="bg-amber-500/10 text-amber-300 px-1 py-0.2 rounded text-[7px] font-bold">
                             4,75 ★
                         </span>
                     </div>
 
-                    <div class="space-y-0.5 text-[7.5px] my-1">
+                    <!-- Métricas Principais -->
+                    <div class="space-y-0.5 text-[7px] font-mono shrink-0">
                         <div class="flex justify-between bg-[#0b0f19] p-0.5 rounded border border-slate-800">
                             <span class="text-slate-400">Programadas:</span>
                             <span class="font-bold text-white">915 rotas</span>
@@ -229,23 +227,47 @@
                         </div>
                     </div>
 
-                    <p class="text-[7.5px] font-bold text-slate-400 uppercase mt-1 mb-0.5">Top Drivers</p>
-                    <div class="space-y-0.5 text-[7.5px] font-mono">
-                        <div class="flex justify-between text-slate-300"><span>1° Cleiton</span> <span class="text-amber-400 font-bold">4.89 ★</span></div>
-                        <div class="flex justify-between text-slate-300"><span>2° Ipenemery</span> <span class="text-amber-400 font-bold">4.77 ★</span></div>
-                        <div class="flex justify-between text-slate-300"><span>3° Fábio</span> <span class="text-amber-400 font-bold">4.73 ★</span></div>
+                    <!-- Top Drivers -->
+                    <div class="shrink-0">
+                        <p class="text-[6.5px] font-bold text-slate-400 uppercase">Top Drivers</p>
+                        <div class="space-y-0.2 text-[6.5px] font-mono leading-tight">
+                            <div class="flex justify-between text-slate-300"><span>1° Cleiton</span> <span class="text-amber-400 font-bold">4.89 ★</span></div>
+                            <div class="flex justify-between text-slate-300"><span>2° Ipenemery</span> <span class="text-amber-400 font-bold">4.77 ★</span></div>
+                            <div class="flex justify-between text-slate-300"><span>3° Fábio</span> <span class="text-amber-400 font-bold">4.73 ★</span></div>
+                        </div>
+                    </div>
+
+                    <!-- DESVIOS POR ROTA (SOLICITADO) -->
+                    <div class="shrink-0 pt-0.5 border-t border-slate-800/80">
+                        <p class="text-[6.5px] font-bold text-amber-400 uppercase mb-0.5">Desvio por Rota</p>
+                        <div class="space-y-0.2 text-[6.5px] font-mono">
+                            <div class="flex justify-between text-slate-300"><span>Recife Norte</span> <span class="text-red-400 font-bold">10%</span></div>
+                            <div class="flex justify-between text-slate-300"><span>João Pessoa</span> <span class="text-amber-400 font-bold">5%</span></div>
+                            <div class="flex justify-between text-slate-300"><span>Recife Sul</span> <span class="text-amber-400 font-bold">5%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- TOP 5 MOTIVOS DE DESVIO (SOLICITADO) -->
+                    <div class="shrink-0 pt-0.5 border-t border-slate-800/80">
+                        <p class="text-[6.5px] font-bold text-slate-400 uppercase mb-0.5">Top 5 Desvios Motivo</p>
+                        <div class="space-y-0.2 text-[6px] text-slate-300 font-mono leading-tight">
+                            <p class="truncate">• 1° Local de entrega fechado</p>
+                            <p class="truncate">• 2° Cliente ausente</p>
+                            <p class="truncate">• 3° Não localizado</p>
+                            <p class="truncate">• 4° NF Cancelada</p>
+                            <p class="truncate">• 5° Outro local de entrega</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-[#0b0f19] p-0.5 rounded border border-amber-500/20 text-center">
-                    <p class="text-[7px] text-amber-400 font-bold">Avaliações: 125</p>
+                <div class="bg-[#0b0f19] p-0.5 rounded border border-amber-500/20 text-center shrink-0 mt-0.5">
+                    <p class="text-[6.5px] text-amber-400 font-bold">Avaliações: 125</p>
                 </div>
             </div>
 
         </div>
 
         <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
-        <!-- OUTUBRO (RECEBIMENTO & EXPEDIÇÃO IN & OUT) -->
         <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden pl-1 pt-2">
             <div class="flex justify-between items-center mb-1 shrink-0">
                 <h3 class="font-bold text-[9.5px] text-emerald-400 flex items-center gap-1">
@@ -279,7 +301,7 @@
                 </div>
             </div>
 
-            <!-- Balanço Liquido -->
+            <!-- Balanço -->
             <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex justify-between items-center">
                 <span class="text-[7.5px] text-slate-400">Balanço Líquido (Mês):</span>
                 <span class="text-[9px] font-mono font-bold text-emerald-400">+1.460 un (Acúmulo)</span>
