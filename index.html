@@ -14,16 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS Control Tower - CD Alhandra PB</title>
     
-    <!-- Importação das Fontes Google Sans / Product Sans & JetBrains Mono -->
+    <!-- Fontes Google Sans / Product Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Chart.js + Plugin DataLabels -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         html, body {
             height: 100vh;
@@ -83,16 +80,16 @@
         </div>
     </header>
 
-    <!-- MARQUEE -->
+    <!-- MARQUEE REFINADO -->
     <div class="ticker-wrap shrink-0">
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <!-- MAIN GRID 2x2 AJUSTADO COM RESPIRO CENTRAL DE SEGURANÇA -->
+    <!-- MAIN GRID 2x2 - UMA PÁGINA POR TV -->
     <main class="p-2.5 gap-x-4 gap-y-3 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
 
         <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
-        <!-- RUA 06 REBAIXADA/SUBIDA PARA CABER COMPLETA -->
+        <!-- ESTOQUE GERAL - CAPACIDADE & RUAS -->
         <div class="flex flex-col gap-1 overflow-hidden pr-1 pb-2">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
                 <h2 class="text-[9.5px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1">
@@ -101,7 +98,7 @@
                 <span class="text-[7.5px] text-slate-500 font-mono">PCO Geral</span>
             </div>
 
-            <!-- Cards de Capacidade Compactos -->
+            <!-- Cards de Capacidade -->
             <div class="grid grid-cols-3 gap-1 shrink-0">
                 <div class="bg-[#0f172a] p-1 rounded text-center glow-blue">
                     <p class="text-[7px] font-bold text-slate-400 uppercase">Locações (Ocup/Total)</p>
@@ -120,7 +117,7 @@
                 </div>
             </div>
 
-            <!-- Tabela Saturação de Ruas (Com recuo inferior suficiente para a Rua 06 não cortar) -->
+            <!-- Tabela Saturação de Ruas -->
             <div class="bg-[#0f172a] p-1.5 rounded-lg border border-slate-800 flex-1 flex flex-col overflow-hidden mb-1">
                 <div class="flex justify-between items-center mb-0.5 shrink-0">
                     <h3 class="font-bold text-[9.5px] text-slate-300 flex items-center gap-1">
@@ -145,40 +142,33 @@
         </div>
 
         <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
-        <!-- GRÁFICO COMPACTADO PARA NÃO VAZAR PARA A TV 04 -->
+        <!-- ESTOQUE GERAL - FAMÍLIAS & DENSIDADE (TELA CHEIA SEM O GRÁFICO CORRIDO) -->
         <div class="flex flex-col gap-1 overflow-hidden pl-1 pb-2">
-            <div class="flex justify-between items-center shrink-0 mb-0.5">
-                <h2 class="text-[9.5px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+            <div class="flex justify-between items-center shrink-0 mb-1">
+                <h2 class="text-[10px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> TV 02: Estoque Geral - Famílias & Densidade
                 </h2>
-                <span class="bg-purple-500/10 text-purple-300 px-1 py-0.2 rounded text-[7.5px] font-bold">
+                <span class="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded text-[8px] font-bold">
                     Top Giro: Frigobar (11,79 un/m²)
                 </span>
             </div>
 
-            <!-- Tabela Ocupação por Família -->
-            <div class="bg-[#0f172a] p-1.5 rounded-lg border border-slate-800 flex-1 flex flex-col overflow-hidden">
+            <!-- Tabela Ocupação por Família Ocupando 100% da Altura da TV 02 -->
+            <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col overflow-hidden">
                 <div class="overflow-hidden flex-1">
-                    <table class="w-full text-left text-[8px] text-slate-300 h-full">
+                    <table class="w-full text-left text-[9px] text-slate-300 h-full">
                         <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
                             <tr>
-                                <th class="px-1 py-0.2">Família</th>
-                                <th class="px-1 py-0.2 text-center">Loc.</th>
-                                <th class="px-1 py-0.2 text-right">Área m² (%)</th>
-                                <th class="px-1 py-0.2 text-right">Estoque</th>
-                                <th class="px-1 py-0.2 text-center">un/m²</th>
+                                <th class="px-2 py-1">Família</th>
+                                <th class="px-2 py-1 text-center">Loc.</th>
+                                <th class="px-2 py-1 text-right">Área m² (%)</th>
+                                <th class="px-2 py-1 text-right">Capacidade</th>
+                                <th class="px-2 py-1 text-right">Estoque (un)</th>
+                                <th class="px-2 py-1 text-center">un/m²</th>
                             </tr>
                         </thead>
                         <tbody id="familyTableBody" class="font-medium"></tbody>
                     </table>
-                </div>
-            </div>
-
-            <!-- Mini Gráfico de Barras Ajustado na Altura -->
-            <div class="bg-[#0f172a] p-1 rounded-lg border border-slate-800 h-[75px] max-h-[75px] shrink-0 flex flex-col overflow-hidden mb-1">
-                <p class="text-[7px] font-bold text-slate-400 uppercase mb-0.2">Estoque por Família (Saldo vs Capacidade)</p>
-                <div class="relative flex-1 w-full overflow-hidden">
-                    <canvas id="chartVolumetria"></canvas>
                 </div>
             </div>
         </div>
@@ -255,7 +245,7 @@
         </div>
 
         <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
-        <!-- OUTUBRO (IN & OUT) -->
+        <!-- OUTUBRO (RECEBIMENTO & EXPEDIÇÃO) -->
         <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden pl-1 pt-2">
             <div class="flex justify-between items-center mb-1 shrink-0">
                 <h3 class="font-bold text-[9.5px] text-emerald-400 flex items-center gap-1">
@@ -299,9 +289,6 @@
     </main>
 
     <script>
-        Chart.register(ChartDataLabels);
-        let chartInstance = null;
-
         const currentData = {
             ruas: [
                 { rua: "RUA 01", loc: "9/9", pct: 100, est: 1944 },
@@ -373,11 +360,12 @@
 
             currentData.familias.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td class="px-1 py-0.2 font-bold text-slate-200">${item.familia}</td>
-                                <td class="px-1 py-0.2 text-center text-slate-300 font-mono">${item.loc}</td>
-                                <td class="px-1 py-0.2 text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[6.5px]">(${item.pctArea})</span></td>
-                                <td class="px-1 py-0.2 text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
-                                <td class="px-1 py-0.2 text-center"><span class="bg-purple-500/10 text-purple-300 px-0.5 rounded font-bold font-mono">${item.densidade}</span></td>`;
+                tr.innerHTML = `<td class="px-2 py-1 font-bold text-slate-200">${item.familia}</td>
+                                <td class="px-2 py-1 text-center text-slate-300 font-mono">${item.loc}</td>
+                                <td class="px-2 py-1 text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[7.5px]">(${item.pctArea})</span></td>
+                                <td class="px-2 py-1 text-right text-purple-300 font-mono">${item.cap.toLocaleString('pt-BR')}</td>
+                                <td class="px-2 py-1 text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
+                                <td class="px-2 py-1 text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold font-mono">${item.densidade}</span></td>`;
                 familyBody.appendChild(tr);
             });
 
@@ -389,51 +377,6 @@
                 tr.innerHTML = `<td class="px-1 py-0.2 font-bold text-slate-200">${b.cat}</td>
                                 <td class="px-1 py-0.2 text-right text-red-400 font-bold font-mono">${b.qtd}</td>`;
                 bloqueadoBody.appendChild(tr);
-            });
-
-            renderizarGraficoHorizontal(currentData.familias);
-        }
-
-        function renderizarGraficoHorizontal(dataset) {
-            const canvasVol = document.getElementById('chartVolumetria');
-            if (!canvasVol) return;
-            const ctxVol = canvasVol.getContext('2d');
-            if (chartInstance) chartInstance.destroy();
-
-            chartInstance = new Chart(ctxVol, {
-                type: 'bar',
-                data: {
-                    labels: dataset.map(item => item.familia),
-                    datasets: [
-                        {
-                            label: 'Saldo',
-                            data: dataset.map(item => item.est),
-                            backgroundColor: '#06b6d4',
-                            borderRadius: 1,
-                            barThickness: 3.5
-                        },
-                        {
-                            label: 'Capacidade',
-                            data: dataset.map(item => item.cap),
-                            backgroundColor: '#a855f7',
-                            borderRadius: 1,
-                            barThickness: 3.5
-                        }
-                    ]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: { display: false }
-                    },
-                    scales: {
-                        x: { ticks: { color: '#64748b', font: { size: 6 } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8', font: { size: 6.5, weight: 'bold' } }, grid: { display: false } }
-                    }
-                }
             });
         }
 
