@@ -43,11 +43,11 @@
             box-shadow: none !important;
         }
 
-        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.2); }
-        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.2); }
-        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.2); }
-        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.2); }
-        .glow-red { border: 1px solid rgba(239, 68, 68, 0.2); }
+        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.25); }
+        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.25); }
+        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.25); }
+        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.25); }
+        .glow-red { border: 1px solid rgba(239, 68, 68, 0.25); }
 
         .ticker-wrap {
             width: 100%; overflow: hidden; background-color: #0f172a; border-bottom: 1px solid #1e293b; padding: 2px 0; display: flex;
@@ -85,7 +85,7 @@
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <!-- MAIN GRID 2x2 - UMA PÁGINA POR TV -->
+    <!-- MAIN GRID 2x2 - UMA PÁGINA POR TV COM MARGENS AJUSTADAS -->
     <main class="p-2.5 gap-x-4 gap-y-3 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
 
         <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
@@ -142,7 +142,7 @@
         </div>
 
         <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
-        <!-- ESTOQUE GERAL - FAMÍLIAS & DENSIDADE (TELA CHEIA SEM O GRÁFICO CORRIDO) -->
+        <!-- ESTOQUE GERAL - FAMÍLIAS, MINI BIN & GIRO -->
         <div class="flex flex-col gap-1 overflow-hidden pl-1 pb-2">
             <div class="flex justify-between items-center shrink-0 mb-1">
                 <h2 class="text-[10px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
@@ -153,7 +153,7 @@
                 </span>
             </div>
 
-            <!-- Tabela Ocupação por Família Ocupando 100% da Altura da TV 02 -->
+            <!-- Tabela Ocupação por Família Ocupando Tela Cheia da TV 02 -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col overflow-hidden">
                 <div class="overflow-hidden flex-1">
                     <table class="w-full text-left text-[9px] text-slate-300 h-full">
@@ -174,7 +174,7 @@
         </div>
 
         <!-- ==================== TV 03 (INFERIOR ESQUERDA) ==================== -->
-        <!-- PÁGINA "ESTOQUE" + "NEXT DAY" -->
+        <!-- PÁGINA "ESTOQUE" (BLOQUEADO & B2B) + PÁGINA "NEXT DAY" (KPIS DE ENTREGA) -->
         <div class="grid grid-cols-2 gap-2 overflow-hidden pr-1 pt-2">
             
             <!-- Estoque Bloqueado + B2B -->
@@ -206,7 +206,7 @@
                 </div>
             </div>
 
-            <!-- Next Day -->
+            <!-- Next Day KPIs -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden">
                 <div>
                     <div class="flex justify-between items-center mb-1">
@@ -245,7 +245,7 @@
         </div>
 
         <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
-        <!-- OUTUBRO (RECEBIMENTO & EXPEDIÇÃO) -->
+        <!-- OUTUBRO (RECEBIMENTO & EXPEDIÇÃO IN & OUT) -->
         <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden pl-1 pt-2">
             <div class="flex justify-between items-center mb-1 shrink-0">
                 <h3 class="font-bold text-[9.5px] text-emerald-400 flex items-center gap-1">
@@ -279,7 +279,7 @@
                 </div>
             </div>
 
-            <!-- Balanço -->
+            <!-- Balanço Liquido -->
             <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex justify-between items-center">
                 <span class="text-[7.5px] text-slate-400">Balanço Líquido (Mês):</span>
                 <span class="text-[9px] font-mono font-bold text-emerald-400">+1.460 un (Acúmulo)</span>
@@ -306,7 +306,8 @@
                 { familia: "FREEZER", loc: 6, area: "126m²", pctArea: "3.5%", est: 425, cap: 706, densidade: "3.35" },
                 { familia: "SECADORA", loc: 2, area: "38m²", pctArea: "1.1%", est: 244, cap: 288, densidade: "6.31" },
                 { familia: "FRIGOBAR", loc: 1, area: "16m²", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
-                { familia: "CERVEJEIRA", loc: 1, area: "19m²", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" }
+                { familia: "CERVEJEIRA", loc: 1, area: "19m²", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" },
+                { familia: "MINI BIN", loc: 15, area: "230,6m²", pctArea: "6.4%", est: 1302, cap: 1302, densidade: "5.65" }
             ],
             bloqueado: [
                 { cat: "Sucata", qtd: 141 },
@@ -362,7 +363,7 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td class="px-2 py-1 font-bold text-slate-200">${item.familia}</td>
                                 <td class="px-2 py-1 text-center text-slate-300 font-mono">${item.loc}</td>
-                                <td class="px-2 py-1 text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[7.5px]">(${item.pctArea})</span></td>
+                                <td class="px-2 py-1 text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[6.5px]">(${item.pctArea})</span></td>
                                 <td class="px-2 py-1 text-right text-purple-300 font-mono">${item.cap.toLocaleString('pt-BR')}</td>
                                 <td class="px-2 py-1 text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
                                 <td class="px-2 py-1 text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold font-mono">${item.densidade}</span></td>`;
