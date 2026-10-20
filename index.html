@@ -58,11 +58,11 @@
         .ticker { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; }
         .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.65rem; font-weight: 700; }
 
-        /* Ticker exclusivo para Avaliações dos Clientes */
+        /* Ticker exclusivo para Avaliações Positivas dos Clientes */
         .feedback-ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #0b0f19; border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 0.375rem; padding: 3px 0; display: flex;
+            width: 100%; overflow: hidden; background-color: #0b0f19; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.375rem; padding: 3px 0; display: flex;
         }
-        .feedback-ticker { display: flex; white-space: nowrap; animation: marqueeFeedback 35s linear infinite; }
+        .feedback-ticker { display: flex; white-space: nowrap; animation: marqueeFeedback 42s linear infinite; }
         .feedback-ticker__item { display: flex; align-items: center; padding: 0 1rem; font-size: 0.68rem; font-weight: 600; }
 
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
@@ -229,11 +229,11 @@
                 </div>
             </div>
 
-            <!-- Next Day COM ROLAGEM DE AVALIAÇÕES DOS CLIENTES NO TOPO -->
+            <!-- Next Day COM ROLAGEM EXCLUSIVA DE AVALIAÇÕES POSITIVAS -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden h-full">
                 <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                     
-                    <!-- BANNER DE ROLAGEM DAS AVALIAÇÕES DOS CLIENTES (NOVO) -->
+                    <!-- BANNER DE ROLAGEM 100% AVALIAÇÕES POSITIVAS -->
                     <div class="feedback-ticker-wrap shrink-0">
                         <div class="feedback-ticker" id="feedbackMarquee"></div>
                     </div>
@@ -395,12 +395,14 @@
                 { cat: "Sucata", qtd: 37 },
                 { cat: "Rio Claro", qtd: 19 }
             ],
-            feedbacks: [
-                { tipo: "P", txt: "⭐ 5/5 'Entregou de forma educada e eficiente!'" },
-                { tipo: "P", txt: "⭐ 5/5 'PERFEITA A ENTREGA !! MINHA GELADEIRA CHEGOU MUITO RÁPIDO 1 dia útil em perfeito estado os entregadores também muito simpáticos e prestativos !'" },
-                { tipo: "P", txt: "⭐ 5/5 'Produto lindo e de excelente qualidade!. Entrega rápida e eficaz. Muita atenção em todo o processo.'" },
-                { tipo: "N", txt: "⚠️ 'Deixaram a geladeira no térreo do prédio e eu que sou idosa tive que contratar pessoas para levarem ao apto.'" },
-                { tipo: "N", txt: "⚠️ 'Todos os dois fogões vieram danificados!'" }
+            feedbacksPositivos: [
+                "⭐ 5/5 'Entrega super rápida! O produto chegou bem antes do prazo estipulado. Excelente serviço.'",
+                "⭐ 5/5 'Impressionado com a velocidade. Comprei em um dia e chegou no outro. Nota 10!'",
+                "⭐ 5/5 'Agilidade nota mil. Entrega rápida e rastreamento atualizado em tempo real.'",
+                "⭐ 5/5 'Entregador super educado e cordial. Um excelente atendimento na hora da entrega.'",
+                "⭐ 5/5 'Entregou de forma educada e eficiente!'",
+                "⭐ 5/5 'PERFEITA A ENTREGA !! MINHA GELADEIRA CHEGOU MUITO RÁPIDO 1 dia útil em perfeito estado os entregadores também muito simpáticos e prestativos !!'",
+                "⭐ 5/5 'Produto lindo e de excelente qualidade!. Entrega rápida e eficaz. Muita atenção em todo o processo.'"
             ],
             nextDayDiario: {
                 dias: ['01', '02', '05', '06', '07', '08', '09', '12', '13', '14', '15', '16', '19', '20'],
@@ -467,15 +469,14 @@
                 familyBody.appendChild(tr);
             });
 
-            // Feedbacks dos Clientes (TV 03 - Next Day Ticker)
+            // Feedbacks Exclusivamente Positivos (TV 03 - Next Day Ticker)
             const feedbackMarquee = document.getElementById('feedbackMarquee');
             feedbackMarquee.innerHTML = '';
-            const doubleFeedbacks = [...currentData.feedbacks, ...currentData.feedbacks];
-            doubleFeedbacks.forEach(f => {
+            const doubleFeedbacks = [...currentData.feedbacksPositivos, ...currentData.feedbacksPositivos];
+            doubleFeedbacks.forEach(txt => {
                 const div = document.createElement('div');
                 div.className = "feedback-ticker__item";
-                const colorClass = f.tipo === 'P' ? 'text-emerald-400' : 'text-amber-400';
-                div.innerHTML = `<span class="${colorClass}">${f.txt}</span><span class="text-slate-700 mx-3">|</span>`;
+                div.innerHTML = `<span class="text-emerald-400">${txt}</span><span class="text-slate-700 mx-3">|</span>`;
                 feedbackMarquee.appendChild(div);
             });
 
