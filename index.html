@@ -63,7 +63,7 @@
 <body class="flex flex-col h-screen overflow-hidden antialiased">
 
     <!-- HEADER COM MARGEM DE SEGURANÇA SUPERIOR -->
-    <header class="bg-[#0f172a] border-b border-slate-800 text-white px-4 pt-1.5 pb-1 flex justify-between items-center shrink-0">
+    <header class="bg-[#0f172a] border-b border-slate-800 text-white px-3 pt-1 pb-1 flex justify-between items-center shrink-0">
         <div class="flex items-center gap-2">
             <div class="px-2 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">PCO</div>
             <div>
@@ -88,13 +88,13 @@
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <!-- MAIN GRID 2x2 - ALINHAMENTO DAS TVS SEM MARGEM DESNECESSÁRIA NO TOPO DAS INFERIORES -->
-    <main class="p-2 gap-x-4 gap-y-1.5 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
+    <!-- MAIN GRID 2x2 - AJUSTE PRECISO PARA O VIDEO WALL (SEM CORTES NAS BORDAS) -->
+    <main class="p-2 pb-2 gap-x-3 gap-y-2 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
 
         <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
-        <div class="flex flex-col gap-1 overflow-hidden pr-1 pb-1">
+        <div class="flex flex-col gap-1 overflow-hidden pr-1 pb-1 h-full">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
-                <h2 class="text-[9.5px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1">
+                <h2 class="text-[9px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> TV 01: Estoque Geral - Capacidade & Ruas
                 </h2>
                 <span class="text-[7.5px] text-slate-500 font-mono">PCO Geral</span>
@@ -103,31 +103,31 @@
             <!-- Cards de Capacidade -->
             <div class="grid grid-cols-3 gap-1 shrink-0">
                 <div class="bg-[#0f172a] p-1 rounded text-center glow-blue">
-                    <p class="text-[7px] font-bold text-slate-400 uppercase">Locações (Ocup/Total)</p>
-                    <h4 class="text-[10px] font-black text-white">139 / 191</h4>
-                    <p class="text-[7px] text-blue-400 font-bold">73% Ocupado</p>
+                    <p class="text-[6.5px] font-bold text-slate-400 uppercase">Locações (Ocup/Total)</p>
+                    <h4 class="text-[9.5px] font-black text-white">139 / 191</h4>
+                    <p class="text-[6.5px] text-blue-400 font-bold">73% Ocupado</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center glow-amber">
-                    <p class="text-[7px] font-bold text-amber-500 uppercase">Área Ocupada (m²)</p>
-                    <h4 class="text-[10px] font-black text-amber-400">2.621 / 3.574 m²</h4>
-                    <p class="text-[7px] text-amber-300 font-bold">73,3% Área</p>
+                    <p class="text-[6.5px] font-bold text-amber-500 uppercase">Área Ocupada (m²)</p>
+                    <h4 class="text-[9.5px] font-black text-amber-400">2.621 / 3.574 m²</h4>
+                    <p class="text-[6.5px] text-amber-300 font-bold">73,3% Área</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center glow-emerald">
-                    <p class="text-[7px] font-bold text-emerald-500 uppercase">Saldo Estocado (un)</p>
-                    <h4 class="text-[10px] font-black text-emerald-400">11.134 un</h4>
-                    <p class="text-[7px] text-emerald-300 font-bold">65,4% Cap</p>
+                    <p class="text-[6.5px] font-bold text-emerald-500 uppercase">Saldo Estocado (un)</p>
+                    <h4 class="text-[9.5px] font-black text-emerald-400">11.134 un</h4>
+                    <p class="text-[6.5px] text-emerald-300 font-bold">65,4% Cap</p>
                 </div>
             </div>
 
-            <!-- Tabela Saturação de Ruas -->
+            <!-- Tabela Saturação de Ruas (RUA 06 GARANTIDA SEM CORTE) -->
             <div class="bg-[#0f172a] p-1.5 rounded-lg border border-slate-800 flex-1 flex flex-col overflow-hidden">
                 <div class="flex justify-between items-center mb-0.5 shrink-0">
-                    <h3 class="font-bold text-[9.5px] text-slate-300 flex items-center gap-1">
+                    <h3 class="font-bold text-[9px] text-slate-300 flex items-center gap-1">
                         📍 Saturação Física por Rua (01 a 06)
                     </h3>
-                    <span class="text-[7.5px] text-slate-500 font-mono">Termômetro</span>
+                    <span class="text-[7px] text-slate-500 font-mono">Termômetro</span>
                 </div>
-                <div class="overflow-hidden flex-1">
+                <div class="overflow-hidden flex-1 flex flex-col justify-between">
                     <table class="w-full text-left text-[8px] text-slate-300 h-full">
                         <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
                             <tr>
@@ -144,24 +144,25 @@
         </div>
 
         <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
-        <div class="flex flex-col gap-1 overflow-hidden pl-1 pb-1">
+        <div class="flex flex-col gap-1 overflow-hidden pl-1 pb-1 h-full">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
-                <h2 class="text-[9.5px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+                <h2 class="text-[9px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> TV 02: Estoque Geral - Famílias & Densidade
                 </h2>
             </div>
 
+            <!-- Tabela Famílias (MINI BIN GARANTIDO SEM CORTE) -->
             <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex-1 flex flex-col overflow-hidden">
-                <div class="overflow-hidden flex-1">
-                    <table class="w-full text-left text-[8.5px] text-slate-300 h-full">
+                <div class="overflow-hidden flex-1 flex flex-col justify-between">
+                    <table class="w-full text-left text-[8px] text-slate-300 h-full">
                         <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold">
                             <tr>
-                                <th class="px-1.5 py-0.5">Família</th>
-                                <th class="px-1.5 py-0.5 text-center">Loc.</th>
-                                <th class="px-1.5 py-0.5 text-right">Área m² (%)</th>
-                                <th class="px-1.5 py-0.5 text-right">Capacidade</th>
-                                <th class="px-1.5 py-0.5 text-right">Estoque (un)</th>
-                                <th class="px-1.5 py-0.5 text-center">un/m²</th>
+                                <th class="px-1.5 py-0.2">Família</th>
+                                <th class="px-1.5 py-0.2 text-center">Loc.</th>
+                                <th class="px-1.5 py-0.2 text-right">Área m² (%)</th>
+                                <th class="px-1.5 py-0.2 text-right">Capacidade</th>
+                                <th class="px-1.5 py-0.2 text-right">Estoque (un)</th>
+                                <th class="px-1.5 py-0.2 text-center">un/m²</th>
                             </tr>
                         </thead>
                         <tbody id="familyTableBody" class="font-medium"></tbody>
@@ -171,27 +172,26 @@
         </div>
 
         <!-- ==================== TV 03 (INFERIOR ESQUERDA) ==================== -->
-        <!-- PUXADO COMPLETAMENTE PARA O TOPO (SEM TOPO VAGO) -->
-        <div class="grid grid-cols-2 gap-2 overflow-hidden pr-1 h-full">
+        <div class="grid grid-cols-2 gap-2 overflow-hidden pr-1 h-full pt-0.5">
             
             <!-- Estoque Bloqueado -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 glow-red flex flex-col justify-between overflow-hidden h-full">
                 <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                     <div class="flex justify-between items-center shrink-0">
-                        <h3 class="font-bold text-[9.5px] text-red-400 flex items-center gap-1">
+                        <h3 class="font-bold text-[9px] text-red-400 flex items-center gap-1">
                             🔒 Estoque Bloqueado
                         </h3>
                         <span class="text-[7.5px] text-red-400 font-bold bg-red-500/10 px-1 py-0.2 rounded">246 vol</span>
                     </div>
 
                     <!-- Tabela de Bloqueados -->
-                    <table class="w-full text-left text-[8.5px] text-slate-300 shrink-0">
+                    <table class="w-full text-left text-[8px] text-slate-300 shrink-0">
                         <tbody id="bloqueadoTableBody" class="font-medium"></tbody>
                     </table>
 
                     <!-- GRÁFICO DONUT DE DISTRIBUIÇÃO DO BLOQUEIO -->
-                    <div class="bg-[#0b0f19] p-1.5 rounded border border-slate-800 flex-1 min-h-[100px] flex flex-col justify-between">
-                        <p class="text-[7px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição por Categoria</p>
+                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[90px] flex flex-col justify-between">
+                        <p class="text-[6.5px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição por Categoria</p>
                         <div class="relative flex-1 w-full overflow-hidden flex justify-center items-center">
                             <canvas id="chartBloqueadoDonut"></canvas>
                         </div>
@@ -199,19 +199,19 @@
 
                     <!-- IMPACTO SOBRE O ESTOQUE TOTAL -->
                     <div class="bg-[#0b0f19] p-1 rounded border border-red-500/20 text-center shrink-0">
-                        <p class="text-[7px] text-slate-400 uppercase">Impacto sobre Estoque Total</p>
-                        <p class="text-[9.5px] font-mono font-bold text-emerald-400">2,2% <span class="text-[7px] text-slate-300 font-normal">(246 de 11.134 un)</span></p>
+                        <p class="text-[6.5px] text-slate-400 uppercase">Impacto sobre Estoque Total</p>
+                        <p class="text-[9px] font-mono font-bold text-emerald-400">2,2% <span class="text-[6.5px] text-slate-300 font-normal">(246 de 11.134 un)</span></p>
                     </div>
                 </div>
 
                 <!-- Canal B2B -->
-                <div class="border-t border-slate-800 pt-1 mt-1 shrink-0">
+                <div class="border-t border-slate-800 pt-1 mt-0.5 shrink-0">
                     <div class="flex justify-between items-center bg-[#0b0f19] p-1 rounded border border-cyan-500/20">
                         <div>
-                            <p class="text-[7.5px] font-bold text-cyan-400 uppercase">Estoque B2B</p>
-                            <p class="text-[9.5px] font-black text-white">482 <span class="text-[7px] font-normal text-slate-400">vol</span></p>
+                            <p class="text-[7px] font-bold text-cyan-400 uppercase">Estoque B2B</p>
+                            <p class="text-[9px] font-black text-white">482 <span class="text-[6.5px] font-normal text-slate-400">vol</span></p>
                         </div>
-                        <div class="text-right text-[7.5px]">
+                        <div class="text-right text-[7px]">
                             <p class="text-slate-300">3 End. Ocup</p>
                             <p class="text-cyan-300 font-mono">51.9 m²</p>
                         </div>
@@ -223,36 +223,36 @@
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden h-full">
                 <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                     <div class="flex justify-between items-center shrink-0">
-                        <h3 class="font-bold text-[9.5px] text-amber-400 flex items-center gap-1">
+                        <h3 class="font-bold text-[9px] text-amber-400 flex items-center gap-1">
                             🚚 Fechamento Next Day
                         </h3>
-                        <span class="bg-amber-500/10 text-amber-300 px-1 py-0.2 rounded text-[8px] font-bold">
+                        <span class="bg-amber-500/10 text-amber-300 px-1 py-0.2 rounded text-[7.5px] font-bold">
                             4,75 ★
                         </span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-1 text-[8px] font-mono shrink-0">
+                    <div class="grid grid-cols-2 gap-1 text-[7.5px] font-mono shrink-0">
                         <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
-                            <p class="text-slate-400 text-[7px] uppercase">Programadas</p>
-                            <p class="font-bold text-white text-[9.5px]">915 rotas</p>
+                            <p class="text-slate-400 text-[6.5px] uppercase">Programadas</p>
+                            <p class="font-bold text-white text-[9px]">915 rotas</p>
                         </div>
                         <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
-                            <p class="text-slate-400 text-[7px] uppercase">1ª Tentativa</p>
-                            <p class="font-bold text-emerald-400 text-[9.5px]">786 (85,9%)</p>
+                            <p class="text-slate-400 text-[6.5px] uppercase">1ª Tentativa</p>
+                            <p class="font-bold text-emerald-400 text-[9px]">786 (85,9%)</p>
                         </div>
                     </div>
 
-                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[90px] flex flex-col">
-                        <p class="text-[7px] font-bold text-cyan-400 uppercase mb-0.5">Evolução Diária (Outubro)</p>
+                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[80px] flex flex-col">
+                        <p class="text-[6.5px] font-bold text-cyan-400 uppercase mb-0.5">Evolução Diária (Outubro)</p>
                         <div class="relative flex-1 w-full overflow-hidden">
                             <canvas id="chartNextDayDaily"></canvas>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-1.5 shrink-0 pt-0.5 border-t border-slate-800/80">
+                    <div class="grid grid-cols-2 gap-1 shrink-0 pt-0.5 border-t border-slate-800/80">
                         <div>
-                            <p class="text-[7.5px] font-bold text-slate-400 uppercase mb-0.2">Top Drivers</p>
-                            <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
+                            <p class="text-[7px] font-bold text-slate-400 uppercase mb-0.2">Top Drivers</p>
+                            <div class="space-y-0.2 text-[7px] font-mono leading-tight">
                                 <div class="flex justify-between text-slate-300"><span>1° Cleiton</span> <span class="text-amber-400 font-bold">4.89★</span></div>
                                 <div class="flex justify-between text-slate-300"><span>2° Ipenemery</span> <span class="text-amber-400 font-bold">4.77★</span></div>
                                 <div class="flex justify-between text-slate-300"><span>3° Fábio</span> <span class="text-amber-400 font-bold">4.73★</span></div>
@@ -260,8 +260,8 @@
                         </div>
 
                         <div>
-                            <p class="text-[7.5px] font-bold text-amber-400 uppercase mb-0.2">Desvio/Rota</p>
-                            <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
+                            <p class="text-[7px] font-bold text-amber-400 uppercase mb-0.2">Desvio/Rota</p>
+                            <div class="space-y-0.2 text-[7px] font-mono leading-tight">
                                 <div class="flex justify-between text-slate-300"><span>Recife N.</span> <span class="text-red-400 font-bold">10%</span></div>
                                 <div class="flex justify-between text-slate-300"><span>J. Pessoa</span> <span class="text-amber-400 font-bold">5%</span></div>
                                 <div class="flex justify-between text-slate-300"><span>Recife S.</span> <span class="text-amber-400 font-bold">5%</span></div>
@@ -270,8 +270,8 @@
                     </div>
 
                     <div class="shrink-0 pt-0.5 border-t border-slate-800/80">
-                        <p class="text-[7.5px] font-bold text-slate-400 uppercase mb-0.2">Top 5 Desvios Motivo</p>
-                        <div class="grid grid-cols-1 gap-0.2 text-[7px] text-slate-300 font-mono leading-tight">
+                        <p class="text-[7px] font-bold text-slate-400 uppercase mb-0.2">Top 5 Desvios Motivo</p>
+                        <div class="grid grid-cols-1 gap-0.2 text-[6.5px] text-slate-300 font-mono leading-tight">
                             <p class="truncate">• 1° Entrega fechada</p>
                             <p class="truncate">• 2° Cliente ausente</p>
                             <p class="truncate">• 3° Não localizado</p>
@@ -282,29 +282,28 @@
                 </div>
 
                 <div class="bg-[#0b0f19] p-0.5 rounded border border-amber-500/20 text-center shrink-0 mt-0.5">
-                    <p class="text-[7.5px] text-amber-400 font-bold">Avaliações: 125</p>
+                    <p class="text-[7px] text-amber-400 font-bold">Avaliações: 125</p>
                 </div>
             </div>
 
         </div>
 
         <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
-        <!-- PUXADO COMPLETAMENTE PARA O TOPO -->
-        <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden pl-1 h-full">
+        <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden pl-1 h-full pt-0.5">
             <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                 <div class="flex justify-between items-center shrink-0 mb-0.5">
-                    <h3 class="font-bold text-[9.5px] text-emerald-400 flex items-center gap-1">
+                    <h3 class="font-bold text-[9px] text-emerald-400 flex items-center gap-1">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 04: Fluxo de Outubro (In & Out)
                     </h3>
-                    <span class="text-[7.5px] text-slate-400 font-mono">Consolidado Mês</span>
+                    <span class="text-[7px] text-slate-400 font-mono">Consolidado Mês</span>
                 </div>
 
-                <div class="grid grid-cols-2 gap-2 shrink-0 my-0.5">
+                <div class="grid grid-cols-2 gap-1.5 shrink-0 my-0.5">
                     <!-- Recebimento Outubro -->
-                    <div class="bg-[#0b0f19] p-1.5 rounded border border-emerald-500/30">
-                        <p class="text-[7.5px] font-bold text-emerald-400 uppercase">Recebimento Outubro</p>
-                        <h4 class="text-[11px] font-black text-white mt-0.5">8.941 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
-                        <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
+                    <div class="bg-[#0b0f19] p-1 rounded border border-emerald-500/30">
+                        <p class="text-[7px] font-bold text-emerald-400 uppercase">Recebimento Outubro</p>
+                        <h4 class="text-[10.5px] font-black text-white mt-0.5">8.941 <span class="text-[6.5px] font-normal text-slate-400">un</span></h4>
+                        <div class="text-[6.5px] text-slate-300 font-mono mt-0.5 space-y-0.2">
                             <p>Média Geral: <strong class="text-emerald-400">638,6 un/dia</strong></p>
                             <p>• Joinville: 6.472 un (462/dia)</p>
                             <p>• Rio Claro: 2.469 un (176/dia)</p>
@@ -312,10 +311,10 @@
                     </div>
 
                     <!-- Expedição Outubro -->
-                    <div class="bg-[#0b0f19] p-1.5 rounded border border-blue-500/30">
-                        <p class="text-[7.5px] font-bold text-blue-400 uppercase">Expedição Outubro</p>
-                        <h4 class="text-[11px] font-black text-white mt-0.5">8.959 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
-                        <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
+                    <div class="bg-[#0b0f19] p-1 rounded border border-blue-500/30">
+                        <p class="text-[7px] font-bold text-blue-400 uppercase">Expedição Outubro</p>
+                        <h4 class="text-[10.5px] font-black text-white mt-0.5">8.959 <span class="text-[6.5px] font-normal text-slate-400">un</span></h4>
+                        <div class="text-[6.5px] text-slate-300 font-mono mt-0.5 space-y-0.2">
                             <p>Média Geral: <strong class="text-blue-400">597,3 un/dia</strong></p>
                             <p>• Joinville: 5.658 un (377/dia)</p>
                             <p>• Rio Claro: 3.095 un (206/dia)</p>
@@ -325,10 +324,10 @@
                 </div>
 
                 <!-- GRÁFICO COMPARATIVO DIÁRIO DE FLUXO EXPANDIDO -->
-                <div class="bg-[#0b0f19] p-1.5 rounded border border-slate-800 flex-1 min-h-[105px] flex flex-col justify-between">
+                <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[90px] flex flex-col justify-between">
                     <div class="flex justify-between items-center mb-0.5 shrink-0">
-                        <p class="text-[7px] font-bold text-slate-300 uppercase">Evolução Diária: Recebimento x Expedição</p>
-                        <div class="flex gap-2 text-[6.5px] font-mono">
+                        <p class="text-[6.5px] font-bold text-slate-300 uppercase">Evolução Diária: Recebimento x Expedição</p>
+                        <div class="flex gap-2 text-[6px] font-mono">
                             <span class="text-emerald-400 font-bold">● Recebimento</span>
                             <span class="text-cyan-400 font-bold">● Expedição</span>
                         </div>
@@ -341,8 +340,8 @@
 
             <!-- Balanço -->
             <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex justify-between items-center shrink-0 mt-0.5">
-                <span class="text-[7.5px] text-slate-400">Balanço Líquido (Mês):</span>
-                <span class="text-[9px] font-mono font-bold text-emerald-400">-18 un (Equilibrado)</span>
+                <span class="text-[7px] text-slate-400">Balanço Líquido (Mês):</span>
+                <span class="text-[8.5px] font-mono font-bold text-emerald-400">-18 un (Equilibrado)</span>
             </div>
         </div>
 
@@ -401,9 +400,9 @@
                 if (r.pct > 80) barColor = "bg-amber-500";
                 if (r.pct >= 95) barColor = "bg-red-500";
 
-                tr.innerHTML = `<td class="px-1 py-0.1 font-bold text-blue-400">${r.rua}</td>
-                                <td class="px-1 py-0.1 text-center text-slate-300 font-mono">${r.loc}</td>
-                                <td class="px-1 py-0.1">
+                tr.innerHTML = `<td class="px-1 py-[2px] font-bold text-blue-400">${r.rua}</td>
+                                <td class="px-1 py-[2px] text-center text-slate-300 font-mono">${r.loc}</td>
+                                <td class="px-1 py-[2px]">
                                     <div class="flex items-center gap-1">
                                         <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
                                             <div class="${barColor} h-1.5 rounded-full" style="width: ${r.pct}%"></div>
@@ -411,7 +410,7 @@
                                         <span class="text-[7.5px] font-bold text-slate-300 min-w-[20px] text-right">${r.pct}%</span>
                                     </div>
                                 </td>
-                                <td class="px-1 py-0.1 text-right font-bold text-emerald-400">${r.est.toLocaleString('pt-BR')}</td>`;
+                                <td class="px-1 py-[2px] text-right font-bold text-emerald-400">${r.est.toLocaleString('pt-BR')}</td>`;
                 ruasBody.appendChild(tr);
             });
 
@@ -434,12 +433,12 @@
 
             currentData.familias.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td class="px-1.5 py-0.5 font-bold text-slate-200">${item.familia}</td>
-                                <td class="px-1.5 py-0.5 text-center text-slate-300 font-mono">${item.loc}</td>
-                                <td class="px-1.5 py-0.5 text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[6.5px]">(${item.pctArea})</span></td>
-                                <td class="px-1.5 py-0.5 text-right text-purple-300 font-mono">${item.cap.toLocaleString('pt-BR')}</td>
-                                <td class="px-1.5 py-0.5 text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
-                                <td class="px-1.5 py-0.5 text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold font-mono">${item.densidade}</span></td>`;
+                tr.innerHTML = `<td class="px-1.5 py-[2px] font-bold text-slate-200">${item.familia}</td>
+                                <td class="px-1.5 py-[2px] text-center text-slate-300 font-mono">${item.loc}</td>
+                                <td class="px-1.5 py-[2px] text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[6.5px]">(${item.pctArea})</span></td>
+                                <td class="px-1.5 py-[2px] text-right text-purple-300 font-mono">${item.cap.toLocaleString('pt-BR')}</td>
+                                <td class="px-1.5 py-[2px] text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
+                                <td class="px-1.5 py-[2px] text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold font-mono">${item.densidade}</span></td>`;
                 familyBody.appendChild(tr);
             });
 
@@ -448,8 +447,8 @@
             bloqueadoBody.innerHTML = '';
             currentData.bloqueado.forEach(b => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td class="px-1 py-0.2 font-bold text-slate-200">${b.cat}</td>
-                                <td class="px-1 py-0.2 text-right text-red-400 font-bold font-mono">${b.qtd}</td>`;
+                tr.innerHTML = `<td class="px-1 py-[2px] font-bold text-slate-200">${b.cat}</td>
+                                <td class="px-1 py-[2px] text-right text-red-400 font-bold font-mono">${b.qtd}</td>`;
                 bloqueadoBody.appendChild(tr);
             });
 
@@ -481,7 +480,7 @@
                         legend: { 
                             display: true,
                             position: 'right',
-                            labels: { color: '#cbd5e1', font: { size: 7 }, boxWidth: 7, padding: 5 }
+                            labels: { color: '#cbd5e1', font: { size: 7 }, boxWidth: 7, padding: 4 }
                         },
                         datalabels: { display: false }
                     },
