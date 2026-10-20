@@ -57,7 +57,16 @@
         }
         .ticker { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; }
         .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.65rem; font-weight: 700; }
+
+        /* Ticker exclusivo para Avaliações dos Clientes */
+        .feedback-ticker-wrap {
+            width: 100%; overflow: hidden; background-color: #0b0f19; border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 0.375rem; padding: 3px 0; display: flex;
+        }
+        .feedback-ticker { display: flex; white-space: nowrap; animation: marqueeFeedback 35s linear infinite; }
+        .feedback-ticker__item { display: flex; align-items: center; padding: 0 1rem; font-size: 0.68rem; font-weight: 600; }
+
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
+        @keyframes marqueeFeedback { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
     </style>
 </head>
 <body class="flex flex-col h-screen overflow-hidden antialiased">
@@ -83,16 +92,15 @@
         </div>
     </header>
 
-    <!-- MARQUEE -->
+    <!-- MARQUEE DE FAMÍLIAS DE ESTOQUE -->
     <div class="ticker-wrap shrink-0">
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <!-- MAIN GRID 2x2 - AJUSTADO COM RECUO DE SEGURANÇA NAS TVS SUPERIORES -->
+    <!-- MAIN GRID 2x2 -->
     <main class="p-2 pb-2 gap-x-3 gap-y-2 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
 
         <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
-        <!-- RECUO INFERIOR DE SEGURANÇA PARA A RUA 06 NÃO ENCOSTAR NA MOLDURA -->
         <div class="flex flex-col justify-start overflow-hidden pr-1 h-full pb-4 gap-1.5">
             <div class="flex justify-between items-center shrink-0">
                 <h2 class="text-[9.5px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1">
@@ -120,7 +128,7 @@
                 </div>
             </div>
 
-            <!-- Tabela Saturação de Ruas COM RECUO DA BASE -->
+            <!-- Tabela Saturação de Ruas -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col justify-start overflow-hidden mb-2">
                 <div class="flex justify-between items-center mb-1 shrink-0">
                     <h3 class="font-bold text-[10px] text-slate-300 flex items-center gap-1">
@@ -145,7 +153,6 @@
         </div>
 
         <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
-        <!-- RECUO INFERIOR DE SEGURANÇA PARA O MINI BIN NÃO ENCOSTAR NA MOLDURA -->
         <div class="flex flex-col justify-start overflow-hidden pl-1 h-full pb-4 gap-1.5">
             <div class="flex justify-between items-center shrink-0">
                 <h2 class="text-[9.5px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
@@ -154,7 +161,7 @@
                 <span class="text-[7.5px] text-slate-500 font-mono">Macro Giro</span>
             </div>
 
-            <!-- Tabela Famílias COM RECUO DA BASE -->
+            <!-- Tabela Famílias -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col justify-start overflow-hidden mb-2">
                 <div class="overflow-hidden flex-1">
                     <table class="w-full text-left text-[8px] text-slate-300">
@@ -222,10 +229,16 @@
                 </div>
             </div>
 
-            <!-- Next Day -->
+            <!-- Next Day COM ROLAGEM DE AVALIAÇÕES DOS CLIENTES NO TOPO -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden h-full">
-                <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1.5">
-                    <div class="flex justify-between items-center shrink-0">
+                <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
+                    
+                    <!-- BANNER DE ROLAGEM DAS AVALIAÇÕES DOS CLIENTES (NOVO) -->
+                    <div class="feedback-ticker-wrap shrink-0">
+                        <div class="feedback-ticker" id="feedbackMarquee"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center shrink-0 mt-0.5">
                         <h3 class="font-bold text-[9.5px] text-amber-400 flex items-center gap-1">
                             🚚 Fechamento Next Day
                         </h3>
@@ -245,7 +258,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[85px] flex flex-col">
+                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[75px] flex flex-col">
                         <p class="text-[7px] font-bold text-cyan-400 uppercase mb-0.5">Evolução Diária (Outubro)</p>
                         <div class="relative flex-1 w-full overflow-hidden">
                             <canvas id="chartNextDayDaily"></canvas>
@@ -382,6 +395,13 @@
                 { cat: "Sucata", qtd: 37 },
                 { cat: "Rio Claro", qtd: 19 }
             ],
+            feedbacks: [
+                { tipo: "P", txt: "⭐ 5/5 'Entregou de forma educada e eficiente!'" },
+                { tipo: "P", txt: "⭐ 5/5 'PERFEITA A ENTREGA !! MINHA GELADEIRA CHEGOU MUITO RÁPIDO 1 dia útil em perfeito estado os entregadores também muito simpáticos e prestativos !'" },
+                { tipo: "P", txt: "⭐ 5/5 'Produto lindo e de excelente qualidade!. Entrega rápida e eficaz. Muita atenção em todo o processo.'" },
+                { tipo: "N", txt: "⚠️ 'Deixaram a geladeira no térreo do prédio e eu que sou idosa tive que contratar pessoas para levarem ao apto.'" },
+                { tipo: "N", txt: "⚠️ 'Todos os dois fogões vieram danificados!'" }
+            ],
             nextDayDiario: {
                 dias: ['01', '02', '05', '06', '07', '08', '09', '12', '13', '14', '15', '16', '19', '20'],
                 qtd: [46, 41, 36, 29, 23, 35, 32, 38, 31, 29, 24, 40, 36, 63]
@@ -445,6 +465,18 @@
                                 <td class="w-1/7 text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
                                 <td class="w-1/7 text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold font-mono">${item.densidade}</span></td>`;
                 familyBody.appendChild(tr);
+            });
+
+            // Feedbacks dos Clientes (TV 03 - Next Day Ticker)
+            const feedbackMarquee = document.getElementById('feedbackMarquee');
+            feedbackMarquee.innerHTML = '';
+            const doubleFeedbacks = [...currentData.feedbacks, ...currentData.feedbacks];
+            doubleFeedbacks.forEach(f => {
+                const div = document.createElement('div');
+                div.className = "feedback-ticker__item";
+                const colorClass = f.tipo === 'P' ? 'text-emerald-400' : 'text-amber-400';
+                div.innerHTML = `<span class="${colorClass}">${f.txt}</span><span class="text-slate-700 mx-3">|</span>`;
+                feedbackMarquee.appendChild(div);
             });
 
             // Bloqueados (TV 03)
