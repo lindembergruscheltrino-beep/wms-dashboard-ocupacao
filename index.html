@@ -75,7 +75,7 @@
         <div class="flex items-center gap-2">
             <div class="badge-date-clean flex items-center gap-1.5 bg-[#1e293b] px-2 py-0.5 rounded border border-slate-700 text-slate-100 text-[9px] font-bold">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Atualizado em 16 Out 09:00
+                Atualizado em 20 Out 09:00
             </div>
             <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-[9px] text-slate-300 hover:text-white px-2 py-0.5 rounded cursor-pointer font-bold">
                 📺 Modo TV
@@ -104,18 +104,18 @@
             <div class="grid grid-cols-3 gap-1 shrink-0">
                 <div class="bg-[#0f172a] p-1 rounded text-center glow-blue">
                     <p class="text-[7px] font-bold text-slate-400 uppercase">Locações (Ocup/Total)</p>
-                    <h4 class="text-[10px] font-black text-white">115 / 191</h4>
-                    <p class="text-[7px] text-blue-400 font-bold">60% Ocupado</p>
+                    <h4 class="text-[10px] font-black text-white">139 / 191</h4>
+                    <p class="text-[7px] text-blue-400 font-bold">73% Ocupado</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center glow-amber">
                     <p class="text-[7px] font-bold text-amber-500 uppercase">Área Ocupada (m²)</p>
-                    <h4 class="text-[10px] font-black text-amber-400">2.181 / 3.574 m²</h4>
-                    <p class="text-[7px] text-amber-300 font-bold">61% Área</p>
+                    <h4 class="text-[10px] font-black text-amber-400">2.621 / 3.574 m²</h4>
+                    <p class="text-[7px] text-amber-300 font-bold">73,3% Área</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center glow-emerald">
                     <p class="text-[7px] font-bold text-emerald-500 uppercase">Saldo Estocado (un)</p>
-                    <h4 class="text-[10px] font-black text-emerald-400">11.033 un</h4>
-                    <p class="text-[7px] text-emerald-300 font-bold">79,9% Cap</p>
+                    <h4 class="text-[10px] font-black text-emerald-400">11.134 un</h4>
+                    <p class="text-[7px] text-emerald-300 font-bold">65,4% Cap</p>
                 </div>
             </div>
 
@@ -150,7 +150,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> TV 02: Estoque Geral - Famílias & Densidade
                 </h2>
                 <span class="bg-purple-500/10 text-purple-300 px-1.5 py-0.5 rounded text-[8px] font-bold">
-                    Top Giro: Frigobar (11,79 un/m²)
+                    Top Giro: Frigobar (6,45 un/m²)
                 </span>
             </div>
 
@@ -174,17 +174,16 @@
         </div>
 
         <!-- ==================== TV 03 (INFERIOR ESQUERDA) ==================== -->
-        <!-- PÁGINA ESTOQUE BLOQUEADO + NEXT DAY (SEM ESPAÇO VAGO NO TOPO) -->
         <div class="grid grid-cols-2 gap-2 overflow-hidden pr-1 pt-0 h-full">
             
-            <!-- Estoque Bloqueado (EXPANDIDO ATÉ O TOPO) -->
+            <!-- Estoque Bloqueado ATUALIZADO -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 glow-red flex flex-col justify-between overflow-hidden h-full">
                 <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1.5">
                     <div class="flex justify-between items-center shrink-0">
                         <h3 class="font-bold text-[9.5px] text-red-400 flex items-center gap-1">
                             🔒 Estoque Bloqueado
                         </h3>
-                        <span class="text-[7.5px] text-red-400 font-bold bg-red-500/10 px-1 py-0.2 rounded">589 vol</span>
+                        <span class="text-[7.5px] text-red-400 font-bold bg-red-500/10 px-1 py-0.2 rounded">246 vol</span>
                     </div>
 
                     <!-- Tabela de Bloqueados -->
@@ -194,7 +193,7 @@
 
                     <!-- GRÁFICO DONUT DE DISTRIBUIÇÃO DO BLOQUEIO -->
                     <div class="bg-[#0b0f19] p-1.5 rounded border border-slate-800 flex-1 min-h-[105px] flex flex-col justify-between">
-                        <p class="text-[7px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição do Bloqueio por Categoria</p>
+                        <p class="text-[7px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição por Categoria</p>
                         <div class="relative flex-1 w-full overflow-hidden flex justify-center items-center">
                             <canvas id="chartBloqueadoDonut"></canvas>
                         </div>
@@ -203,7 +202,7 @@
                     <!-- IMPACTO SOBRE O ESTOQUE TOTAL -->
                     <div class="bg-[#0b0f19] p-1.5 rounded border border-red-500/20 text-center shrink-0">
                         <p class="text-[7px] text-slate-400 uppercase">Impacto sobre Estoque Total</p>
-                        <p class="text-[10px] font-mono font-bold text-red-400">5,3% <span class="text-[7.5px] text-slate-300 font-normal">(589 de 11.033 un)</span></p>
+                        <p class="text-[10px] font-mono font-bold text-emerald-400">2,2% <span class="text-[7.5px] text-slate-300 font-normal">(246 de 11.134 un)</span></p>
                     </div>
                 </div>
 
@@ -222,7 +221,7 @@
                 </div>
             </div>
 
-            <!-- Next Day (EXPANDIDO ATÉ O TOPO) -->
+            <!-- Next Day ATUALIZADO -->
             <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden h-full">
                 <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1.5">
                     <div class="flex justify-between items-center shrink-0">
@@ -292,6 +291,7 @@
         </div>
 
         <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
+        <!-- FLUXO DE OUTUBRO ATUALIZADO COM OS NOVOS DADOS -->
         <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden pl-1 pt-0 h-full">
             <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                 <div class="flex justify-between items-center shrink-0 mb-0.5">
@@ -305,28 +305,28 @@
                     <!-- Recebimento Outubro -->
                     <div class="bg-[#0b0f19] p-1.5 rounded border border-emerald-500/30">
                         <p class="text-[7.5px] font-bold text-emerald-400 uppercase">Recebimento Outubro</p>
-                        <h4 class="text-[11px] font-black text-white mt-0.5">16.125 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
+                        <h4 class="text-[11px] font-black text-white mt-0.5">8.941 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
                         <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
-                            <p>Média Geral: <strong class="text-emerald-400">701 un/dia</strong></p>
-                            <p>• Joinville: 9.956 un (433/dia)</p>
-                            <p>• Rio Claro: 6.169 un (268/dia)</p>
+                            <p>Média Geral: <strong class="text-emerald-400">638,6 un/dia</strong></p>
+                            <p>• Joinville: 6.472 un (462/dia)</p>
+                            <p>• Rio Claro: 2.469 un (176/dia)</p>
                         </div>
                     </div>
 
                     <!-- Expedição Outubro -->
                     <div class="bg-[#0b0f19] p-1.5 rounded border border-blue-500/30">
                         <p class="text-[7.5px] font-bold text-blue-400 uppercase">Expedição Outubro</p>
-                        <h4 class="text-[11px] font-black text-white mt-0.5">14.665 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
+                        <h4 class="text-[11px] font-black text-white mt-0.5">8.959 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
                         <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
-                            <p>Média Geral: <strong class="text-blue-400">611 un/dia</strong></p>
-                            <p>• Joinville: 9.340 un (389/dia)</p>
-                            <p>• Rio Claro: 4.828 un (201/dia)</p>
-                            <p>• Manaus: 497 un (21/dia)</p>
+                            <p>Média Geral: <strong class="text-blue-400">597,3 un/dia</strong></p>
+                            <p>• Joinville: 5.658 un (377/dia)</p>
+                            <p>• Rio Claro: 3.095 un (206/dia)</p>
+                            <p>• Manaus: 206 un (14/dia)</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- GRÁFICO COMPARATIVO DIÁRIO DE FLUXO -->
+                <!-- GRÁFICO COMPARATIVO DIÁRIO DE FLUXO ATUALIZADO -->
                 <div class="bg-[#0b0f19] p-1.5 rounded border border-slate-800 flex-1 min-h-[105px] flex flex-col justify-between">
                     <div class="flex justify-between items-center mb-0.5 shrink-0">
                         <p class="text-[7px] font-bold text-slate-300 uppercase">Evolução Diária: Recebimento x Expedição</p>
@@ -344,7 +344,7 @@
             <!-- Balanço -->
             <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex justify-between items-center shrink-0 mt-1">
                 <span class="text-[7.5px] text-slate-400">Balanço Líquido (Mês):</span>
-                <span class="text-[9px] font-mono font-bold text-emerald-400">+1.460 un (Acúmulo)</span>
+                <span class="text-[9px] font-mono font-bold text-emerald-400">-18 un (Equilibrado)</span>
             </div>
         </div>
 
@@ -357,39 +357,39 @@
 
         const currentData = {
             ruas: [
-                { rua: "RUA 01", loc: "9/9", pct: 100, est: 1944 },
-                { rua: "RUA 02", loc: "9/36", pct: 25, est: 943 },
-                { rua: "RUA 03", loc: "28/41", pct: 68, est: 1996 },
-                { rua: "RUA 04", loc: "32/36", pct: 88, est: 2919 },
-                { rua: "RUA 05", loc: "34/36", pct: 94, est: 2649 },
-                { rua: "RUA 06", loc: "3/33", pct: 9, est: 582 }
+                { rua: "RUA 01", loc: "9/9", pct: 100, est: 1915 },
+                { rua: "RUA 02", loc: "18/36", pct: 50, est: 1076 },
+                { rua: "RUA 03", loc: "37/41", pct: 90, est: 2204 },
+                { rua: "RUA 04", loc: "36/36", pct: 100, est: 2865 },
+                { rua: "RUA 05", loc: "36/36", pct: 100, est: 2501 },
+                { rua: "RUA 06", loc: "3/33", pct: 9, est: 573 }
             ],
             familias: [
-                { familia: "REFRIGERADOR", loc: 62, area: "1.243m²", pctArea: "34.8%", est: 6672, cap: 8285, densidade: "5.37" },
-                { familia: "LAVADORA", loc: 12, area: "215m²", pctArea: "6.0%", est: 989, cap: 1996, densidade: "4.59" },
-                { familia: "FOGÃO", loc: 12, area: "211m²", pctArea: "5.9%", est: 577, cap: 1408, densidade: "2.72" },
-                { familia: "FORNO", loc: 4, area: "78m²", pctArea: "2.2%", est: 530, cap: 720, densidade: "6.73" },
-                { familia: "FREEZER", loc: 6, area: "126m²", pctArea: "3.5%", est: 425, cap: 706, densidade: "3.35" },
-                { familia: "SECADORA", loc: 2, area: "38m²", pctArea: "1.1%", est: 244, cap: 288, densidade: "6.31" },
-                { familia: "FRIGOBAR", loc: 1, area: "16m²", pctArea: "0.5%", est: 198, cap: 186, densidade: "11.79" },
-                { familia: "CERVEJEIRA", loc: 1, area: "19m²", pctArea: "0.5%", est: 96, cap: 222, densidade: "4.90" },
-                { familia: "MINI BIN", loc: 15, area: "230,6m²", pctArea: "6.4%", est: 1302, cap: 1302, densidade: "5.65" }
+                { familia: "REFRIGERADOR", loc: 74, area: "1.456m²", pctArea: "40.7%", est: 6719, cap: 9421, densidade: "4.61" },
+                { familia: "LAVADORA", loc: 18, area: "325m²", pctArea: "9.1%", est: 1175, cap: 2920, densidade: "3.61" },
+                { familia: "FORNO", loc: 7, area: "122m²", pctArea: "3.4%", est: 694, cap: 1248, densidade: "5.67" },
+                { familia: "FOGÃO", loc: 17, area: "307m²", pctArea: "8.6%", est: 553, cap: 1780, densidade: "1.80" },
+                { familia: "FREEZER", loc: 6, area: "125m²", pctArea: "3.5%", est: 244, cap: 766, densidade: "1.95" },
+                { familia: "SECADORA", loc: 2, area: "39m²", pctArea: "1.1%", est: 238, cap: 288, densidade: "6.16" },
+                { familia: "FRIGOBAR", loc: 2, area: "34m²", pctArea: "1.0%", est: 220, cap: 372, densidade: "6.45" },
+                { familia: "CERVEJEIRA", loc: 1, area: "20m²", pctArea: "0.5%", est: 92, cap: 222, densidade: "4.69" },
+                { familia: "MINI BIN", loc: 12, area: "193,0m²", pctArea: "5.4%", est: 1199, cap: 1199, densidade: "6.21" }
             ],
             bloqueado: [
-                { cat: "Rio Claro", qtd: 216 },
-                { cat: "Sucata", qtd: 141 },
-                { cat: "127v", qtd: 136 },
-                { cat: "Joinville", qtd: 52 },
-                { cat: "Reoperação", qtd: 44 }
+                { cat: "Joinville", qtd: 97 },
+                { cat: "127v", qtd: 53 },
+                { cat: "Reoperação", qtd: 40 },
+                { cat: "Sucata", qtd: 37 },
+                { cat: "Rio Claro", qtd: 19 }
             ],
             nextDayDiario: {
-                dias: ['01', '02', '05', '06', '07', '08', '09', '12', '13', '14', '15', '16', '19'],
-                qtd: [46, 41, 36, 29, 23, 35, 32, 38, 31, 29, 24, 40, 36]
+                dias: ['01', '02', '05', '06', '07', '08', '09', '12', '13', '14', '15', '16', '19', '20'],
+                qtd: [46, 41, 36, 29, 23, 35, 32, 38, 31, 29, 24, 40, 36, 63]
             },
             fluxoDiario: {
-                dias: ['01', '02', '03', '04', '07', '08', '09', '10', '11', '12', '14', '15', '16', '17', '18', '19'],
-                recebimento: [214, 797, 1089, 825, 0, 518, 930, 766, 1200, 1300, 345, 515, 774, 0, 337, 729],
-                expedicao:   [64,  352, 89,   95,  1333, 1422, 594, 813, 681,  330,  1221, 835, 640, 777, 0,   584]
+                dias: ['01', '02', '05', '06', '07', '08', '09', '10', '13', '14', '15', '16', '17', '19', '20'],
+                recebimento: [452, 664, 799, 173, 197, 0,    160, 598, 845,  840, 814, 839, 1318, 710,  532],
+                expedicao:   [288, 32,  143, 63,  1,   1969, 994, 120, 1577, 878, 587, 744, 298,  1202, 63]
             }
         };
 
