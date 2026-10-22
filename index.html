@@ -1,1 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q30GKGZL64"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Q30GKGZL64');
+    </script>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WMS Control Tower - CD Alhandra PB</title>
+    
+    <!-- Fontes Google Sans / Product Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Chart.js + Plugin DataLabels -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <style>
+        html, body {
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden !important;
+            background-color: #070a13;
+            color: #f8fafc;
+            font-family: 'JetBrains Mono', 'Product Sans Mono', monospace !important;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .badge-date-clean {
+            font-family: 'Product Sans', 'Google Sans', sans-serif !important;
+        }
+
+        /* Remoção Total de Bordas de Tabelas */
+        table, th, td, tr, thead, tbody, tfoot {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.25); }
+        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.25); }
+        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.25); }
+        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.25); }
+        .glow-red { border: 1px solid rgba(239, 68, 68, 0.25); }
+
+        .ticker-wrap {
+            width: 100%; overflow: hidden; background-color: #0f172a; border-bottom: 1px solid #1e293b; padding: 2px 0; display: flex;
+        }
+        .ticker { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; }
+        .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.65rem; font-weight: 700; }
+
+        /* Ticker exclusivo para Avaliações Positivas dos Clientes */
+        .feedback-ticker-wrap {
+            width: 100%; overflow: hidden; background-color: #0b0f19; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.375rem; padding: 3px 0; display: flex;
+        }
+        .feedback-ticker { display: flex; white-space: nowrap; animation: marqueeFeedback 42s linear infinite; }
+        .feedback-ticker__item { display: flex; align-items: center; padding: 0 1rem; font-size: 0.68rem; font-weight: 600; }
+
+        @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
+        @keyframes marqueeFeedback { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden antialiased">
+
+    <!-- HEADER COM MARGEM DE SEGURANÇA SUPERIOR -->
+    <header class="bg-[#0f172a] border-b border-slate-800 text-white px-3 pt-1.5 pb-1 flex justify-between items-center shrink-0">
+        <div class="flex items-center gap-2">
+            <div class="px-2 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">PCO</div>
+            <div>
+                <h1 class="text-[11px] font-bold text-slate-100 leading-tight">Control Tower WMS Alhandra</h1>
+                <p class="text-[8px] text-slate-400 leading-none">CD Alhandra PB • Whirlpool • Trino</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+            <div class="badge-date-clean flex items-center gap-1.5 bg-[#1e293b] px-2 py-0.5 rounded border border-slate-700 text-slate-100 text-[9px] font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Atualizado em 22 Out 09:00
+            </div>
+            <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-[9px] text-slate-300 hover:text-white px-2 py-0.5 rounded cursor-pointer font-bold">
+                📺 Modo TV
+            </button>
+        </div>
+    </header>
+
+    <!-- MARQUEE DE FAMÍLIAS DE ESTOQUE -->
+    <div class="ticker-wrap shrink-0">
+        <div class="ticker" id="tickerMarquee"></div>
+    </div>
+
+    <!-- MAIN GRID 2x2 -->
+    <main class="p-2 gap-x-3 gap-y-1 flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
+
+        <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
+        <div class="flex flex-col justify-between overflow-hidden pr-1 h-full gap-1">
+            <div class="flex justify-between items-center shrink-0">
+                <h2 class="text-[9.5px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> TV 01: Estoque Geral - Capacidade & Ruas
+                </h2>
+                <span class="text-[7.5px] text-slate-500 font-mono">PCO Geral</span>
+            </div>
+
+            <!-- Cards de Capacidade -->
+            <div class="grid grid-cols-3 gap-1.5 shrink-0">
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-blue">
+                    <p class="text-[7px] font-bold text-slate-400 uppercase">Locações (Ocup/Total)</p>
+                    <h4 class="text-[11px] font-black text-white">136 / 191</h4>
+                    <p class="text-[7px] text-blue-400 font-bold">71,2% Ocupado</p>
+                </div>
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-amber">
+                    <p class="text-[7px] font-bold text-amber-500 uppercase">Área Ocupada (m²)</p>
+                    <h4 class="text-[11px] font-black text-amber-400">2.564 / 3.574 m²</h4>
+                    <p class="text-[7px] text-amber-300 font-bold">71,7% Área</p>
+                </div>
+                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-emerald">
+                    <p class="text-[7px] font-bold text-emerald-500 uppercase">Saldo Estocado (un)</p>
+                    <h4 class="text-[11px] font-black text-emerald-400">12.871 un</h4>
+                    <p class="text-[7px] text-emerald-300 font-bold">76,8% Cap</p>
+                </div>
+            </div>
+
+            <!-- Tabela Saturação de Ruas -->
+            <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col justify-between overflow-hidden">
+                <div class="flex justify-between items-center mb-1 shrink-0">
+                    <h3 class="font-bold text-[10px] text-slate-300 flex items-center gap-1">
+                        📍 Ocupação Por Rua
+                    </h3>
+                    <span class="text-[8px] text-slate-500 font-mono">Termômetro</span>
+                </div>
+                <div class="overflow-hidden flex-1 flex flex-col justify-between">
+                    <table class="w-full text-left text-[8.5px] text-slate-300 h-full flex flex-col justify-between">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold shrink-0">
+                            <tr class="flex justify-between w-full px-2 py-1">
+                                <th class="w-1/6">Rua</th>
+                                <th class="w-1/6 text-center">Locações</th>
+                                <th class="w-3/6 text-center">Ocupação</th>
+                                <th class="w-1/6 text-right">Estoque (un)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ruasTableBody" class="font-medium flex-1 flex flex-col justify-between py-1"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
+        <div class="flex flex-col justify-between overflow-hidden pl-1 h-full gap-1">
+            <div class="flex justify-between items-center shrink-0">
+                <h2 class="text-[9.5px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> TV 02: Estoque Geral - Famílias & Densidade
+                </h2>
+                <span class="text-[7.5px] text-slate-500 font-mono">Macro Giro</span>
+            </div>
+
+            <!-- Tabela Famílias -->
+            <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex-1 flex flex-col justify-between overflow-hidden">
+                <div class="overflow-hidden flex-1 flex flex-col justify-between">
+                    <table class="w-full text-left text-[8px] text-slate-300 h-full flex flex-col justify-between">
+                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold shrink-0">
+                            <tr class="flex justify-between w-full px-2 py-1">
+                                <th class="w-2/7">Família</th>
+                                <th class="w-1/7 text-center">Loc.</th>
+                                <th class="w-1/7 text-right">Área m² (%)</th>
+                                <th class="w-1/7 text-right">Capacidade</th>
+                                <th class="w-1/7 text-right">Estoque (un)</th>
+                                <th class="w-1/7 text-center">un/m²</th>
+                            </tr>
+                        </thead>
+                        <tbody id="familyTableBody" class="font-medium flex-1 flex flex-col justify-between py-1"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TV 03 (INFERIOR ESQUERDA) ==================== -->
+        <div class="grid grid-cols-2 gap-2 overflow-hidden pr-1 h-full pt-0">
+            
+            <!-- CQ - Controle de Qualidade -->
+            <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 glow-red flex flex-col justify-between overflow-hidden h-full">
+                <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1.5">
+                    <div class="flex justify-between items-center shrink-0">
+                        <h3 class="font-bold text-[9.5px] text-red-400 flex items-center gap-1">
+                            🔒 CQ - Controle de Qualidade
+                        </h3>
+                        <span class="text-[7.5px] text-red-400 font-bold bg-red-500/10 px-1 py-0.2 rounded">253 vol</span>
+                    </div>
+
+                    <!-- Tabela de Bloqueados -->
+                    <table class="w-full text-left text-[8.5px] text-slate-300 shrink-0">
+                        <tbody id="bloqueadoTableBody" class="font-medium"></tbody>
+                    </table>
+
+                    <!-- GRÁFICO DONUT DE DISTRIBUIÇÃO DO BLOQUEIO -->
+                    <div class="bg-[#0b0f19] p-1.5 rounded border border-slate-800 flex-1 min-h-[95px] flex flex-col justify-between">
+                        <p class="text-[7px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição por Categoria</p>
+                        <div class="relative flex-1 w-full overflow-hidden flex justify-center items-center">
+                            <canvas id="chartBloqueadoDonut"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- IMPACTO SOBRE O ESTOQUE TOTAL -->
+                    <div class="bg-[#0b0f19] p-1 rounded border border-red-500/20 text-center shrink-0">
+                        <p class="text-[7px] text-slate-400 uppercase">Impacto sobre Estoque Total</p>
+                        <p class="text-[9.5px] font-mono font-bold text-emerald-400">2,0% <span class="text-[7px] text-slate-300 font-normal">(253 de 12.871 un)</span></p>
+                    </div>
+                </div>
+
+                <!-- Canal B2B -->
+                <div class="border-t border-slate-800 pt-1 mt-1 shrink-0">
+                    <div class="flex justify-between items-center bg-[#0b0f19] p-1 rounded border border-cyan-500/20">
+                        <div>
+                            <p class="text-[7.5px] font-bold text-cyan-400 uppercase">Estoque B2B</p>
+                            <p class="text-[9.5px] font-black text-white">482 <span class="text-[7px] font-normal text-slate-400">vol</span></p>
+                        </div>
+                        <div class="text-right text-[7.5px]">
+                            <p class="text-slate-300">3 End. Ocup</p>
+                            <p class="text-cyan-300 font-mono">51.9 m²</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Day -->
+            <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden h-full">
+                <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
+                    
+                    <!-- BANNER DE ROLAGEM AVALIAÇÕES POSITIVAS -->
+                    <div class="feedback-ticker-wrap shrink-0">
+                        <div class="feedback-ticker" id="feedbackMarquee"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center shrink-0 mt-0.5">
+                        <h3 class="font-bold text-[9.5px] text-amber-400 flex items-center gap-1">
+                            🚚 Next Day
+                        </h3>
+                        <span class="bg-amber-500/10 text-amber-300 px-1 py-0.2 rounded text-[8px] font-bold">
+                            4,75 ★
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-1 text-[8px] font-mono shrink-0">
+                        <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
+                            <p class="text-slate-400 text-[7px] uppercase">Programadas</p>
+                            <p class="font-bold text-white text-[9.5px]">915 rotas</p>
+                        </div>
+                        <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
+                            <p class="text-slate-400 text-[7px] uppercase">1ª Tentativa</p>
+                            <p class="font-bold text-emerald-400 text-[9.5px]">786 (85,9%)</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[75px] flex flex-col">
+                        <p class="text-[7px] font-bold text-cyan-400 uppercase mb-0.5">Evolução Diária (Outubro)</p>
+                        <div class="relative flex-1 w-full overflow-hidden">
+                            <canvas id="chartNextDayDaily"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-1.5 shrink-0 pt-0.5 border-t border-slate-800/80">
+                        <div>
+                            <p class="text-[7.5px] font-bold text-slate-400 uppercase mb-0.2">Five-star</p>
+                            <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
+                                <div class="flex justify-between text-slate-300"><span>1° Cleiton</span> <span class="text-amber-400 font-bold">4.89★</span></div>
+                                <div class="flex justify-between text-slate-300"><span>2° Ipenemery</span> <span class="text-amber-400 font-bold">4.77★</span></div>
+                                <div class="flex justify-between text-slate-300"><span>3° Fábio</span> <span class="text-amber-400 font-bold">4.73★</span></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-[7.5px] font-bold text-amber-400 uppercase mb-0.2">Desvio/Rota</p>
+                            <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
+                                <div class="flex justify-between text-slate-300"><span>Recife N.</span> <span class="text-red-400 font-bold">10%</span></div>
+                                <div class="flex justify-between text-slate-300"><span>J. Pessoa</span> <span class="text-amber-400 font-bold">5%</span></div>
+                                <div class="flex justify-between text-slate-300"><span>Recife S.</span> <span class="text-amber-400 font-bold">5%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shrink-0 pt-0.5 border-t border-slate-800/80">
+                        <p class="text-[7.5px] font-bold text-slate-400 uppercase mb-0.2">Top 5 Desvios Motivo</p>
+                        <div class="grid grid-cols-1 gap-0.2 text-[7px] text-slate-300 font-mono leading-tight">
+                            <p class="truncate">• 1° Entrega fechada</p>
+                            <p class="truncate">• 2° Cliente ausente</p>
+                            <p class="truncate">• 3° Não localizado</p>
+                            <p class="truncate">• 4° NF Cancelada</p>
+                            <p class="truncate">• 5° Outro local</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#0b0f19] p-0.5 rounded border border-amber-500/20 text-center shrink-0 mt-0.5">
+                    <p class="text-[7.5px] text-amber-400 font-bold">Avaliações: 125</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
+        <div class="bg-[#0f172a] p-2 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden pl-1 h-full pt-0">
+            <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1.5">
+                <div class="flex justify-between items-center shrink-0">
+                    <h3 class="font-bold text-[9.5px] text-emerald-400 flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 04: Outubro (In & Out)
+                    </h3>
+                    <span class="text-[7.5px] text-slate-400 font-mono">Consolidado Mês</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-1.5 shrink-0 my-0.5">
+                    <!-- Recebimento Outubro -->
+                    <div class="bg-[#0b0f19] p-1.5 rounded border border-emerald-500/30">
+                        <p class="text-[7.5px] font-bold text-emerald-400 uppercase">Recebimento Outubro</p>
+                        <h4 class="text-[11px] font-black text-white mt-0.5">11.695 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
+                        <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
+                            <p>Média Geral: <strong class="text-emerald-400">730,9 un/dia</strong></p>
+                            <p>• Joinville: 6.579 un (411/dia)</p>
+                            <p>• Rio Claro: 5.116 un (320/dia)</p>
+                        </div>
+                    </div>
+
+                    <!-- Expedição Outubro -->
+                    <div class="bg-[#0b0f19] p-1.5 rounded border border-blue-500/30">
+                        <p class="text-[7.5px] font-bold text-blue-400 uppercase">Expedição Outubro</p>
+                        <h4 class="text-[11px] font-black text-white mt-0.5">10.618 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
+                        <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
+                            <p>Média Geral: <strong class="text-blue-400">624,6 un/dia</strong></p>
+                            <p>• Joinville: 5.937 un (349/dia)</p>
+                            <p>• Rio Claro: 4.062 un (239/dia)</p>
+                            <p>• Manaus: 619 un (36/dia)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRÁFICO COMPARATIVO DIÁRIO DE FLUXO -->
+                <div class="bg-[#0b0f19] p-1.5 rounded border border-slate-800 flex-1 min-h-[90px] flex flex-col justify-between">
+                    <div class="flex justify-between items-center mb-0.5 shrink-0">
+                        <p class="text-[7px] font-bold text-slate-300 uppercase">Evolução Diária: Recebimento x Expedição</p>
+                        <div class="flex gap-2 text-[6.5px] font-mono">
+                            <span class="text-emerald-400 font-bold">● Recebimento</span>
+                            <span class="text-cyan-400 font-bold">● Expedição</span>
+                        </div>
+                    </div>
+                    <div class="relative flex-1 w-full overflow-hidden">
+                        <canvas id="chartFluxoDiario"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balanço -->
+            <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex justify-between items-center shrink-0 mt-0.5">
+                <span class="text-[7.5px] text-slate-400">Balanço Líquido (Mês):</span>
+                <span class="text-[9px] font-mono font-bold text-emerald-400">+1.077 un (Acúmulo)</span>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        let nextDayChartInstance = null;
+        let fluxoChartInstance = null;
+        let bloqueadoChartInstance = null;
+
+        const currentData = {
+            ruas: [
+                { rua: "RUA 01", loc: "9/9", pct: 100, est: 1919 },
+                { rua: "RUA 02", loc: "22/36", pct: 61, est: 1692 },
+                { rua: "RUA 03", loc: "35/41", pct: 85, est: 2734 },
+                { rua: "RUA 04", loc: "32/36", pct: 89, est: 2837 },
+                { rua: "RUA 05", loc: "35/36", pct: 97, est: 3034 },
+                { rua: "RUA 06", loc: "3/33", pct: 9, est: 659 }
+            ],
+            familias: [
+                { familia: "REFRIGERADOR", loc: 69, area: "1.364m²", pctArea: "38.2%", est: 6985, cap: 9072, densidade: "5.12" },
+                { familia: "LAVADORA", loc: 21, area: "385m²", pctArea: "10.8%", est: 1960, cap: 3366, densidade: "5.09" },
+                { familia: "FOGÃO", loc: 20, area: "356m²", pctArea: "9.9%", est: 938, cap: 2168, densidade: "2.64" },
+                { familia: "FORNO", loc: 6, area: "112m²", pctArea: "3.1%", est: 706, cap: 1068, densidade: "6.28" },
+                { familia: "FREEZER", loc: 1, area: "33m²", pctArea: "0.9%", est: 161, cap: 196, densidade: "4.91" },
+                { familia: "FRIGOBAR", loc: 2, area: "34m²", pctArea: "1.0%", est: 389, cap: 372, densidade: "11.41" },
+                { familia: "SECADORA", loc: 2, area: "39m²", pctArea: "1.1%", est: 237, cap: 288, densidade: "6.13" },
+                { familia: "CERVEJEIRA", loc: 1, area: "20m²", pctArea: "0.5%", est: 85, cap: 222, densidade: "4.34" },
+                { familia: "MIX", loc: 14, area: "221,6m²", pctArea: "6.2%", est: 1410, cap: 1410, densidade: "6.36" }
+            ],
+            bloqueado: [
+                { cat: "Joinville", qtd: 99 },
+                { cat: "127v", qtd: 53 },
+                { cat: "Sucata", qtd: 40 },
+                { cat: "Reoperação", qtd: 31 },
+                { cat: "Rio Claro", qtd: 30 }
+            ],
+            feedbacksPositivos: [
+                "⭐ 5/5 'Entrega super rápida! O produto chegou bem antes do prazo estipulado. Excelente serviço.'",
+                "⭐ 5/5 'Impressionado com a velocidade. Comprei em um dia e chegou no outro. Nota 10!'",
+                "⭐ 5/5 'Agilidade nota mil. Entrega rápida e rastreamento atualizado em tempo real.'",
+                "⭐ 5/5 'Entregador super educado e cordial. Um excelente atendimento na hora da entrega.'",
+                "⭐ 5/5 'Entregou de forma educada e eficiente!'",
+                "⭐ 5/5 'PERFEITA A ENTREGA !! MINHA GELADEIRA CHEGOU MUITO RÁPIDO 1 dia útil em perfeito estado os entregadores também muito simpáticos e prestativos !!'",
+                "⭐ 5/5 'Produto lindo e de excelente qualidade!. Entrega rápida e eficaz. Muita atenção em todo o processo.'"
+            ],
+            nextDayDiario: {
+                dias: ['01', '02', '05', '06', '07', '08', '09', '12', '13', '14', '15', '16', '19', '20', '21'],
+                qtd: [46, 41, 36, 29, 23, 35, 32, 38, 31, 29, 24, 40, 36, 63, 56]
+            },
+            fluxoDiario: {
+                dias: ['01', '02', '05', '06', '07', '08', '09', '10', '13', '14', '15', '16', '17', '19', '20', '21', '22'],
+                recebimento: [452, 664, 799, 173, 197, 0,    160, 598, 845,  840, 814, 839, 1318, 710,  1527, 1331, 428],
+                expedicao:   [288, 32,  143, 63,  1,   1969, 994, 120, 1577, 878, 587, 744, 298,  1202, 827,  845,  50]
+            }
+        };
+
+        function carregarPainel() {
+            // Ruas (TV 01)
+            const ruasBody = document.getElementById('ruasTableBody');
+            ruasBody.innerHTML = '';
+            currentData.ruas.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.className = "flex justify-between items-center w-full px-2 py-1 border-b border-slate-800/40";
+                let barColor = "bg-emerald-500";
+                if (r.pct > 80) barColor = "bg-amber-500";
+                if (r.pct >= 95) barColor = "bg-red-500";
+
+                tr.innerHTML = `<td class="w-1/6 font-bold text-blue-400">${r.rua}</td>
+                                <td class="w-1/6 text-center text-slate-300 font-mono">${r.loc}</td>
+                                <td class="w-3/6 px-2">
+                                    <div class="flex items-center gap-1">
+                                        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                            <div class="${barColor} h-1.5 rounded-full" style="width: ${r.pct}%"></div>
+                                        </div>
+                                        <span class="text-[7.5px] font-bold text-slate-300 min-w-[22px] text-right">${r.pct}%</span>
+                                    </div>
+                                </td>
+                                <td class="w-1/6 text-right font-bold text-emerald-400">${r.est.toLocaleString('pt-BR')}</td>`;
+                ruasBody.appendChild(tr);
+            });
+
+            // Famílias (TV 02)
+            const familyBody = document.getElementById('familyTableBody');
+            const marquee = document.getElementById('tickerMarquee');
+            familyBody.innerHTML = '';
+            marquee.innerHTML = '';
+
+            const tickerData = [...currentData.familias, ...currentData.familias];
+            tickerData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "ticker__item";
+                div.innerHTML = `<span class="text-white font-black">${item.familia}</span>
+                                 <span class="text-blue-400 ml-1 font-mono">${item.est.toLocaleString('pt-BR')} un</span>
+                                 <span class="text-slate-600 mx-1">|</span>
+                                 <span class="text-emerald-400 font-mono">${item.densidade} un/m²</span>`;
+                marquee.appendChild(div);
+            });
+
+            currentData.familias.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "flex justify-between items-center w-full px-2 py-1 border-b border-slate-800/40";
+                tr.innerHTML = `<td class="w-2/7 font-bold text-slate-200">${item.familia}</td>
+                                <td class="w-1/7 text-center text-slate-300 font-mono">${item.loc}</td>
+                                <td class="w-1/7 text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[6.5px]">(${item.pctArea})</span></td>
+                                <td class="w-1/7 text-right text-purple-300 font-mono">${item.cap.toLocaleString('pt-BR')}</td>
+                                <td class="w-1/7 text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
+                                <td class="w-1/7 text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold font-mono">${item.densidade}</span></td>`;
+                familyBody.appendChild(tr);
+            });
+
+            // Feedbacks Exclusivamente Positivos (TV 03 - Next Day Ticker)
+            const feedbackMarquee = document.getElementById('feedbackMarquee');
+            feedbackMarquee.innerHTML = '';
+            const doubleFeedbacks = [...currentData.feedbacksPositivos, ...currentData.feedbacksPositivos];
+            doubleFeedbacks.forEach(txt => {
+                const div = document.createElement('div');
+                div.className = "feedback-ticker__item";
+                div.innerHTML = `<span class="text-emerald-400">${txt}</span><span class="text-slate-700 mx-3">|</span>`;
+                feedbackMarquee.appendChild(div);
+            });
+
+            // Bloqueados (TV 03)
+            const bloqueadoBody = document.getElementById('bloqueadoTableBody');
+            bloqueadoBody.innerHTML = '';
+            currentData.bloqueado.forEach(b => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td class="px-1 py-[1px] font-bold text-slate-200">${b.cat}</td>
+                                <td class="px-1 py-[1px] text-right text-red-400 font-bold font-mono">${b.qtd}</td>`;
+                bloqueadoBody.appendChild(tr);
+            });
+
+            renderizarGraficoBloqueadoDonut();
+            renderizarGraficoLinhaDiario();
+            renderizarGraficoFluxoDiario();
+        }
+
+        function renderizarGraficoBloqueadoDonut() {
+            const canvas = document.getElementById('chartBloqueadoDonut');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (bloqueadoChartInstance) bloqueadoChartInstance.destroy();
+
+            bloqueadoChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: currentData.bloqueado.map(b => b.cat),
+                    datasets: [{
+                        data: currentData.bloqueado.map(b => b.qtd),
+                        backgroundColor: ['#ef4444', '#f97316', '#f59e0b', '#06b6d4', '#a855f7'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            display: true,
+                            position: 'right',
+                            labels: { color: '#cbd5e1', font: { size: 7 }, boxWidth: 7, padding: 4 }
+                        },
+                        datalabels: { display: false }
+                    },
+                    cutout: '62%'
+                }
+            });
+        }
+
+        function renderizarGraficoLinhaDiario() {
+            const canvas = document.getElementById('chartNextDayDaily');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (nextDayChartInstance) nextDayChartInstance.destroy();
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, 80);
+            gradient.addColorStop(0, 'rgba(6, 182, 212, 0.4)');
+            gradient.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
+
+            nextDayChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: currentData.nextDayDiario.dias,
+                    datasets: [{
+                        label: 'Entregas',
+                        data: currentData.nextDayDiario.qtd,
+                        borderColor: '#06b6d4',
+                        backgroundColor: gradient,
+                        borderWidth: 1.5,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 1.5,
+                        pointBackgroundColor: '#38bdf8'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: { display: false }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#64748b', font: { size: 6 } }, 
+                            grid: { display: false } 
+                        },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+
+        function renderizarGraficoFluxoDiario() {
+            const canvas = document.getElementById('chartFluxoDiario');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (fluxoChartInstance) fluxoChartInstance.destroy();
+
+            const gradientRec = ctx.createLinearGradient(0, 0, 0, 80);
+            gradientRec.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+            gradientRec.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+
+            const gradientExp = ctx.createLinearGradient(0, 0, 0, 80);
+            gradientExp.addColorStop(0, 'rgba(6, 182, 212, 0.3)');
+            gradientExp.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
+
+            fluxoChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: currentData.fluxoDiario.dias,
+                    datasets: [
+                        {
+                            label: 'Recebimento',
+                            data: currentData.fluxoDiario.recebimento,
+                            borderColor: '#10b981',
+                            backgroundColor: gradientRec,
+                            borderWidth: 1.5,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 1.5,
+                            pointBackgroundColor: '#34d399'
+                        },
+                        {
+                            label: 'Expedição',
+                            data: currentData.fluxoDiario.expedicao,
+                            borderColor: '#06b6d4',
+                            backgroundColor: gradientExp,
+                            borderWidth: 1.5,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 1.5,
+                            pointBackgroundColor: '#38bdf8'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: { display: false }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#64748b', font: { size: 6 } }, 
+                            grid: { display: false } 
+                        },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => alert("Erro: " + err.message));
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarPainel);
+    </script>
+</body>
+</html>
